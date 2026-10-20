@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101a17">
+<meta name="description" content="A lightweight AI assistant for chatting, writing, coding and creativity.">
+<title>Nova AI - Your AI Assistant</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #101a17;
+    color: #f1f5f3;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+header {
+    background: #17251f;
+    padding: 15px;
+    border-bottom: 1px solid #304438;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    color: #54e69b;
+}
+
+.logo span {
+    color: #f5c65b;
+}
+
+.subtitle {
+    color: #aabbb1;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+main {
+    max-width: 760px;
+    margin: auto;
+    padding: 18px 12px;
+}
+
+.welcome {
+    text-align: center;
+    padding: 30px 8px 20px;
+}
+
+.welcome h1 {
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+.welcome h1 span {
+    color: #54e69b;
+}
+
+.welcome p {
+    color: #b3c2b9;
+    line-height: 1.6;
+}
+
+.tools {
+    margin: 18px 0;
+    text-align: center;
+}
+
+.tool {
+    display: inline-block;
+    background: #1c2c24;
+    border: 1px solid #354c3e;
+    color: #e7f3eb;
+    padding: 9px 12px;
+    margin: 4px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+#chat {
+    padding: 5px 0;
+}
+
+.message {
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 10px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.user {
+    background: #244b36;
+    margin-left: 12%;
+}
+
+.assistant {
+    background: #1b2922;
+    border: 1px solid #304438;
+    margin-right: 5%;
+}
+
+.label {
+    font-size: 11px;
+    color: #54e69b;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.composer {
+    background: #1b2922;
+    border: 1px solid #405747;
+    border-radius: 12px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    min-height: 75px;
+    resize: vertical;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: white;
+    font: inherit;
+    padding: 8px;
+}
+
+textarea::placeholder {
+    color: #91a69a;
+}
+
+.buttons {
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    border: 0;
+    border-radius: 7px;
+    padding: 11px 14px;
+}
+
+#send {
+    float: right;
+    background: #54e69b;
+    color: #102219;
+    font-weight: bold;
+}
+
+#clear {
+    background: #304238;
+    color: white;
+}
+
+.notice {
+    color: #9daf9f;
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: center;
+    margin: 14px 0;
+}
+
+footer {
+    text-align: center;
+    padding: 22px 10px;
+    color: #8ea397;
+    border-top: 1px solid #304438;
+    font-size: 12px;
+}
+
+@media (max-width: 360px) {
+    .welcome h1 {
+        font-size: 23px;
+    }
+
+    main {
+        padding: 12px 8px;
+    }
+
+    button {
+        padding: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Nova<span>AI</span></div>
+    <div class="subtitle">
+        Your assistant for ideas, knowledge and creativity
+    </div>
+</header>
+
+<main>
+
+    <section class="welcome">
+        <h1>Meet your new <span>AI assistant.</span></h1>
+        <p>
+            Explore ideas, learn new things, write content
+            and work on your next big project.
+        </p>
+    </section>
+
+    <div class="tools">
+        <span class="tool">AI Chat</span>
+        <span class="tool">Writing</span>
+        <span class="tool">Coding</span>
+        <span class="tool">Image Creation</span>
+    </div>
+
+    <section id="chat" aria-live="polite">
+        <div class="message assistant">
+            <div class="label">NOVAAI</div>
+            Welcome! Your AI workspace is ready.
+
+            The AI engine has not been connected yet.
+            Our next step is to connect a suitable AI model.
+        </div>
+    </section>
+
+    <div class="composer">
+        <textarea
+            id="prompt"
+            placeholder="Ask a question or describe an idea..."
+            aria-label="Your message"></textarea>
+
+        <div class="buttons">
+            <button id="clear" type="button">New chat</button>
+            <button id="send" type="button">Send &#10148;</button>
+        </div>
+    </div>
+
+    <p class="notice">
+        Preview version. AI responses will become available
+        after the AI engine is connected.
+    </p>
+
+</main>
+
+<footer>
+    NovaAI &copy; 2026<br>
+    Designed for smartphones and compatible older browsers.
+</footer>
+
+<script>
+(function () {
+    var promptBox = document.getElementById("prompt");
+    var chat = document.getElementById("chat");
+    var send = document.getElementById("send");
+    var clear = document.getElementById("clear");
+
+    function addMessage(label, text, type) {
+        var box = document.createElement("div");
+        var heading = document.createElement("div");
+        var content = document.createElement("div");
+
+        box.className = "message " + type;
+        heading.className = "label";
+        heading.textContent = label;
+        content.textContent = text;
+
+        box.appendChild(heading);
+        box.appendChild(content);
+        chat.appendChild(box);
+    }
+
+    send.onclick = function () {
+        var text = promptBox.value.trim();
+
+        if (!text) {
+            promptBox.focus();
+            return;
+        }
+
+        addMessage("YOU", text, "user");
+
+        addMessage(
+            "NOVAAI",
+            "The AI engine is not connected yet. This is the website preview. The next step is connecting the AI service.",
+            "assistant"
+        );
+
+        promptBox.value = "";
+        promptBox.focus();
+
+        window.scrollTo(0, document.body.scrollHeight);
+    };
+
+    clear.onclick = function () {
+        chat.innerHTML = "";
+        promptBox.value = "";
+        promptBox.focus();
+    };
+
+    promptBox.onkeydown = function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            send.click();
+        }
+    };
+})();
+</script>
+
+</body>
+</html>
