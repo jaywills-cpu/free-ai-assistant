@@ -3,317 +3,378 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101a17">
-<meta name="description" content="A lightweight AI assistant for chatting, writing, coding and creativity.">
-<title>Nova AI - Your AI Assistant</title>
+<meta name="theme-color" content="#080d0b">
+<meta name="description" content="Jay AI by Nimx-G. Think bigger. Create more.">
+<title>Jay AI — Powered by Nimx-G</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;
+ background:#080d0b;
+ color:#f5f8f6;
+ font-family:Arial,Helvetica,sans-serif;
+ overflow-x:hidden
 }
-
-body {
-    margin: 0;
-    background: #101a17;
-    color: #f1f5f3;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.topbar{
+ padding:15px 6%;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ border-bottom:1px solid #1d3025;
+ background:rgba(8,13,11,.96)
 }
-
-header {
-    background: #17251f;
-    padding: 15px;
-    border-bottom: 1px solid #304438;
+.brand{font-size:25px;font-weight:900;letter-spacing:-1px}
+.brand .jay{color:#65edaa}
+.brand .ai{color:#e7c65e}
+.powered{font-size:9px;color:#a5b5aa;letter-spacing:2px;margin-top:5px}
+.menu a{font-size:13px;color:#b9c8bf;margin-left:20px}
+.menu a:hover{color:#65edaa}
+.small-btn{
+ display:inline-block;
+ padding:11px 17px;
+ border-radius:9px;
+ background:#65edaa;
+ color:#07110b!important;
+ font-size:13px;
+ font-weight:bold
 }
-
-.logo {
-    font-size: 23px;
-    font-weight: bold;
-    color: #54e69b;
+.hero{
+ max-width:1100px;
+ margin:auto;
+ padding:70px 22px 55px;
+ text-align:center
 }
-
-.logo span {
-    color: #f5c65b;
+.tag{
+ display:inline-block;
+ border:1px solid #315541;
+ border-radius:30px;
+ padding:9px 14px;
+ color:#80f0b4;
+ background:#10251a;
+ font-size:11px;
+ letter-spacing:1px
 }
-
-.subtitle {
-    color: #aabbb1;
-    font-size: 12px;
-    margin-top: 5px;
+.hero h1{
+ max-width:750px;
+ margin:25px auto 15px;
+ font-size:clamp(38px,8vw,70px);
+ line-height:1.08;
+ letter-spacing:-2.5px
 }
-
-main {
-    max-width: 760px;
-    margin: auto;
-    padding: 18px 12px;
+.gradient{
+ background:linear-gradient(100deg,#67efad,#e8cb68);
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent
 }
-
-.welcome {
-    text-align: center;
-    padding: 30px 8px 20px;
+.hero>p{
+ max-width:580px;
+ margin:0 auto;
+ color:#aabbb0;
+ font-size:16px;
+ line-height:1.8
 }
-
-.welcome h1 {
-    font-size: 27px;
-    margin-bottom: 10px;
+.actions{margin-top:28px}
+.primary,.secondary{
+ display:inline-block;
+ padding:15px 22px;
+ margin:5px;
+ border-radius:10px;
+ font-weight:bold;
+ font-size:14px;
+ cursor:pointer
 }
-
-.welcome h1 span {
-    color: #54e69b;
+.primary{background:#65edaa;color:#07110b;border:1px solid #65edaa}
+.secondary{background:#111b15;color:#fff;border:1px solid #34483a}
+.primary:hover{background:#8af5bf}
+.secondary:hover{border-color:#65edaa}
+.preview{
+ max-width:690px;
+ margin:40px auto 0;
+ padding:18px;
+ background:linear-gradient(145deg,#15251b,#0c130f);
+ border:1px solid #31523d;
+ border-radius:20px;
+ text-align:left;
+ box-shadow:0 20px 80px #0008
 }
-
-.welcome p {
-    color: #b3c2b9;
-    line-height: 1.6;
+.preview-top{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding-bottom:15px;
+ border-bottom:1px solid #27392d
 }
-
-.tools {
-    margin: 18px 0;
-    text-align: center;
+.dots span{
+ display:inline-block;
+ width:8px;height:8px;
+ border-radius:50%;
+ margin-right:4px;
+ background:#45634f
 }
-
-.tool {
-    display: inline-block;
-    background: #1c2c24;
-    border: 1px solid #354c3e;
-    color: #e7f3eb;
-    padding: 9px 12px;
-    margin: 4px;
-    border-radius: 8px;
-    font-size: 12px;
+.preview-title{font-size:12px;color:#dbe9df}
+.status{font-size:10px;color:#72e8a7}
+.welcome{
+ padding:22px 5px 15px;
+ font-size:19px;
+ font-weight:bold
 }
-
-#chat {
-    padding: 5px 0;
+.welcome small{
+ display:block;
+ margin-top:9px;
+ color:#a7b8ac;
+ font-size:12px;
+ font-weight:normal;
+ line-height:1.7
 }
-
-.message {
-    padding: 12px;
-    margin: 12px 0;
-    border-radius: 10px;
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-    white-space: pre-wrap;
+.suggestions{margin:8px 0 20px}
+.suggestions span{
+ display:inline-block;
+ padding:9px 11px;
+ margin:4px 3px 0 0;
+ border:1px solid #304638;
+ background:#122019;
+ border-radius:8px;
+ color:#c8d8cd;
+ font-size:11px
 }
-
-.user {
-    background: #244b36;
-    margin-left: 12%;
+.fake-input{
+ border:1px solid #3b5945;
+ border-radius:11px;
+ padding:13px;
+ color:#829489;
+ font-size:12px;
+ background:#09110c
 }
-
-.assistant {
-    background: #1b2922;
-    border: 1px solid #304438;
-    margin-right: 5%;
+.fake-input b{
+ float:right;
+ background:#65edaa;
+ color:#07110b;
+ border-radius:7px;
+ padding:6px 10px;
+ margin-top:-6px
 }
-
-.label {
-    font-size: 11px;
-    color: #54e69b;
-    font-weight: bold;
-    margin-bottom: 7px;
+.section{
+ max-width:1050px;
+ margin:auto;
+ padding:40px 22px 65px
 }
-
-.composer {
-    background: #1b2922;
-    border: 1px solid #405747;
-    border-radius: 12px;
-    padding: 10px;
-    margin-top: 15px;
+.section-heading{text-align:center;margin-bottom:30px}
+.section-heading h2{font-size:29px;margin-bottom:10px}
+.section-heading p{color:#a8b8ad;font-size:14px;line-height:1.7}
+.features{
+ display:block;
+ text-align:center
 }
-
-textarea {
-    display: block;
-    width: 100%;
-    min-height: 75px;
-    resize: vertical;
-    border: 0;
-    outline: none;
-    background: transparent;
-    color: white;
-    font: inherit;
-    padding: 8px;
+.feature{
+ display:inline-block;
+ vertical-align:top;
+ width:30%;
+ min-width:220px;
+ margin:1%;
+ padding:23px 18px;
+ text-align:left;
+ border:1px solid #263d2d;
+ background:#0d1711;
+ border-radius:14px
 }
-
-textarea::placeholder {
-    color: #91a69a;
+.feature-mark{
+ display:inline-block;
+ padding:10px;
+ border-radius:9px;
+ background:#173222;
+ color:#7af0ae;
+ font-size:21px
 }
-
-.buttons {
-    margin-top: 8px;
-    overflow: hidden;
+.feature h3{font-size:16px;margin:17px 0 9px}
+.feature p{font-size:13px;color:#9fb0a4;line-height:1.8;margin:0}
+.access{
+ margin:0 6% 60px;
+ padding:35px 20px;
+ border:1px solid #355540;
+ border-radius:18px;
+ background:linear-gradient(120deg,#11251a,#111a14);
+ text-align:center
 }
-
-button {
-    font: inherit;
-    cursor: pointer;
-    border: 0;
-    border-radius: 7px;
-    padding: 11px 14px;
+.access h2{font-size:26px;margin:0 0 12px}
+.access p{font-size:13px;color:#b1c1b5;line-height:1.8}
+.access-buttons{margin-top:22px}
+.phone-btn{
+ display:inline-block;
+ vertical-align:top;
+ width:230px;
+ max-width:100%;
+ margin:6px;
+ padding:19px 12px;
+ border:1px solid #405c47;
+ border-radius:12px;
+ background:#0a130d
 }
-
-#send {
-    float: right;
-    background: #54e69b;
-    color: #102219;
-    font-weight: bold;
+.phone-btn strong{display:block;font-size:15px;margin-bottom:8px}
+.phone-btn small{font-size:11px;color:#a8b9ad;line-height:1.6}
+.bottom{
+ border-top:1px solid #203227;
+ padding:25px 15px;
+ text-align:center;
+ color:#87998c;
+ font-size:11px;
+ line-height:2
 }
-
-#clear {
-    background: #304238;
-    color: white;
-}
-
-.notice {
-    color: #9daf9f;
-    font-size: 11px;
-    line-height: 1.6;
-    text-align: center;
-    margin: 14px 0;
-}
-
-footer {
-    text-align: center;
-    padding: 22px 10px;
-    color: #8ea397;
-    border-top: 1px solid #304438;
-    font-size: 12px;
-}
-
-@media (max-width: 360px) {
-    .welcome h1 {
-        font-size: 23px;
-    }
-
-    main {
-        padding: 12px 8px;
-    }
-
-    button {
-        padding: 10px;
-    }
+.bottom b{color:#65edaa}
+@media(max-width:600px){
+ .topbar{padding:14px 16px}
+ .brand{font-size:22px}
+ .menu a:not(.small-btn){display:none}
+ .menu .small-btn{padding:10px 12px;font-size:12px}
+ .hero{padding:55px 17px 40px}
+ .hero h1{letter-spacing:-1.5px}
+ .hero>p{font-size:14px}
+ .preview{padding:13px;border-radius:14px}
+ .feature{width:100%;margin:7px 0;min-width:0}
+ .section{padding:35px 18px 45px}
+ .section-heading h2{font-size:25px}
+ .access{margin:0 15px 40px;padding:28px 15px}
+ .access h2{font-size:23px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo">Nova<span>AI</span></div>
-    <div class="subtitle">
-        Your assistant for ideas, knowledge and creativity
-    </div>
+<header class="topbar">
+ <div>
+  <div class="brand"><span class="jay">Jay</span> <span class="ai">AI</span></div>
+  <div class="powered">POWERED BY NIMX-G</div>
+ </div>
+ <nav class="menu">
+  <a href="#features">Features</a>
+  <a href="#access">Platforms</a>
+  <a href="#access" class="small-btn">Get Started ↗</a>
+ </nav>
 </header>
 
 <main>
+ <section class="hero">
+  <div class="tag">✦ YOUR IDEAS. YOUR AI. YOUR WORLD.</div>
 
-    <section class="welcome">
-        <h1>Meet your new <span>AI assistant.</span></h1>
-        <p>
-            Explore ideas, learn new things, write content
-            and work on your next big project.
-        </p>
-    </section>
+  <h1>
+   Meet your next<br>
+   <span class="gradient">intelligent partner.</span>
+  </h1>
 
-    <div class="tools">
-        <span class="tool">AI Chat</span>
-        <span class="tool">Writing</span>
-        <span class="tool">Coding</span>
-        <span class="tool">Image Creation</span>
-    </div>
+  <p>
+   From big ideas to everyday questions, Jay AI helps you
+   think clearly, write brilliantly, learn faster and build
+   something amazing.
+  </p>
 
-    <section id="chat" aria-live="polite">
-        <div class="message assistant">
-            <div class="label">NOVAAI</div>
-            Welcome! Your AI workspace is ready.
+  <div class="actions">
+   <a class="primary" href="#access">Explore Jay AI &nbsp; →</a>
+   <a class="secondary" href="#features">Discover Features</a>
+  </div>
 
-            The AI engine has not been connected yet.
-            Our next step is to connect a suitable AI model.
-        </div>
-    </section>
+  <div class="preview">
+   <div class="preview-top">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <div class="preview-title">Jay AI Assistant</div>
+    <div class="status">● READY TO HELP</div>
+   </div>
 
-    <div class="composer">
-        <textarea
-            id="prompt"
-            placeholder="Ask a question or describe an idea..."
-            aria-label="Your message"></textarea>
+   <div class="welcome">
+    Hello, welcome to Jay AI ✨
+    <small>
+     Your space to ask questions, explore ideas and turn
+     your thoughts into something extraordinary.
+    </small>
+   </div>
 
-        <div class="buttons">
-            <button id="clear" type="button">New chat</button>
-            <button id="send" type="button">Send &#10148;</button>
-        </div>
-    </div>
+   <div class="suggestions">
+    <span>✦ Help me learn</span>
+    <span>✎ Write something</span>
+    <span>⌘ Help with code</span>
+    <span>◈ Explore an idea</span>
+   </div>
 
-    <p class="notice">
-        Preview version. AI responses will become available
-        after the AI engine is connected.
-    </p>
+   <div class="fake-input">
+    Imagine what you could create...
+    <b>↑</b>
+   </div>
+  </div>
+ </section>
 
+ <section class="section" id="features">
+  <div class="section-heading">
+   <h2>One AI. <span class="gradient">More possibilities.</span></h2>
+   <p>Designed to help you create, discover and move forward.</p>
+  </div>
+
+  <div class="features">
+   <article class="feature">
+    <div class="feature-mark">✦</div>
+    <h3>Smart Conversations</h3>
+    <p>Ask questions, understand difficult topics and explore new ideas with an AI assistant.</p>
+   </article>
+
+   <article class="feature">
+    <div class="feature-mark">✎</div>
+    <h3>Writing & Creativity</h3>
+    <p>Develop your ideas, improve your writing and work on creative projects.</p>
+   </article>
+
+   <article class="feature">
+    <div class="feature-mark">&lt;/&gt;</div>
+    <h3>Coding Companion</h3>
+    <p>Get help understanding code, solving programming problems and building websites.</p>
+   </article>
+
+   <article class="feature">
+    <div class="feature-mark">◷</div>
+    <h3>Conversation History</h3>
+    <p>Our planned account system will let users return to their own saved conversations.</p>
+   </article>
+
+   <article class="feature">
+    <div class="feature-mark">◈</div>
+    <h3>Made for Your Device</h3>
+    <p>A mobile-first design, with a simplified interface planned for compatible older phones.</p>
+   </article>
+
+   <article class="feature">
+    <div class="feature-mark">⬡</div>
+    <h3>Privacy & Protection</h3>
+    <p>Account security and age-appropriate access will be part of the backend design.</p>
+   </article>
+  </div>
+ </section>
+
+ <section class="access" id="access">
+  <h2>Your device. <span class="gradient">Your experience.</span></h2>
+  <p>Choose the interface designed for your phone.<br>
+     Both experiences are being developed.</p>
+
+  <div class="access-buttons">
+   <a class="phone-btn" href="android.html">
+    <strong>▣ Android Experience</strong>
+    <small>Modern mobile interface<br>Designed for touchscreens</small>
+   </a>
+
+   <a class="phone-btn" href="button-phone.html">
+    <strong>▤ Button Phone Experience</strong>
+    <small>Lightweight pages<br>For compatible older browsers</small>
+   </a>
+  </div>
+ </section>
 </main>
 
-<footer>
-    NovaAI &copy; 2026<br>
-    Designed for smartphones and compatible older browsers.
+<footer class="bottom">
+ <b>Jay AI</b> — Powered by Nimx-G<br>
+ Built for ideas, creativity and discovery.<br>
+ © 2026 Jay AI. All rights reserved.
 </footer>
 
-<script>
-(function () {
-    var promptBox = document.getElementById("prompt");
-    var chat = document.getElementById("chat");
-    var send = document.getElementById("send");
-    var clear = document.getElementById("clear");
-
-    function addMessage(label, text, type) {
-        var box = document.createElement("div");
-        var heading = document.createElement("div");
-        var content = document.createElement("div");
-
-        box.className = "message " + type;
-        heading.className = "label";
-        heading.textContent = label;
-        content.textContent = text;
-
-        box.appendChild(heading);
-        box.appendChild(content);
-        chat.appendChild(box);
-    }
-
-    send.onclick = function () {
-        var text = promptBox.value.trim();
-
-        if (!text) {
-            promptBox.focus();
-            return;
-        }
-
-        addMessage("YOU", text, "user");
-
-        addMessage(
-            "NOVAAI",
-            "The AI engine is not connected yet. This is the website preview. The next step is connecting the AI service.",
-            "assistant"
-        );
-
-        promptBox.value = "";
-        promptBox.focus();
-
-        window.scrollTo(0, document.body.scrollHeight);
-    };
-
-    clear.onclick = function () {
-        chat.innerHTML = "";
-        promptBox.value = "";
-        promptBox.focus();
-    };
-
-    promptBox.onkeydown = function (event) {
-        if (event.key === "Enter" && !event.shiftKey) {
-            event.preventDefault();
-            send.click();
-        }
-    };
-})();
-</script>
-
 </body>
-</html>
+    </html>
