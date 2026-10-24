@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | NIMX-G AI HUB</title>
+
+    <meta name="theme-color" content="#07110d">
+    <meta name="description"
+          content="Create your NIMX-G AI HUB account. One Platform. Multiple AIs.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px 12px;
+            min-height: 100vh;
+            background: #07110d;
+            color: #f1f5f2;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+            margin: 20px auto;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .brand-name {
+            color: #36d98b;
+            font-size: 27px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-name span {
+            color: #f0c75e;
+        }
+
+        .tagline {
+            color: #a9b9af;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .card {
+            background: #101d16;
+            border: 1px solid #263c2e;
+            border-radius: 15px;
+            padding: 23px 18px;
+        }
+
+        h1 {
+            font-size: 23px;
+            margin: 0 0 8px;
+        }
+
+        .description {
+            color: #aab9af;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 23px;
+        }
+
+        label {
+            display: block;
+            margin: 16px 0 7px;
+            color: #e5eee8;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px 12px;
+            background: #08120d;
+            border: 1px solid #344b3a;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #36d98b;
+        }
+
+        select option {
+            background: #101d16;
+            color: #ffffff;
+        }
+
+        .password-note {
+            color: #9bac9f;
+            font-size: 12px;
+            margin-top: 7px;
+        }
+
+        .button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 8px;
+            background: #36d98b;
+            color: #07110d;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .secondary-button {
+            background: #18291f;
+            color: #f0c75e;
+            border: 1px solid #344b3a;
+            margin-top: 10px;
+        }
+
+        .message {
+            display: none;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .message.success {
+            display: block;
+            background: #102c1d;
+            color: #7df0ae;
+            border: 1px solid #286943;
+        }
+
+        .message.error {
+            display: block;
+            background: #351719;
+            color: #ffaaaa;
+            border: 1px solid #713337;
+        }
+
+        .message.info {
+            display: block;
+            background: #17271f;
+            color: #f0d58b;
+            border: 1px solid #4c5733;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .divider {
+            height: 1px;
+            background: #2a4031;
+            margin: 23px 0;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: #9bac9f;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #36d98b;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .gold {
+            color: #f0c75e;
+        }
+
+        .small-note {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #9bac9f;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 360px) {
+            body {
+                padding: 12px 8px;
+            }
+
+            .card {
+                padding: 19px 13px;
+            }
+
+            .brand-name {
+                font-size: 23px;
+            }
+
+            h1 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="brand">
+        <div class="brand-name">NIMX-G <span>AI HUB</span></div>
+        <div class="tagline">One Platform. Multiple AIs.</div>
+    </header>
+
+    <main class="card">
+
+        <h1>Create your account</h1>
+
+        <div class="description">
+            Join NIMX-G AI HUB and explore AI assistants for learning,
+            writing, coding, research and everyday questions.
+        </div>
+
+        <div id="pageMessage"
+             class="message"
+             role="status"
+             aria-live="polite"></div>
+
+        <!-- REGISTRATION FORM -->
+
+        <form id="registerForm">
+
+            <label for="username">Choose a username</label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                minlength="3"
+                maxlength="30"
+                pattern="[A-Za-z0-9_]+"
+                autocomplete="username"
+                placeholder="e.g. nimxg_user"
+                required
+            >
+
+            <div class="small-note">
+                Use 3–30 letters, numbers or underscores.
+            </div>
+
+            <label for="email">Email address</label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                maxlength="254"
+                autocomplete="email"
+                placeholder="you@example.com"
+                required
+            >
+
+            <label for="password">Create password</label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                minlength="8"
+                maxlength="72"
+                autocomplete="new-password"
+                placeholder="At least 8 characters"
+                required
+            >
+
+            <label for="confirmPassword">Confirm password</label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                minlength="8"
+                maxlength="72"
+                autocomplete="new-password"
+                placeholder="Enter your password again"
+                required
+            >
+
+            <div class="password-note">
+                Your passwords must match.
+            </div>
+
+            <label for="deviceType">Choose your device</label>
+
+            <select id="deviceType" name="deviceType" required>
+                <option value="android">Android / Smartphone</option>
+                <option value="keypad">Keypad / Older phone</option>
+            </select>
+
+            <button type="submit"
+                    id="registerButton"
+                    class="button">
+                Create My Account
+            </button>
+
+        </form>
+
+        <!-- EMAIL VERIFICATION -->
+
+        <section id="verificationSection" class="hidden">
+
+            <div class="divider"></div>
+
+            <h2 style="font-size:19px;">Verify your email</h2>
+
+            <p class="description">
+                We have requested a verification email. Open it and
+                either click its verification link or enter the code below.
+            </p>
+
+            <label for="verificationCode">Email verification code</label>
+
+            <input
+                type="text"
+                id="verificationCode"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                maxlength="8"
+                placeholder="Enter the code from your email"
+            >
+
+            <button type="button"
+                    id="verifyButton"
+                    class="button">
+                Verify Email Code
+            </button>
+
+            <button type="button"
+                    id="resendButton"
+                    class="button secondary-button">
+                Request Another Verification Email
+            </button>
+
+            <p class="small-note">
+                If you click the verification link in your email,
+                this page will handle the return when Supabase completes
+                the confirmation flow.
+            </p>
+
+        </section>
+
+        <!-- VERIFIED STATE -->
+
+        <section id="verifiedSection" class="hidden">
+
+            <div class="divider"></div>
+
+            <h2 class="gold" style="font-size:20px;">
+                Email verified!
+            </h2>
+
+            <p class="description">
+                Your email has been confirmed. Your profile has been
+                saved if the required database permissions are configured.
+            </p>
+
+            <a href="login.html" class="button"
+               style="display:block;text-align:center;">
+                Continue to Login
+            </a>
+
+        </section>
+
+        <div class="divider"></div>
+
+        <div class="footer-text">
+            Already have an account?
+            <a href="login.html">Sign in</a>
+
+            <br>
+
+            <a href="index.html">Back to Home</a>
+        </div>
+
+    </main>
+
+    <footer class="footer-text">
+        &copy; <span id="year">2026</span> NIMX-G AI HUB.
+        All rights reserved.
+    </footer>
+
+</div>
+
+<!-- Supabase JavaScript client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+(function () {
+    "use strict";
+
+    /*
+     * IMPORTANT:
+     * Replace these two placeholders with the exact public project URL
+     * and publishable key already used in assets/js/supabase.js.
+     *
+     * Never put a service_role key or secret API key here.
+     */
+
+    const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
+    const SUPABASE_PUBLISHABLE_KEY =
+        "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
+
+    const pageMessage = document.getElementById("pageMessage");
+    const registerForm = document.getElementById("registerForm");
+    const registerButton = document.getElementById("registerButton");
+
+    const verificationSection =
+        document.getElementById("verificationSection");
+
+    const verifiedSection =
+        document.getElementById("verifiedSection");
+
+    const verifyButton = document.getElementById("verifyButton");
+    const resendButton = document.getElementById("resendButton");
+
+    let supabaseClient = null;
+    let pendingEmail = "";
+    let isSavingProfile = false;
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+    function showMessage(message, type) {
+        pageMessage.textContent = message;
+        pageMessage.className = "message " + type;
+    }
+
+    function clearMessage() {
+        pageMessage.textContent = "";
+        pageMessage.className = "message";
+    }
+
+    function showVerification() {
+        verificationSection.classList.remove("hidden");
+        verifiedSection.classList.add("hidden");
+    }
+
+    function showVerified() {
+        registerForm.classList.add("hidden");
+        verificationSection.classList.add("hidden");
+        verifiedSection.classList.remove("hidden");
+    }
+
+    function getFriendlyError(error) {
+        const message = String(error && error.message
+            ? error.message
+            : "Something went wrong.");
+
+        if (/duplicate key|unique constraint|already registered/i.test(message)) {
+            return "This username or account may already be in use. Try another username or sign in if you already have an account.";
+        }
+
+        if (/invalid login credentials/i.test(message)) {
+            return "Those sign-in details are not valid.";
+        }
+
+        if (/email not confirmed/i.test(message)) {
+            return "Please verify your email before signing in.";
+        }
+
+        if (/rate limit|too many requests/i.test(message)) {
+            return "Too many attempts. Please wait a while before trying again.";
+        }
+
+        return message;
+    }
+
+    function validateConfiguration() {
+        if (
+            !SUPABASE_URL.startsWith("https://") ||
+            SUPABASE_URL.indexOf("PASTE_") !== -1 ||
+            SUPABASE_PUBLISHABLE_KEY.indexOf("PASTE_") !== -1 ||
+            !SUPABASE_PUBLISHABLE_KEY
+        ) {
+            showMessage(
+                "Setup is incomplete. Add your existing Supabase project URL and publishable key in this file first.",
+                "error"
+            );
+
+            registerButton.disabled = true;
+            return false;
+        }
+
+        return true;
+    }
+
+    if (!window.supabase || !window.supabase.createClient) {
+        showMessage(
+            "The Supabase library could not load. Check your internet connection and reload the page.",
+            "error"
+        );
+        registerButton.disabled = true;
+        return;
+    }
+
+    if (!validateConfiguration()) {
+        return;
+    }
+
+    supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY,
+        {
+            auth: {
+                persistSession: true,
+                autoRefreshToken: true,
+                detectSessionInUrl: true
+            }
+        }
+    );
+
+    /*
+     * Save the user's profile after email verification.
+     * Username and device choice are taken from Auth user metadata.
+     */
+
+    async function saveVerifiedProfile(user) {
+        if (!user || !user.email_confirmed_at) {
+            return false;
+        }
+
+        if (isSavingProfile) {
+            return false;
+        }
+
+        isSavingProfile = true;
+
+        try {
+            const metadata = user.user_metadata || {};
+
+            const username = String(metadata.username || "");
+            const deviceType = String(metadata.device_type || "android");
+
+            if (!/^[A-Za-z0-9_]{3,30}$/.test(username)) {
+                showMessage(
+                    "Your email is verified, but the username information is missing or invalid. Please contact support.",
+                    "error"
+                );
+                return false;
+            }
+
+            if (deviceType !== "android" && deviceType !== "keypad") {
+                showMessage(
+                    "Your saved device preference is invalid. Please contact support.",
+                    "error"
+                );
+                return false;
+            }
+
+            const profile = {
+                id: user.id,
+                username: username,
+                device_type: deviceType,
+                account_type: "free"
+            };
+
+            const result = await supabaseClient
+                .from("profiles")
+                .upsert(profile, {
+                    onConflict: "id"
+                });
+
+            if (result.error) {
+                console.error("Profile save error:", result.error);
+
+                showMessage(
+                    "Your email is verified, but your profile could not be saved. Check your profiles table, username uniqueness and Row Level Security policies.",
+                    "error"
+                );
+
+                return false;
+            }
+
+            showMessage(
+                "Your email is verified and your profile is saved. You can now continue to login.",
+                "success"
+            );
+
+            showVerified();
+            return true;
+
+        } catch (error) {
+            console.error(error);
+
+            showMessage(
+                "Your email was verified, but we could not finish saving your profile. Please try again.",
+                "error"
+            );
+
+            return false;
+
+        } finally {
+            isSavingProfile = false;
+        }
+    }
+
+    /*
+     * Handle users returning after clicking a Supabase confirmation link.
+     */
+
+    async function checkVerifiedSession() {
+        try {
+            const result = await supabaseClient.auth.getSession();
+
+            if (result.error) {
+                return;
+            }
+
+            const session = result.data.session;
+
+            if (session && session.user && session.user.email_confirmed_at) {
+                await saveVerifiedProfile(session.user);
+            }
+        } catch (error) {
+            console.error("Session check error:", error);
+        }
+    }
+
+    supabaseClient.auth.onAuthStateChange(function (event, session) {
+        if (
+            event === "SIGNED_IN" &&
+            session &&
+            session.user &&
+            session.user.email_confirmed_at
+        ) {
+            /*
+             * Defer database work until after the auth callback.
+             */
+            setTimeout(function () {
+                saveVerifiedProfile(session.user);
+            }, 0);
+        }
+    });
+
+    /*
+     * REGISTER
+     */
+
+    registerForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        clearMessage();
+
+        const username = document.getElementById("username")
+            .value.trim();
+
+        const email = document.getElementById("email")
+            .value.trim().toLowerCase();
+
+        const password = document.getElementById("password").value;
+
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+        const deviceType =
+            document.getElementById("deviceType").value;
+
+        if (!/^[A-Za-z0-9_]{3,30}$/.test(username)) {
+            showMessage(
+                "Your username must contain 3–30 letters, numbers or underscores.",
+                "error"
+            );
+            return;
+        }
+
+        if (password.length < 8) {
+            showMessage(
+                "Your password must contain at least 8 characters.",
+                "error"
+            );
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showMessage(
+                "The passwords do not match. Please check them.",
+                "error"
+            );
+            return;
+        }
+
+        if (deviceType !== "android" && deviceType !== "keypad") {
+            showMessage(
+                "Please choose a valid device type.",
+                "error"
+            );
+            return;
+        }
+
+        registerButton.disabled = true;
+        registerButton.textContent = "Creating account...";
+
+        try {
+            const redirectUrl =
+                window.location.origin + window.location.pathname;
+
+            const result = await supabaseClient.auth.signUp({
+                email: email,
+                password: password,
+
+                options: {
+                    emailRedirectTo: redirectUrl,
+
+                    data: {
+                        username: username,
+                        device_type: deviceType
+                    }
+                }
+            });
+
+            if (result.error) {
+                showMessage(
+                    getFriendlyError(result.error),
+                    "error"
+                );
+                return;
+            }
+
+            pendingEmail = email;
+
+            /*
+             * With email confirmation enabled, Supabase normally
+             * returns no active session until confirmation.
+             */
+
+            if (result.data.session &&
+                result.data.user &&
+                result.data.user.email_confirmed_at) {
+
+                await saveVerifiedProfile(result.data.user);
+
+            } else {
+                showVerification();
+
+                showMessage(
+                    "Registration submitted. Check your email for the verification link or code. If the email does not arrive, check Spam or Junk.",
+                    "success"
+                );
+            }
+
+        } catch (error) {
+            console.error(error);
+
+            showMessage(
+                "We could not complete registration. Check your connection and try again.",
+                "error"
+            );
+
+        } finally {
+            registerButton.disabled = false;
+            registerButton.textContent = "Create My Account";
+        }
+    });
+
+    /*
+     * VERIFY USING THE EMAIL OTP CODE
+     */
+
+    verifyButton.addEventListener("click", async function () {
+        clearMessage();
+
+        const code = document.getElementById("verificationCode")
+            .value.trim();
+
+        const email = pendingEmail ||
+            document.getElementById("email").value.trim().toLowerCase();
+
+        if (!email) {
+            showMessage(
+                "Enter the email address you used to register.",
+                "error"
+            );
+            return;
+        }
+
+        if (!/^[0-9]{6,8}$/.test(code)) {
+            showMessage(
+                "Enter the verification code from your email.",
+                "error"
+            );
+            return;
+        }
+
+        verifyButton.disabled = true;
+        verifyButton.textContent = "Verifying...";
+
+        try {
+            const result = await supabaseClient.auth.verifyOtp({
+                email: email,
+                token: code,
+                type: "signup"
+            });
+
+            if (result.error) {
+                showMessage(
+                    getFriendlyError(result.error),
+                    "error"
+                );
+                return;
+            }
+
+            if (result.data.user) {
+                await saveVerifiedProfile(result.data.user);
+            } else {
+                showMessage(
+                    "The verification response was incomplete. Please try signing in.",
+                    "info"
+                );
+            }
+
+        } catch (error) {
+            console.error(error);
+
+            showMessage(
+                "Verification failed. Check the code and try again.",
+                "error"
+            );
+
+        } finally {
+            verifyButton.disabled = false;
+            verifyButton.textContent = "Verify Email Code";
+        }
+    });
+
+    /*
+     * RESEND VERIFICATION EMAIL
+     */
+
+    resendButton.addEventListener("click", async function () {
+        clearMessage();
+
+        const email = pendingEmail ||
+            document.getElementById("email").value.trim().toLowerCase();
+
+        if (!email) {
+            showMessage(
+                "Enter the email address you used to register.",
+                "error"
+            );
+            return;
+        }
+
+        resendButton.disabled = true;
+        resendButton.textContent = "Requesting email...";
+
+        try {
+            const result = await supabaseClient.auth.resend({
+                type: "signup",
+                email: email,
+                options: {
+                    emailRedirectTo:
+                        window.location.origin + window.location.pathname
+                }
+            });
+
+            if (result.error) {
+                showMessage(
+                    getFriendlyError(result.error),
+                    "error"
+                );
+                return;
+            }
+
+            pendingEmail = email;
+
+            showMessage(
+                "If another verification email can be sent, it has been requested. Check your inbox and Spam folder.",
+                "success"
+            );
+
+        } catch (error) {
+            console.error(error);
+
+            showMessage(
+                "We could not request another email. Please try again later.",
+                "error"
+            );
+
+        } finally {
+            resendButton.disabled = false;
+            resendButton.textContent =
+                "Request Another Verification Email";
+        }
+    });
+
+    checkVerifiedSession();
+
+})();
+</script>
+
+</body>
+  </html>
