@@ -1,380 +1,796 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080d0b">
-<meta name="description" content="Jay AI by Nimx-G. Think bigger. Create more.">
-<title>Jay AI — Powered by Nimx-G</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
- margin:0;
- background:#080d0b;
- color:#f5f8f6;
- font-family:Arial,Helvetica,sans-serif;
- overflow-x:hidden
-}
-a{color:inherit;text-decoration:none}
-button{font-family:inherit}
-.topbar{
- padding:15px 6%;
- display:flex;
- align-items:center;
- justify-content:space-between;
- border-bottom:1px solid #1d3025;
- background:rgba(8,13,11,.96)
-}
-.brand{font-size:25px;font-weight:900;letter-spacing:-1px}
-.brand .jay{color:#65edaa}
-.brand .ai{color:#e7c65e}
-.powered{font-size:9px;color:#a5b5aa;letter-spacing:2px;margin-top:5px}
-.menu a{font-size:13px;color:#b9c8bf;margin-left:20px}
-.menu a:hover{color:#65edaa}
-.small-btn{
- display:inline-block;
- padding:11px 17px;
- border-radius:9px;
- background:#65edaa;
- color:#07110b!important;
- font-size:13px;
- font-weight:bold
-}
-.hero{
- max-width:1100px;
- margin:auto;
- padding:70px 22px 55px;
- text-align:center
-}
-.tag{
- display:inline-block;
- border:1px solid #315541;
- border-radius:30px;
- padding:9px 14px;
- color:#80f0b4;
- background:#10251a;
- font-size:11px;
- letter-spacing:1px
-}
-.hero h1{
- max-width:750px;
- margin:25px auto 15px;
- font-size:clamp(38px,8vw,70px);
- line-height:1.08;
- letter-spacing:-2.5px
-}
-.gradient{
- background:linear-gradient(100deg,#67efad,#e8cb68);
- -webkit-background-clip:text;
- background-clip:text;
- color:transparent
-}
-.hero>p{
- max-width:580px;
- margin:0 auto;
- color:#aabbb0;
- font-size:16px;
- line-height:1.8
-}
-.actions{margin-top:28px}
-.primary,.secondary{
- display:inline-block;
- padding:15px 22px;
- margin:5px;
- border-radius:10px;
- font-weight:bold;
- font-size:14px;
- cursor:pointer
-}
-.primary{background:#65edaa;color:#07110b;border:1px solid #65edaa}
-.secondary{background:#111b15;color:#fff;border:1px solid #34483a}
-.primary:hover{background:#8af5bf}
-.secondary:hover{border-color:#65edaa}
-.preview{
- max-width:690px;
- margin:40px auto 0;
- padding:18px;
- background:linear-gradient(145deg,#15251b,#0c130f);
- border:1px solid #31523d;
- border-radius:20px;
- text-align:left;
- box-shadow:0 20px 80px #0008
-}
-.preview-top{
- display:flex;
- align-items:center;
- justify-content:space-between;
- padding-bottom:15px;
- border-bottom:1px solid #27392d
-}
-.dots span{
- display:inline-block;
- width:8px;height:8px;
- border-radius:50%;
- margin-right:4px;
- background:#45634f
-}
-.preview-title{font-size:12px;color:#dbe9df}
-.status{font-size:10px;color:#72e8a7}
-.welcome{
- padding:22px 5px 15px;
- font-size:19px;
- font-weight:bold
-}
-.welcome small{
- display:block;
- margin-top:9px;
- color:#a7b8ac;
- font-size:12px;
- font-weight:normal;
- line-height:1.7
-}
-.suggestions{margin:8px 0 20px}
-.suggestions span{
- display:inline-block;
- padding:9px 11px;
- margin:4px 3px 0 0;
- border:1px solid #304638;
- background:#122019;
- border-radius:8px;
- color:#c8d8cd;
- font-size:11px
-}
-.fake-input{
- border:1px solid #3b5945;
- border-radius:11px;
- padding:13px;
- color:#829489;
- font-size:12px;
- background:#09110c
-}
-.fake-input b{
- float:right;
- background:#65edaa;
- color:#07110b;
- border-radius:7px;
- padding:6px 10px;
- margin-top:-6px
-}
-.section{
- max-width:1050px;
- margin:auto;
- padding:40px 22px 65px
-}
-.section-heading{text-align:center;margin-bottom:30px}
-.section-heading h2{font-size:29px;margin-bottom:10px}
-.section-heading p{color:#a8b8ad;font-size:14px;line-height:1.7}
-.features{
- display:block;
- text-align:center
-}
-.feature{
- display:inline-block;
- vertical-align:top;
- width:30%;
- min-width:220px;
- margin:1%;
- padding:23px 18px;
- text-align:left;
- border:1px solid #263d2d;
- background:#0d1711;
- border-radius:14px
-}
-.feature-mark{
- display:inline-block;
- padding:10px;
- border-radius:9px;
- background:#173222;
- color:#7af0ae;
- font-size:21px
-}
-.feature h3{font-size:16px;margin:17px 0 9px}
-.feature p{font-size:13px;color:#9fb0a4;line-height:1.8;margin:0}
-.access{
- margin:0 6% 60px;
- padding:35px 20px;
- border:1px solid #355540;
- border-radius:18px;
- background:linear-gradient(120deg,#11251a,#111a14);
- text-align:center
-}
-.access h2{font-size:26px;margin:0 0 12px}
-.access p{font-size:13px;color:#b1c1b5;line-height:1.8}
-.access-buttons{margin-top:22px}
-.phone-btn{
- display:inline-block;
- vertical-align:top;
- width:230px;
- max-width:100%;
- margin:6px;
- padding:19px 12px;
- border:1px solid #405c47;
- border-radius:12px;
- background:#0a130d
-}
-.phone-btn strong{display:block;font-size:15px;margin-bottom:8px}
-.phone-btn small{font-size:11px;color:#a8b9ad;line-height:1.6}
-.bottom{
- border-top:1px solid #203227;
- padding:25px 15px;
- text-align:center;
- color:#87998c;
- font-size:11px;
- line-height:2
-}
-.bottom b{color:#65edaa}
-@media(max-width:600px){
- .topbar{padding:14px 16px}
- .brand{font-size:22px}
- .menu a:not(.small-btn){display:none}
- .menu .small-btn{padding:10px 12px;font-size:12px}
- .hero{padding:55px 17px 40px}
- .hero h1{letter-spacing:-1.5px}
- .hero>p{font-size:14px}
- .preview{padding:13px;border-radius:14px}
- .feature{width:100%;margin:7px 0;min-width:0}
- .section{padding:35px 18px 45px}
- .section-heading h2{font-size:25px}
- .access{margin:0 15px 40px;padding:28px 15px}
- .access h2{font-size:23px}
-}
-</style>
+    <title>NIMX-G AI HUB | One Platform. Multiple AIs.</title>
+
+    <meta name="description"
+          content="Welcome to NIMX-G AI HUB. Explore AI assistants for coding, learning, writing, research and everyday questions.">
+
+    <meta name="theme-color" content="#080b09">
+
+    <style>
+        :root {
+            --bg: #080b09;
+            --surface: #101612;
+            --surface-light: #151e18;
+            --green: #00df83;
+            --green-dark: #009b5b;
+            --gold: #e8c66a;
+            --text: #f2f6f3;
+            --muted: #9aa79f;
+            --border: #26372c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .container {
+            width: 94%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: #0b100d;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 10px 0;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-symbol {
+            width: 37px;
+            height: 37px;
+            border: 2px solid var(--green);
+            border-radius: 11px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green);
+            font-size: 17px;
+            box-shadow: 0 0 15px #00df8320;
+        }
+
+        .brand span:last-child {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .button {
+            display: inline-block;
+            text-align: center;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .button-primary {
+            color: #03150c;
+            background: var(--green);
+        }
+
+        .button-primary:hover {
+            background: #36f5a6;
+        }
+
+        .button-outline {
+            color: var(--text);
+            border-color: var(--border);
+            background: transparent;
+        }
+
+        .button-outline:hover {
+            border-color: var(--green);
+        }
+
+        /* HERO */
+
+        .hero {
+            padding: 66px 0 48px;
+            text-align: center;
+            background:
+                radial-gradient(
+                    ellipse at top,
+                    #073b241c 0%,
+                    transparent 65%
+                );
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: var(--green);
+            background: #00df8310;
+            border: 1px solid #00df833b;
+            border-radius: 30px;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            max-width: 780px;
+            margin: 0 auto 15px;
+            font-size: clamp(34px, 6vw, 61px);
+            line-height: 1.12;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--green);
+        }
+
+        .hero-description {
+            max-width: 580px;
+            margin: 0 auto 23px;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .hero-buttons .button {
+            padding: 12px 19px;
+        }
+
+        .hero-note {
+            margin-top: 18px;
+            font-size: 11px;
+            color: #77857b;
+        }
+
+        /* SECTION HEADINGS */
+
+        .section {
+            padding: 37px 0;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 12px;
+            margin-bottom: 19px;
+            flex-wrap: wrap;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-size: 23px;
+            line-height: 1.3;
+        }
+
+        .section-heading p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .section-label {
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+
+        /* ASSISTANT CARDS */
+
+        .assistant-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .assistant-card {
+            position: relative;
+            min-width: 0;
+            padding: 17px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .assistant-card:hover {
+            border-color: var(--green-dark);
+            background: var(--surface-light);
+        }
+
+        .assistant-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .assistant-icon {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #00df8310;
+            border: 1px solid #00df8328;
+            font-size: 20px;
+        }
+
+        .status {
+            color: var(--muted);
+            background: #ffffff08;
+            border: 1px solid #ffffff12;
+            border-radius: 20px;
+            padding: 3px 7px;
+            font-size: 9px;
+            white-space: nowrap;
+        }
+
+        .assistant-card h3 {
+            margin: 0 0 5px;
+            font-size: 15px;
+        }
+
+        .assistant-card p {
+            min-height: 36px;
+            margin: 0 0 12px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .assistant-link {
+            display: inline-block;
+            color: var(--green);
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .assistant-link:hover {
+            color: var(--gold);
+        }
+
+        /* HOW IT WORKS */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .step {
+            padding: 17px;
+            border-left: 2px solid var(--green);
+            background: #101612;
+        }
+
+        .step-number {
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            margin: 7px 0 5px;
+            font-size: 14px;
+        }
+
+        .step p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* CTA */
+
+        .cta {
+            padding: 28px 20px;
+            border: 1px solid #00df8330;
+            border-radius: 14px;
+            text-align: center;
+            background:
+                radial-gradient(
+                    ellipse at top,
+                    #00df8310,
+                    transparent 75%
+                ),
+                var(--surface);
+        }
+
+        .cta h2 {
+            margin: 0 0 8px;
+            font-size: 24px;
+        }
+
+        .cta p {
+            max-width: 470px;
+            margin: 0 auto 17px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            padding: 22px 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .footer a:hover {
+            color: var(--green);
+        }
+
+        .gold-line {
+            width: 55px;
+            height: 2px;
+            margin: 13px auto 0;
+            background: var(--gold);
+        }
+
+        /* SMALL SCREENS */
+
+        @media (max-width: 650px) {
+            .nav {
+                justify-content: space-between;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                padding: 7px 0 2px;
+                border-top: 1px solid #ffffff0b;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .brand {
+                font-size: 17px;
+            }
+
+            .brand-symbol {
+                width: 32px;
+                height: 32px;
+            }
+
+            .nav-actions .button {
+                padding: 8px 10px;
+                font-size: 11px;
+            }
+
+            .hero {
+                padding: 45px 0 30px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .hero-description {
+                font-size: 13px;
+            }
+
+            .section {
+                padding: 27px 0;
+            }
+
+            .assistant-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 9px;
+            }
+
+            .assistant-card {
+                padding: 12px;
+            }
+
+            .assistant-card h3 {
+                font-size: 13px;
+            }
+
+            .assistant-card p {
+                font-size: 10px;
+            }
+
+            .assistant-icon {
+                width: 33px;
+                height: 33px;
+                font-size: 18px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 9px;
+            }
+
+            .section-heading h2 {
+                font-size: 21px;
+            }
+
+            .cta h2 {
+                font-size: 21px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="topbar">
- <div>
-  <div class="brand"><span class="jay">Jay</span> <span class="ai">AI</span></div>
-  <div class="powered">POWERED BY NIMX-G</div>
- </div>
- <nav class="menu">
-  <a href="#features">Features</a>
-  <a href="#access">Platforms</a>
-  <a href="#access" class="small-btn">Get Started ↗</a>
- </nav>
+<header class="header">
+    <div class="container">
+        <nav class="nav" aria-label="Main navigation">
+
+            <a class="brand" href="index.html" aria-label="NIMX-G AI HUB home">
+                <span class="brand-symbol">N</span>
+                <span>NIMX-G <span>AI HUB</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#assistants">Assistants</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#about">About</a>
+            </div>
+
+            <div class="nav-actions">
+                <a class="button button-outline" href="login.html">
+                    Login
+                </a>
+
+                <a class="button button-primary" href="register.html">
+                    Get Started
+                </a>
+            </div>
+
+        </nav>
+    </div>
 </header>
 
 <main>
- <section class="hero">
-  <div class="tag">✦ YOUR IDEAS. YOUR AI. YOUR WORLD.</div>
 
-  <h1>
-   Meet your next<br>
-   <span class="gradient">intelligent partner.</span>
-  </h1>
+    <section class="hero">
+        <div class="container">
 
-  <p>
-   From big ideas to everyday questions, Jay AI helps you
-   think clearly, write brilliantly, learn faster and build
-   something amazing.
-  </p>
+            <span class="eyebrow">WELCOME TO NIMX-G</span>
 
-  <div class="actions">
-   <a class="primary" href="#access">Explore Jay AI &nbsp; →</a>
-   <a class="secondary" href="#features">Discover Features</a>
-  </div>
+            <h1>
+                One Platform.<br>
+                <span class="highlight">Multiple AIs.</span>
+            </h1>
 
-  <div class="preview">
-   <div class="preview-top">
-    <div class="dots"><span></span><span></span><span></span></div>
-    <div class="preview-title">Jay AI Assistant</div>
-    <div class="status">● READY TO HELP</div>
-   </div>
+            <p class="hero-description">
+                Discover AI assistants for coding, learning, writing,
+                research and everyday questions — all in one place.
+            </p>
 
-   <div class="welcome">
-    Hello, welcome to Jay AI ✨
-    <small>
-     Your space to ask questions, explore ideas and turn
-     your thoughts into something extraordinary.
-    </small>
-   </div>
+            <div class="hero-buttons">
+                <a class="button button-primary" href="#assistants">
+                    Explore Assistants
+                </a>
 
-   <div class="suggestions">
-    <span>✦ Help me learn</span>
-    <span>✎ Write something</span>
-    <span>⌘ Help with code</span>
-    <span>◈ Explore an idea</span>
-   </div>
+                <a class="button button-outline" href="register.html">
+                    Create Free Account
+                </a>
+            </div>
 
-   <div class="fake-input">
-    Imagine what you could create...
-    <b>↑</b>
-   </div>
-  </div>
- </section>
+            <p class="hero-note">
+                One account. Different assistants. Your own AI workspace.
+            </p>
 
- <section class="section" id="features">
-  <div class="section-heading">
-   <h2>One AI. <span class="gradient">More possibilities.</span></h2>
-   <p>Designed to help you create, discover and move forward.</p>
-  </div>
+        </div>
+    </section>
 
-  <div class="features">
-   <article class="feature">
-    <div class="feature-mark">✦</div>
-    <h3>Smart Conversations</h3>
-    <p>Ask questions, understand difficult topics and explore new ideas with an AI assistant.</p>
-   </article>
+    <section class="section" id="assistants">
+        <div class="container">
 
-   <article class="feature">
-    <div class="feature-mark">✎</div>
-    <h3>Writing & Creativity</h3>
-    <p>Develop your ideas, improve your writing and work on creative projects.</p>
-   </article>
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">EXPLORE THE HUB</span>
+                    <h2>Meet Your AI Assistants</h2>
+                    <p>Choose an assistant based on what you need.</p>
+                </div>
+            </div>
 
-   <article class="feature">
-    <div class="feature-mark">&lt;/&gt;</div>
-    <h3>Coding Companion</h3>
-    <p>Get help understanding code, solving programming problems and building websites.</p>
-   </article>
+            <div class="assistant-grid">
 
-   <article class="feature">
-    <div class="feature-mark">◷</div>
-    <h3>Conversation History</h3>
-    <p>Our planned account system will let users return to their own saved conversations.</p>
-   </article>
+                <article class="assistant-card">
+                    <div class="assistant-top">
+                        <span class="assistant-icon">🧠</span>
+                        <span class="status">Coming soon</span>
+                    </div>
 
-   <article class="feature">
-    <div class="feature-mark">◈</div>
-    <h3>Made for Your Device</h3>
-    <p>A mobile-first design, with a simplified interface planned for compatible older phones.</p>
-   </article>
+                    <h3>General AI</h3>
 
-   <article class="feature">
-    <div class="feature-mark">⬡</div>
-    <h3>Privacy & Protection</h3>
-    <p>Account security and age-appropriate access will be part of the backend design.</p>
-   </article>
-  </div>
- </section>
+                    <p>
+                        Ask questions, explore ideas and get help
+                        with everyday tasks.
+                    </p>
 
- <section class="access" id="access">
-  <h2>Your device. <span class="gradient">Your experience.</span></h2>
-  <p>Choose the interface designed for your phone.<br>
-     Both experiences are being developed.</p>
+                    <span class="assistant-link">Explore assistant →</span>
+                </article>
 
-  <div class="access-buttons">
-   <a class="phone-btn" href="android.html">
-    <strong>▣ Android Experience</strong>
-    <small>Modern mobile interface<br>Designed for touchscreens</small>
-   </a>
+                <article class="assistant-card">
+                    <div class="assistant-top">
+                        <span class="assistant-icon">💻</span>
+                        <span class="status">Coming soon</span>
+                    </div>
 
-   <a class="phone-btn" href="button-phone.html">
-    <strong>▤ Button Phone Experience</strong>
-    <small>Lightweight pages<br>For compatible older browsers</small>
-   </a>
-  </div>
- </section>
+                    <h3>Coding AI</h3>
+
+                    <p>
+                        Learn programming, understand code and
+                        troubleshoot errors.
+                    </p>
+
+                    <span class="assistant-link">Explore assistant →</span>
+                </article>
+
+                <article class="assistant-card">
+                    <div class="assistant-top">
+                        <span class="assistant-icon">📚</span>
+                        <span class="status">Coming soon</span>
+                    </div>
+
+                    <h3>Study AI</h3>
+
+                    <p>
+                        Understand difficult topics and get
+                        explanations for your studies.
+                    </p>
+
+                    <span class="assistant-link">Explore assistant →</span>
+                </article>
+
+                <article class="assistant-card">
+                    <div class="assistant-top">
+                        <span class="assistant-icon">✍️</span>
+                        <span class="status">Coming soon</span>
+                    </div>
+
+                    <h3>Writing AI</h3>
+
+                    <p>
+                        Improve your writing, organize ideas and
+                        draft useful content.
+                    </p>
+
+                    <span class="assistant-link">Explore assistant →</span>
+                </article>
+
+                <article class="assistant-card">
+                    <div class="assistant-top">
+                        <span class="assistant-icon">🔎</span>
+                        <span class="status">Coming soon</span>
+                    </div>
+
+                    <h3>Research AI</h3>
+
+                    <p>
+                        Explore subjects, analyze information and
+                        organize your findings.
+                    </p>
+
+                    <span class="assistant-link">Explore assistant →</span>
+                </article>
+
+                <article class="assistant-card">
+                    <div class="assistant-top">
+                        <span class="assistant-icon">➗</span>
+                        <span class="status">Coming soon</span>
+                    </div>
+
+                    <h3>Maths AI</h3>
+
+                    <p>
+                        Work through calculations and understand
+                        mathematical concepts.
+                    </p>
+
+                    <span class="assistant-link">Explore assistant →</span>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+        <div class="container">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">GETTING STARTED</span>
+                    <h2>Three Simple Steps</h2>
+                    <p>Our goal is to make using AI straightforward.</p>
+                </div>
+            </div>
+
+            <div class="steps">
+
+                <article class="step">
+                    <span class="step-number">STEP 01</span>
+                    <h3>Create Your Account</h3>
+                    <p>
+                        Sign up for your personal NIMX-G AI HUB account.
+                    </p>
+                </article>
+
+                <article class="step">
+                    <span class="step-number">STEP 02</span>
+                    <h3>Choose an Assistant</h3>
+                    <p>
+                        Select the AI tool that best fits your task.
+                    </p>
+                </article>
+
+                <article class="step">
+                    <span class="step-number">STEP 03</span>
+                    <h3>Start Exploring</h3>
+                    <p>
+                        Use available assistants as their features
+                        become active on the platform.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="container">
+
+            <div class="cta">
+                <span class="section-label">YOUR AI WORKSPACE</span>
+
+                <h2>Many Possibilities. One Hub.</h2>
+
+                <p>
+                    NIMX-G AI HUB is being built to bring useful
+                    AI tools together in one accessible platform.
+                </p>
+
+                <a class="button button-primary" href="register.html">
+                    Join NIMX-G
+                </a>
+
+                <div class="gold-line"></div>
+            </div>
+
+        </div>
+    </section>
+
 </main>
 
-<footer class="bottom">
- <b>Jay AI</b> — Powered by Nimx-G<br>
- Built for ideas, creativity and discovery.<br>
- © 2026 Jay AI. All rights reserved.
+<footer class="footer">
+    <div class="container">
+
+        <div class="footer-inner">
+
+            <div>
+                © <span id="year">2026</span> NIMX-G AI HUB.
+                <br>
+                One Platform. Multiple AIs.
+            </div>
+
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+            </div>
+
+        </div>
+    </div>
 </footer>
 
+<script>
+    // Update the displayed year without a browser popup.
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+</script>
+
 </body>
-    </html>
+ </html>
