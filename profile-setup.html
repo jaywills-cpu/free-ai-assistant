@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Complete Your Profile | NIMX-G AI HUB</title>
+
+<style>
+:root {
+    --green: #00d084;
+    --gold: #d8b45a;
+    --bg: #080c0b;
+    --card: #111816;
+    --border: #26362e;
+    --text: #f4f7f5;
+    --muted: #a0aea6;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px 14px;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, #143126 0%, transparent 48%),
+        var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 540px;
+    margin: 25px auto;
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo {
+    width: 68px;
+    height: 68px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    color: var(--green);
+    font-size: 25px;
+    font-weight: 900;
+    box-shadow: 0 0 25px #00d08420;
+}
+
+.brand h1 {
+    font-size: 25px;
+    margin: 13px 0 5px;
+}
+
+.brand h1 span {
+    color: var(--green);
+}
+
+.brand p {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 15px 45px #00000035;
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 23px;
+}
+
+.description {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin: 18px 0 8px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    display: block;
+    width: 100%;
+    min-height: 46px;
+    background: #0b100e;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 12px;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--green);
+}
+
+select {
+    cursor: pointer;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.dob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1.3fr;
+    gap: 8px;
+}
+
+.age-box {
+    background: #0b2118;
+    border: 1px solid #176343;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 14px;
+}
+
+.age-label {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.age-number {
+    display: block;
+    color: var(--green);
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.notice {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+button {
+    width: 100%;
+    margin-top: 24px;
+    min-height: 49px;
+    background: linear-gradient(110deg, var(--green), #079b69);
+    color: #04120b;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+
+.status {
+    display: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.status.error {
+    display: block;
+    color: #ffb7b7;
+    background: #3a1717;
+}
+
+.status.success {
+    display: block;
+    color: #a9ffcf;
+    background: #103323;
+}
+
+.footer {
+    text-align: center;
+    color: #77857d;
+    font-size: 11px;
+    margin-top: 22px;
+}
+
+@media (max-width: 360px) {
+    .card {
+        padding: 17px;
+    }
+
+    .dob-grid {
+        gap: 5px;
+    }
+
+    input, select {
+        padding: 9px;
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="brand">
+        <div class="logo">NG</div>
+
+        <h1>NIMX-G <span>AI HUB</span></h1>
+
+        <p>ONE PLATFORM. MULTIPLE AIs.</p>
+    </div>
+
+    <div class="card">
+
+        <h2>Complete your profile</h2>
+
+        <p class="description">
+            Welcome to NIMX-G AI HUB! Complete your profile
+            to continue to your AI dashboard.
+        </p>
+
+        <form id="profileForm">
+
+            <label for="fullName">Full name</label>
+            <input
+                type="text"
+                id="fullName"
+                maxlength="100"
+                placeholder="Enter your full name"
+                autocomplete="name"
+                required
+            >
+
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                maxlength="30"
+                minlength="3"
+                pattern="[A-Za-z0-9_]+"
+                placeholder="Choose your username"
+                autocomplete="username"
+                required
+            >
+
+            <label>Date of birth</label>
+
+            <div class="dob-grid">
+
+                <select id="dobDay" aria-label="Birth day" required>
+                    <option value="">Day</option>
+                </select>
+
+                <select id="dobMonth" aria-label="Birth month" required>
+                    <option value="">Month</option>
+                </select>
+
+                <select id="dobYear" aria-label="Birth year" required>
+                    <option value="">Year</option>
+                </select>
+
+            </div>
+
+            <div class="age-box">
+                <span class="age-label">Your calculated age</span>
+                <span class="age-number" id="ageDisplay">Not selected</span>
+            </div>
+
+            <label for="bio">About you (optional)</label>
+
+            <textarea
+                id="bio"
+                maxlength="250"
+                placeholder="Tell us a little about yourself..."
+            ></textarea>
+
+            <p class="notice">
+                Your date of birth is used to calculate your age
+                and support age-appropriate account settings.
+                Choose your actual date of birth.
+            </p>
+
+            <div id="status" class="status" role="status"
+                 aria-live="polite"></div>
+
+            <button type="submit" id="saveButton">
+                Save Profile & Continue
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="footer">
+        POWERED BY NIMX-G
+    </div>
+
+</div>
+
+<!-- Supabase JavaScript library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Your existing shared Supabase configuration -->
+<script src="assets/js/supabase.js"></script>
+
+<script>
+(function () {
+    "use strict";
+
+    /*
+     * This page expects assets/js/supabase.js to expose
+     * the initialized client as window.supabaseClient.
+     *
+     * If your existing file uses a different global variable,
+     * connect that existing client here instead of creating
+     * a second client with different credentials.
+     */
+
+    const client = window.supabaseClient;
+
+    const form = document.getElementById("profileForm");
+    const daySelect = document.getElementById("dobDay");
+    const monthSelect = document.getElementById("dobMonth");
+    const yearSelect = document.getElementById("dobYear");
+    const ageDisplay = document.getElementById("ageDisplay");
+    const statusBox = document.getElementById("status");
+    const saveButton = document.getElementById("saveButton");
+
+    let currentUser = null;
+    let originalUsername = "";
+
+    function showStatus(message, type) {
+        statusBox.textContent = message;
+        statusBox.className = "status " + type;
+    }
+
+    function clearStatus() {
+        statusBox.textContent = "";
+        statusBox.className = "status";
+    }
+
+    function populateDateDropdowns() {
+        const months = [
+            "January", "February", "March", "April",
+            "May", "June", "July", "August",
+            "September", "October", "November", "December"
+        ];
+
+        months.forEach(function (month, index) {
+            const option = document.createElement("option");
+            option.value = String(index + 1);
+            option.textContent = month;
+            monthSelect.appendChild(option);
+        });
+
+        const currentYear = new Date().getFullYear();
+
+        for (let year = currentYear; year >= currentYear - 120; year--) {
+            const option = document.createElement("option");
+            option.value = String(year);
+            option.textContent = String(year);
+            yearSelect.appendChild(option);
+        }
+
+        for (let day = 1; day <= 31; day++) {
+            const option = document.createElement("option");
+            option.value = String(day);
+            option.textContent = String(day);
+            daySelect.appendChild(option);
+        }
+    }
+
+    function getSelectedDOB() {
+        const day = Number(daySelect.value);
+        const month = Number(monthSelect.value);
+        const year = Number(yearSelect.value);
+
+        if (!day || !month || !year) {
+            return null;
+        }
+
+        const date = new Date(Date.UTC(year, month - 1, day));
+
+        // Reject impossible dates, such as 31 February.
+        if (
+            date.getUTCFullYear() !== year ||
+            date.getUTCMonth() !== month - 1 ||
+            date.getUTCDate() !== day
+        ) {
+            return null;
+        }
+
+        // Reject future birth dates.
+        const today = new Date();
+        const todayUTC = Date.UTC(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate()
+        );
+
+        if (date.getTime() > todayUTC) {
+            return null;
+        }
+
+        return {
+            date: date,
+            iso: year + "-" +
+                String(month).padStart(2, "0") + "-" +
+                String(day).padStart(2, "0")
+        };
+    }
+
+    function calculateAge(date) {
+        const today = new Date();
+
+        let age = today.getFullYear() - date.getUTCFullYear();
+
+        const birthdayHasNotOccurred =
+            today.getMonth() < date.getUTCMonth() ||
+            (
+                today.getMonth() === date.getUTCMonth() &&
+                today.getDate() < date.getUTCDate()
+            );
+
+        if (birthdayHasNotOccurred) {
+            age--;
+        }
+
+        return age;
+    }
+
+    function updateAge() {
+        clearStatus();
+
+        if (
+            !daySelect.value ||
+            !monthSelect.value ||
+            !yearSelect.value
+        ) {
+            ageDisplay.textContent = "Not selected";
+            return;
+        }
+
+        const dob = getSelectedDOB();
+
+        if (!dob) {
+            ageDisplay.textContent = "Invalid date";
+            return;
+        }
+
+        ageDisplay.textContent = calculateAge(dob.date) + " years old";
+    }
+
+    async function initialisePage() {
+        if (!client) {
+            showStatus(
+                "Supabase client was not found. Check assets/js/supabase.js " +
+                "and ensure it exposes window.supabaseClient.",
+                "error"
+            );
+
+            saveButton.disabled = true;
+            return;
+        }
+
+        const { data, error } = await client.auth.getUser();
+
+        if (error || !data.user) {
+            window.location.replace("login.html");
+            return;
+        }
+
+        currentUser = data.user;
+
+        const metadata = currentUser.user_metadata || {};
+
+        originalUsername = metadata.username || "";
+
+        document.getElementById("username").value = originalUsername;
+        document.getElementById("fullName").value =
+            metadata.full_name || "";
+
+        /*
+         * Check whether the profile is already complete.
+         * If it is, send the user to the dashboard.
+         */
+        const { data: profile, error: profileError } = await client
+            .from("profiles")
+            .select("profile_completed")
+            .eq("id", currentUser.id)
+            .maybeSingle();
+
+        if (profileError) {
+            console.error("Profile lookup failed:", profileError);
+            showStatus(
+                "We could not check your profile. Please try again. " +
+                profileError.message,
+                "error"
+            );
+            return;
+        }
+
+        if (profile && profile.profile_completed === true) {
+            window.location.replace("dashboard.html");
+            return;
+        }
+    }
+
+    daySelect.addEventListener("change", updateAge);
+    monthSelect.addEventListener("change", updateAge);
+    yearSelect.addEventListener("change", updateAge);
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        clearStatus();
+
+        if (!client || !currentUser) {
+            showStatus(
+                "Your login session is unavailable. Please sign in again.",
+                "error"
+            );
+            return;
+        }
+
+        const fullName = document.getElementById("fullName")
+            .value.trim();
+
+        const username = document.getElementById("username")
+            .value.trim();
+
+        const bio = document.getElementById("bio")
+            .value.trim();
+
+        const dob = getSelectedDOB();
+
+        if (fullName.length < 2) {
+            showStatus("Please enter your full name.", "error");
+            return;
+        }
+
+        if (!/^[A-Za-z0-9_]{3,30}$/.test(username)) {
+            showStatus(
+                "Username must contain 3–30 letters, numbers, or underscores.",
+                "error"
+            );
+            return;
+        }
+
+        if (!dob) {
+            showStatus(
+                "Please select a valid day, month, and year of birth.",
+                "error"
+            );
+            return;
+        }
+
+        const age = calculateAge(dob.date);
+
+        if (age < 0 || age > 120) {
+            showStatus("Please check your date of birth.", "error");
+            return;
+        }
+
+        /*
+         * The existing profiles table requires username and device_type.
+         * Retrieve device_type from the original registration metadata.
+         */
+        const metadata = currentUser.user_metadata || {};
+
+        const deviceType = metadata.device_type || "android";
+
+        if (!["android", "keypad"].includes(deviceType)) {
+            showStatus(
+                "Your registered device type is invalid. Please contact support.",
+                "error"
+            );
+            return;
+        }
+
+        saveButton.disabled = true;
+        saveButton.textContent = "Saving your profile...";
+
+        try {
+            /*
+             * Refresh the session before attempting the database write.
+             */
+            const { data: sessionData, error: sessionError } =
+                await client.auth.getSession();
+
+            if (
+                sessionError ||
+                !sessionData.session ||
+                sessionData.session.user.id !== currentUser.id
+            ) {
+                throw new Error(
+                    "Your session has expired. Please sign in again."
+                );
+            }
+
+            /*
+             * Update the existing row if registration already created it.
+             * Otherwise, insert the user's profile.
+             */
+            const profileData = {
+                id: currentUser.id,
+                username: username,
+                device_type: deviceType,
+                full_name: fullName,
+                date_of_birth: dob.iso,
+                bio: bio || null,
+                profile_completed: true
+            };
+
+            /*
+             * Preserve the existing account_type if a profile row exists.
+             * New profiles use the table's default account_type.
+             */
+            const { data: existingProfile, error: existingError } =
+                await client
+                    .from("profiles")
+                    .select("account_type")
+                    .eq("id", currentUser.id)
+                    .maybeSingle();
+
+            if (existingError) {
+                throw existingError;
+            }
+
+            if (existingProfile && existingProfile.account_type) {
+                profileData.account_type = existingProfile.account_type;
+            }
+
+            const { data: savedProfile, error: saveError } = await client
+                .from("profiles")
+                .upsert(profileData, { onConflict: "id" })
+                .select("id, profile_completed")
+                .single();
+
+            if (saveError) {
+                throw saveError;
+            }
+
+            if (
+                !savedProfile ||
+                savedProfile.id !== currentUser.id ||
+                savedProfile.profile_completed !== true
+            ) {
+                throw new Error(
+                    "Supabase did not confirm that the profile was saved."
+                );
+            }
+
+            /*
+             * Update Auth metadata for future profile page visits.
+             */
+            const { error: metadataError } = await client.auth.updateUser({
+                data: {
+                    username: username,
+                    full_name: fullName,
+                    device_type: deviceType
+                }
+            });
+
+            if (metadataError) {
+                console.warn(
+                    "Profile saved, but auth metadata update failed:",
+                    metadataError.message
+                );
+            }
+
+            showStatus(
+                "Profile saved successfully! Opening your dashboard...",
+                "success"
+            );
+
+            saveButton.textContent = "Profile Saved";
+
+            setTimeout(function () {
+                window.location.replace("dashboard.html");
+            }, 900);
+
+        } catch (error) {
+            console.error("Profile save error:", error);
+
+            showStatus(
+                "We could not save your profile. " +
+                (error.message || "Please try again."),
+                "error"
+            );
+
+            saveButton.disabled = false;
+            saveButton.textContent = "Save Profile & Continue";
+        }
+    });
+
+    populateDateDropdowns();
+    initialisePage();
+
+})();
+</script>
+
+</body>
+  </html>
