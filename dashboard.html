@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07110d">
+<title>NIMX-G AI HUB | Dashboard</title>
+
+<style>
+:root {
+    --bg: #07110d;
+    --panel: #0d1b14;
+    --panel2: #10251a;
+    --green: #35e28a;
+    --gold: #c9b66b;
+    --text: #f0f7f2;
+    --muted: #a3b5a9;
+    --border: rgba(53,226,138,.17);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(ellipse at 10% 0%, rgba(53,226,138,.10), transparent 35%),
+        var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+a { color: inherit; text-decoration: none; }
+
+button { font: inherit; }
+
+.topbar {
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(7,17,13,.94);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.brand {
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.brand span { color: var(--green); }
+
+.brand small {
+    display: block;
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 4px;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-btn {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+.page {
+    width: 100%;
+    max-width: 1150px;
+    margin: auto;
+    padding: 25px 5% 40px;
+}
+
+.welcome {
+    position: relative;
+    overflow: hidden;
+    padding: 25px;
+    border: 1px solid var(--border);
+    border-radius: 23px;
+    background: linear-gradient(130deg, #10291c, #0a1710 72%);
+}
+
+.welcome:after {
+    content: "✦";
+    position: absolute;
+    right: 24px;
+    top: 10px;
+    font-size: 75px;
+    color: rgba(201,182,107,.15);
+}
+
+.eyebrow {
+    color: var(--green);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: clamp(27px, 5vw, 42px);
+    margin: 13px 0 8px;
+    line-height: 1.2;
+}
+
+/* Dancing-script appearance for browsers that support the optional font */
+.script-line {
+    color: var(--gold);
+    font-family: "Brush Script MT", "Segoe Script", cursive;
+    font-size: clamp(23px, 4vw, 34px);
+    font-style: italic;
+    margin: 5px 0 14px;
+}
+
+.welcome p {
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 620px;
+    font-size: 14px;
+}
+
+.user-line {
+    margin-top: 16px;
+    color: var(--text);
+    font-size: 13px;
+}
+
+.user-line strong { color: var(--green); }
+
+.section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 30px 0 16px;
+}
+
+.section-head h2 {
+    font-size: 21px;
+    margin: 0;
+}
+
+.section-head p {
+    color: var(--muted);
+    font-size: 12px;
+    margin: 6px 0 0;
+}
+
+.ai-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.ai-card {
+    display: block;
+    min-width: 0;
+    background: linear-gradient(145deg, var(--panel2), var(--panel));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px;
+    transition: transform .2s, border-color .2s;
+}
+
+.ai-card:hover {
+    border-color: var(--green);
+    transform: translateY(-3px);
+}
+
+.ai-icon {
+    width: 47px;
+    height: 47px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: rgba(53,226,138,.10);
+    font-size: 24px;
+    margin-bottom: 14px;
+}
+
+.ai-card h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+}
+
+.ai-card p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+    min-height: 39px;
+    margin: 0 0 15px;
+}
+
+.open-ai {
+    color: var(--green);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px;
+}
+
+.quick-link {
+    display: block;
+    padding: 16px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    font-size: 13px;
+}
+
+.quick-link span {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.quick-link small {
+    display: block;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 6px;
+}
+
+.notice {
+    margin-top: 25px;
+    padding: 16px;
+    border-left: 3px solid var(--gold);
+    background: rgba(201,182,107,.06);
+    color: var(--muted);
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.notice strong { color: var(--gold); }
+
+footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 25px 10px;
+    border-top: 1px solid var(--border);
+    line-height: 2;
+}
+
+footer strong { color: var(--green); }
+
+footer a {
+    color: var(--gold);
+    margin: 0 6px;
+}
+
+#status {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+.hidden { display: none !important; }
+
+#sign-in-warning {
+    margin: 30px auto;
+    max-width: 550px;
+    padding: 25px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    text-align: center;
+}
+
+.primary-btn {
+    display: inline-block;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--green);
+    color: #07110d;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 6px 4px;
+}
+
+.secondary-btn {
+    display: inline-block;
+    padding: 11px 17px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    margin: 6px 4px;
+}
+
+/* Android bubbling / dancing effects */
+.android-mode .bubble {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-left: 4px;
+    animation: bubble 1.1s infinite ease-in-out;
+}
+
+.android-mode .bubble:nth-child(2) { animation-delay: .15s; }
+.android-mode .bubble:nth-child(3) { animation-delay: .3s; }
+
+@keyframes bubble {
+    0%, 60%, 100% { transform: translateY(0); opacity: .4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+}
+
+.android-mode .script-line {
+    animation: scriptGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes scriptGlow {
+    from { text-shadow: 0 0 2px rgba(201,182,107,.15); }
+    to { text-shadow: 0 0 13px rgba(201,182,107,.48); }
+}
+
+.android-mode .brand span {
+    animation: brandGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes brandGlow {
+    from { text-shadow: 0 0 0 transparent; }
+    to { text-shadow: 0 0 10px rgba(53,226,138,.55); }
+}
+
+/* Lightweight keypad-phone view */
+.keypad-mode .welcome,
+.keypad-mode .ai-card,
+.keypad-mode .quick-link {
+    border-radius: 5px;
+    box-shadow: none;
+    transition: none;
+}
+
+.keypad-mode .ai-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.keypad-mode .ai-card {
+    padding: 12px;
+}
+
+.keypad-mode .ai-icon {
+    float: left;
+    width: 36px;
+    height: 36px;
+    margin: 0 12px 8px 0;
+    font-size: 18px;
+}
+
+.keypad-mode .ai-card p { min-height: 0; }
+
+.keypad-mode .quick-grid { grid-template-columns: 1fr; }
+
+.keypad-mode .bubble { display: none; }
+
+.keypad-mode .welcome:after { display: none; }
+
+.keypad-mode .ai-card:hover { transform: none; }
+
+@media (max-width: 700px) {
+    .ai-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .quick-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .page { padding: 18px 4% 30px; }
+    .welcome { padding: 20px; }
+}
+
+@media (max-width: 390px) {
+    .ai-grid { grid-template-columns: 1fr; }
+    .brand { font-size: 16px; }
+    .topbar { padding: 12px 4%; }
+    .icon-btn { padding: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+<header class="topbar">
+    <a class="brand" href="index.html">
+        NIMX-G <span>AI HUB</span>
+        <small>ONE PLATFORM. MULTIPLE AIs.</small>
+    </a>
+
+    <div class="top-actions">
+        <a class="icon-btn" href="profile.html" aria-label="My profile">👤</a>
+        <a class="icon-btn" href="settings.html" aria-label="Settings">⚙️</a>
+    </div>
+</header>
+
+<main class="page" id="dashboard-content">
+    <section class="welcome">
+        <div class="eyebrow">Your personal AI workspace</div>
+        <h1>Welcome to <span style="color:var(--green)">NIMX-G</span></h1>
+        <div class="script-line">Your ideas. Your intelligence. Your future.</div>
+
+        <p>
+            Meet your AI assistants in one place. Learn, create, solve problems,
+            write, research and explore your ideas with the assistant that fits your task.
+        </p>
+
+        <div class="user-line">
+            Signed in as: <strong id="username">AI Explorer</strong>
+        </div>
+
+        <div id="status" role="status">Preparing your workspace...</div>
+        <div id="welcome-bubbles" aria-hidden="true">
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+        </div>
+    </section>
+
+    <div class="section-head">
+        <div>
+            <h2>Choose your AI ✨</h2>
+            <p>One hub. Different assistants. Select a card to begin.</p>
+        </div>
+    </div>
+
+    <section class="ai-grid" aria-label="AI assistants">
+        <a class="ai-card" href="chat.html?ai=general">
+            <div class="ai-icon">🧠</div>
+            <h3>General AI</h3>
+            <p>Ask questions, explore ideas and get help with everyday tasks.</p>
+            <span class="open-ai">Open assistant →</span>
+        </a>
+
+        <a class="ai-card" href="chat.html?ai=coding">
+            <div class="ai-icon">💻</div>
+            <h3>Coding AI</h3>
+            <p>Understand code, work through programming problems and debug errors.</p>
+            <span class="open-ai">Open assistant →</span>
+        </a>
+
+        <a class="ai-card" href="chat.html?ai=study">
+            <div class="ai-icon">📚</div>
+            <h3>Study AI</h3>
+            <p>Learn difficult topics with clear explanations and guided practice.</p>
+            <span class="open-ai">Open assistant →</span>
+        </a>
+
+        <a class="ai-card" href="chat.html?ai=writing">
+            <div class="ai-icon">✍️</div>
+            <h3>Writing AI</h3>
+            <p>Develop drafts, stories, letters and other written content.</p>
+            <span class="open-ai">Open assistant →</span>
+        </a>
+
+        <a class="ai-card" href="chat.html?ai=research">
+            <div class="ai-icon">🔎</div>
+            <h3>Research AI</h3>
+            <p>Organise questions, examine information and develop research ideas.</p>
+            <span class="open-ai">Open assistant →</span>
+        </a>
+
+        <a class="ai-card" href="chat.html?ai=maths">
+            <div class="ai-icon">➗</div>
+            <h3>Maths AI</h3>
+            <p>Explore calculations, equations and step-by-step maths explanations.</p>
+            <span class="open-ai">Open assistant →</span>
+        </a>
+
+        <a class="ai-card" href="chat.html?ai=image">
+            <div class="ai-icon">🎨</div>
+            <h3>AI Image Studio</h3>
+            <p>Describe an image to generate or, where supported, upload one to edit.</p>
+            <span class="open-ai">Enter Image Studio →</span>
+        </a>
+    </section>
+
+    <div class="section-head">
+        <div>
+            <h2>Your workspace</h2>
+            <p>Quick access to your account and saved conversations.</p>
+        </div>
+    </div>
+
+    <section class="quick-grid">
+        <a class="quick-link" href="chat.html?ai=general">
+            <span>✚</span>Start a new chat
+            <small>Begin a fresh conversation.</small>
+        </a>
+
+        <a class="quick-link" href="history.html">
+            <span>🗂️</span>Chat history
+            <small>Return to your saved conversations.</small>
+        </a>
+
+        <a class="quick-link" href="profile.html">
+            <span>👤</span>My profile
+            <small>View your account information.</small>
+        </a>
+
+        <a class="quick-link" href="settings.html">
+            <span>⚙️</span>Settings
+            <small>Manage available preferences.</small>
+        </a>
+
+        <a class="quick-link" href="support.html">
+            <span>💬</span>Help & support
+            <small>Find help with your account.</small>
+        </a>
+
+        <button class="quick-link" id="sign-out-button" type="button"
+                style="text-align:left;color:inherit;cursor:pointer">
+            <span>↪️</span>Sign out
+            <small>End your current session on this device.</small>
+        </button>
+    </section>
+
+    <div class="notice">
+        <strong>Account safety reminder</strong><br>
+        Keep your account information accurate and up to date. Incorrect details
+        may cause verification or account-access problems. Only provide information
+        that is genuinely required. Your account information should be handled
+        according to the platform's actual privacy and security practices.
+    </div>
+</main>
+
+<section id="sign-in-warning" class="hidden">
+    <h2>Sign in to your AI Hub</h2>
+    <p style="color:var(--muted);line-height:1.7">
+        Please sign in to access your personal dashboard and account features.
+    </p>
+    <a class="primary-btn" href="login.html">Sign in</a>
+    <a class="secondary-btn" href="register.html">Create account</a>
+</section>
+
+<footer>
+    <strong>Powered by Nimx-G</strong><br>
+    One Platform. Multiple AIs.<br>
+    <a href="about.html">About</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <br>© <span id="year"></span> NIMX-G AI HUB
+</footer>
+
+<!-- Use the existing shared Supabase configuration -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase.js"></script>
+
+<script>
+(function () {
+    "use strict";
+
+    var status = document.getElementById("status");
+    var dashboard = document.getElementById("dashboard-content");
+    var signInWarning = document.getElementById("sign-in-warning");
+    var usernameElement = document.getElementById("username");
+    var signOutButton = document.getElementById("sign-out-button");
+    var bubbleArea = document.getElementById("welcome-bubbles");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    /*
+      Device preference saved in the user's profile takes priority.
+      Otherwise, use a conservative browser/device hint.
+      This changes presentation only; it is not a security check.
+    */
+    function applyDeviceMode(deviceType) {
+        var mode = deviceType;
+
+        if (mode !== "android" && mode !== "keypad") {
+            var ua = navigator.userAgent || "";
+            var smallOrOldBrowser =
+                /Series40|Nokia|Opera Mini|UP\.Browser|J2ME|MIDP/i.test(ua);
+
+            mode = smallOrOldBrowser ? "keypad" : "android";
+        }
+
+        document.body.classList.remove("android-mode", "keypad-mode");
+        document.body.classList.add(mode === "keypad" ? "keypad-mode" : "android-mode");
+
+        if (mode === "keypad") {
+            bubbleArea.textContent = "Workspace ready.";
+            status.textContent = "Your workspace is ready.";
+        } else {
+            bubbleArea.innerHTML =
+                '<span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>';
+            status.textContent = "Your workspace is ready. Choose an assistant below.";
+        }
+    }
+
+    function showSignedOut() {
+        dashboard.classList.add("hidden");
+        signInWarning.classList.remove("hidden");
+        status.textContent = "Please sign in.";
+    }
+
+    async function startDashboard() {
+        var client = window.supabaseClient;
+
+        if (!client || !client.auth) {
+            applyDeviceMode(null);
+            status.textContent =
+                "Supabase is not configured yet. Check assets/js/supabase.js.";
+            showSignedOut();
+            return;
+        }
+
+        try {
+            var result = await client.auth.getSession();
+
+            if (result.error || !result.data || !result.data.session) {
+                showSignedOut();
+                return;
+            }
+
+            var user = result.data.session.user;
+            var meta = user.user_metadata || {};
+            var displayName = meta.username || meta.full_name || "AI Explorer";
+            var deviceType = meta.device_type || null;
+
+            try {
+                var profileResult = await client
+                    .from("profiles")
+                    .select("username, full_name, device_type, profile_completed")
+                    .eq("id", user.id)
+                    .maybeSingle();
+
+                if (!profileResult.error && profileResult.data) {
+                    var profile = profileResult.data;
+
+                    displayName =
+                        profile.username ||
+                        profile.full_name ||
+                        displayName;
+
+                    deviceType = profile.device_type || deviceType;
+
+                    if (profile.profile_completed === false) {
+                        window.location.href = "profile-setup.html";
+                        return;
+                    }
+                }
+            } catch (profileError) {
+                /* Keep using available account metadata if profile lookup fails. */
+            }
+
+            usernameElement.textContent = displayName;
+            applyDeviceMode(deviceType);
+            dashboard.classList.remove("hidden");
+            signInWarning.classList.add("hidden");
+
+        } catch (error) {
+            status.textContent =
+                "We couldn't verify your session. Please refresh or sign in again.";
+            showSignedOut();
+        }
+    }
+
+    signOutButton.addEventListener("click", async function () {
+        if (!window.supabaseClient) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        signOutButton.disabled = true;
+        signOutButton.innerHTML = "<span>…</span>Signing out";
+
+        try {
+            var result = await window.supabaseClient.auth.signOut();
+
+            if (result.error) {
+                throw result.error;
+            }
+
+            window.location.href = "login.html";
+        } catch (error) {
+            signOutButton.disabled = false;
+            signOutButton.innerHTML =
+                "<span>↪️</span>Sign out<small>Sign out failed. Please try again.</small>";
+        }
+    });
+
+    startDashboard();
+})();
+</script>
+</body>
+</html>
