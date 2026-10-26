@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07110d">
+<title>Login | NIMX-G AI HUB</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #07110d;
+    color: #f4f7f5;
+    font-family: Arial, sans-serif;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 390px;
+    padding: 28px 23px;
+    background: #101b15;
+    border: 1px solid #254b36;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px #0008;
+}
+
+.logo {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: #35e28a;
+    letter-spacing: 1px;
+}
+
+.tagline {
+    text-align: center;
+    color: #c9b66b;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 23px;
+    margin-top: 28px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #aab8af;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin: 15px 0 7px;
+    font-size: 14px;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #34513f;
+    border-radius: 9px;
+    background: #08110c;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #35e28a;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 22px;
+    border: 0;
+    border-radius: 9px;
+    background: #35e28a;
+    color: #07110d;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.message {
+    display: none;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.error {
+    display: block;
+    background: #3a1717;
+    color: #ffbaba;
+}
+
+.success {
+    display: block;
+    background: #123622;
+    color: #a5ffca;
+}
+
+.links {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 2;
+    color: #b8c4bc;
+}
+
+a {
+    color: #45e894;
+    text-decoration: none;
+}
+
+.footer {
+    text-align: center;
+    color: #829087;
+    font-size: 11px;
+    margin-top: 23px;
+}
+</style>
+</head>
+
+<body>
+
+<main class="login-card">
+
+    <div class="logo">NIMX-G AI HUB</div>
+    <div class="tagline">One Platform. Multiple AIs.</div>
+
+    <h1>Welcome Back</h1>
+    <div class="subtitle">Sign in to continue your AI journey.</div>
+
+    <form id="loginForm">
+        <label for="email">Email address</label>
+        <input
+            id="email"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required
+        >
+
+        <label for="password">Password</label>
+        <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Enter your password"
+            required
+        >
+
+        <button id="loginButton" type="submit">Sign In</button>
+    </form>
+
+    <div id="message" class="message" role="status" aria-live="polite"></div>
+
+    <div class="links">
+        <a href="forgot-password.html">Forgot password?</a>
+        <br>
+        Don't have an account?
+        <a href="register.html">Create one</a>
+    </div>
+
+    <div class="footer">Powered by Nimx-G</div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase.js"></script>
+
+<script>
+(function () {
+    "use strict";
+
+    const client = window.supabaseClient;
+
+    const form = document.getElementById("loginForm");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const loginButton = document.getElementById("loginButton");
+    const messageBox = document.getElementById("message");
+
+    let redirecting = false;
+    let checking = false;
+
+    function showMessage(text, type) {
+        messageBox.textContent = text;
+        messageBox.className = "message " + type;
+    }
+
+    function setLoading(loading) {
+        loginButton.disabled = loading;
+        loginButton.textContent = loading ? "Please wait..." : "Sign In";
+    }
+
+    function showError(error) {
+        const text = error && error.message
+            ? error.message
+            : "Something went wrong. Please try again.";
+
+        showMessage(text, "error");
+    }
+
+    async function routeUser() {
+        if (redirecting || checking) return;
+
+        checking = true;
+
+        try {
+            const {
+                data: { session },
+                error: sessionError
+            } = await client.auth.getSession();
+
+            if (sessionError) throw sessionError;
+
+            if (!session) {
+                checking = false;
+                return;
+            }
+
+            if (!session.user.email_confirmed_at) {
+                await client.auth.signOut();
+                checking = false;
+                showMessage(
+                    "Please verify your email before signing in.",
+                    "error"
+                );
+                return;
+            }
+
+            const { data: profile, error } = await client
+                .from("profiles")
+                .select("profile_completed")
+                .eq("id", session.user.id)
+                .maybeSingle();
+
+            if (error) throw error;
+
+            redirecting = true;
+
+            if (profile && profile.profile_completed === true) {
+                window.location.replace("dashboard.html");
+            } else {
+                window.location.replace("profile-setup.html");
+            }
+
+        } catch (error) {
+            checking = false;
+            showError(error);
+        }
+    }
+
+    if (!client) {
+        showMessage(
+            "Supabase did not load. Check assets/js/supabase.js and try again.",
+            "error"
+        );
+        return;
+    }
+
+    /*
+      Supabase automatically persists the session.
+      If this user is already logged in, route them
+      without asking them to sign in again.
+    */
+    routeUser();
+
+    client.auth.onAuthStateChange(function (event, session) {
+        if (session && (
+            event === "SIGNED_IN" ||
+            event === "INITIAL_SESSION" ||
+            event === "TOKEN_REFRESHED"
+        )) {
+            setTimeout(routeUser, 0);
+        }
+    });
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        if (redirecting) return;
+
+        setLoading(true);
+        showMessage("", "");
+
+        try {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            const { data, error } = await client.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+            if (error) throw error;
+
+            if (!data.user || !data.session) {
+                throw new Error("Sign-in failed. Please try again.");
+            }
+
+            if (!data.user.email_confirmed_at) {
+                await client.auth.signOut();
+
+                throw new Error(
+                    "Please verify your email before signing in."
+                );
+            }
+
+            showMessage("Login successful. Opening your account...", "success");
+
+            await routeUser();
+
+        } catch (error) {
+            setLoading(false);
+            showError(error);
+        }
+    });
+
+})();
+</script>
+
+</body>
+  </html>
