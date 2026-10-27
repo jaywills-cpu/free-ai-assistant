@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07110D">
+
+    <title>About Us | NIMX-G AI HUB</title>
+
+    <meta name="description"
+          content="Discover the vision behind NIMX-G AI HUB: making AI-powered learning, academic assistance, creativity, research and productivity more accessible.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --background: #07110D;
+            --panel: #0B1C13;
+            --panel-light: #102219;
+            --green: #35E28A;
+            --gold: #C9B66B;
+            --white: #EAF5EE;
+            --muted: #B8CBBE;
+            --border: #234333;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--white);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.75;
+        }
+
+        a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 4px;
+        }
+
+        .header {
+            padding: 15px 18px;
+            background: #091810;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            max-width: 1050px;
+            margin: auto;
+            display: block;
+        }
+
+        .brand {
+            display: inline-block;
+            color: var(--green);
+            font-size: 21px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-subtitle {
+            display: block;
+            margin-top: -4px;
+            color: var(--gold);
+            font-size: 12px;
+        }
+
+        .nav-actions {
+            margin-top: 14px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .dashboard-button {
+            display: inline-block;
+            padding: 9px 15px;
+            background: var(--green);
+            color: #07110D;
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 1050px;
+            margin: auto;
+            padding: 25px 16px 45px;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 35px 23px;
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(53, 226, 138, 0.13),
+                    transparent 40%
+                ),
+                var(--panel);
+            border: 1px solid #28533B;
+            border-radius: 18px;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            max-width: 750px;
+            margin: 12px 0;
+            color: var(--green);
+            font-size: clamp(32px, 7vw, 51px);
+            line-height: 1.15;
+        }
+
+        .hero-description {
+            max-width: 740px;
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+        .brand-signature {
+            margin-top: 22px;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 7px 8px 0 0;
+            padding: 12px 17px;
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            background: var(--green);
+            color: #07110D;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .button.secondary {
+            background: transparent;
+            color: var(--green);
+        }
+
+        .section {
+            margin-top: 22px;
+            padding: 23px 20px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        .section-label {
+            margin-bottom: 4px;
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 5px 0 12px;
+            color: var(--green);
+            font-size: 25px;
+            line-height: 1.3;
+        }
+
+        h3 {
+            margin: 0 0 7px;
+            color: var(--white);
+            font-size: 17px;
+        }
+
+        p {
+            color: var(--muted);
+        }
+
+        .cards {
+            display: block;
+        }
+
+        .card {
+            margin-top: 12px;
+            padding: 17px;
+            background: var(--panel-light);
+            border: 1px solid #244332;
+            border-radius: 11px;
+        }
+
+        .card p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        .icon {
+            display: inline-block;
+            margin-bottom: 7px;
+            font-size: 25px;
+        }
+
+        .vision-box {
+            padding: 22px;
+            background: #102219;
+            border-left: 4px solid var(--gold);
+            border-radius: 7px;
+        }
+
+        .vision-box p {
+            margin-bottom: 0;
+        }
+
+        .notice {
+            padding: 17px;
+            background: #1B1A10;
+            border: 1px solid #76683B;
+            border-radius: 10px;
+        }
+
+        .notice strong {
+            color: var(--gold);
+        }
+
+        .cta {
+            margin-top: 22px;
+            padding: 27px 20px;
+            background: linear-gradient(135deg, #102219, #0B1C13);
+            border: 1px solid #28533B;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 27px;
+        }
+
+        footer {
+            padding: 25px 15px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-brand {
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 13px;
+        }
+
+        .footer-links {
+            margin: 13px 0;
+        }
+
+        .footer-links a {
+            display: inline-block;
+            margin: 5px 8px;
+            font-size: 13px;
+        }
+
+        @media (min-width: 650px) {
+            .nav {
+                display: block;
+            }
+
+            .nav-actions {
+                margin-top: 12px;
+            }
+
+            .hero {
+                padding: 48px 38px;
+            }
+
+            .section {
+                padding: 28px;
+            }
+
+            .cards {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+            }
+
+            .card {
+                margin-top: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .hero {
+                animation: entrance 0.5s ease-out;
+            }
+
+            @keyframes entrance {
+                from {
+                    opacity: 0.65;
+                    transform: translateY(7px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="nav">
+
+        <a class="brand" href="index.html">
+            NIMX-G AI HUB
+        </a>
+
+        <span class="brand-subtitle">
+            Powered by Nimx-G
+        </span>
+
+        <nav class="nav-actions" aria-label="Main navigation">
+            <a class="nav-link" href="index.html">Home</a>
+
+            <a class="nav-link" href="about.html">
+                About Us
+            </a>
+
+            <a class="nav-link" href="support.html">
+                Help &amp; Support
+            </a>
+
+            <a class="dashboard-button" href="dashboard.html">
+                Dashboard &#8594;
+            </a>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+
+    <!-- INTRODUCTION -->
+
+    <section class="hero">
+
+        <div class="eyebrow">
+            Welcome to NIMX-G AI HUB
+        </div>
+
+        <h1>
+            One Platform.<br>
+            Multiple AIs.
+        </h1>
+
+        <p class="hero-description">
+            A smarter way to learn, create, explore ideas, solve problems,
+            and accomplish everyday tasks with the help of artificial
+            intelligence.
+        </p>
+
+        <p class="hero-description">
+            We are building a platform where students, learners, creators,
+            and everyday users can access different AI assistants in one
+            convenient place.
+        </p>
+
+        <p class="brand-signature">
+            NIMX-G AI HUB — Powered by Nimx-G.
+        </p>
+
+        <a class="button" href="dashboard.html">
+            Open Dashboard &#8594;
+        </a>
+
+        <a class="button secondary" href="support.html">
+            Get Help
+        </a>
+
+    </section>
+
+    <!-- ABOUT US -->
+
+    <section class="section">
+
+        <div class="section-label">
+            Who We Are
+        </div>
+
+        <h2>What Is NIMX-G AI HUB?</h2>
+
+        <p>
+            NIMX-G AI HUB is a multi-assistant AI platform being developed
+            to bring useful artificial intelligence tools together under
+            one roof. Instead of treating every task as the same, the
+            platform is designed around assistants that focus on different
+            needs.
+        </p>
+
+        <p>
+            From understanding a difficult school topic to writing,
+            programming, mathematics, research, and creative work, our
+            goal is to make AI assistance more organized and convenient.
+        </p>
+
+        <p>
+            We want users to spend less time struggling to find the right
+            tool and more time learning, creating, solving problems,
+            and developing their abilities.
+        </p>
+
+    </section>
+
+    <!-- VISION -->
+
+    <section class="section">
+
+        <div class="section-label">
+            Our Vision
+        </div>
+
+        <h2>Making Learning and Productivity More Accessible</h2>
+
+        <div class="vision-box">
+
+            <p>
+                Our vision is to build a useful and accessible AI
+                environment where students can better understand their
+                lessons, practise difficult subjects, prepare for
+                examinations, organize assignments, and develop the
+                confidence to tackle academic challenges.
+            </p>
+
+            <p>
+                We also want to support people beyond the classroom:
+                aspiring programmers learning to code, writers developing
+                their ideas, creators exploring new possibilities, and
+                individuals looking for practical help with everyday tasks.
+            </p>
+
+            <p>
+                By bringing multiple AI assistants into one platform,
+                we aim to make helpful technology easier to explore,
+                particularly for people who may not have access to
+                expensive devices or multiple paid tools.
+            </p>
+
+        </div>
+
+        <p>
+            Our long-term goal is to keep improving accessibility,
+            usefulness, and reliability while encouraging responsible
+            AI use and continuous learning.
+        </p>
+
+    </section>
+
+    <!-- STUDENTS -->
+
+    <section class="section">
+
+        <div class="section-label">
+            Built Around Useful Tasks
+        </div>
+
+        <h2>How We Aim to Help Students</h2>
+
+        <p>
+            Learning is not always easy. Sometimes a student needs another
+            explanation, a worked example, help organizing an assignment,
+            or a way to practise a subject at their own pace.
+        </p>
+
+        <div class="cards">
+
+            <article class="card">
+                <span class="icon" aria-hidden="true">&#128218;</span>
+
+                <h3>Understand Difficult Topics</h3>
+
+                <p>
+                    Get explanations of challenging concepts in simpler
+                    language and explore examples that make learning
+                    easier to follow.
+                </p>
+            </article>
+
+            <article class="card">
+                <span class="icon" aria-hidden="true">&#128221;</span>
+
+                <h3>Work on Academic Tasks</h3>
+
+                <p>
+                    Organize ideas, understand assignment questions,
+                    plan essays, prepare notes, and improve written work.
+                </p>
+            </article>
+
+            <article class="card">
+                <span class="icon" aria-hidden="true">&#128290;</span>
+
+                <h3>Practise Mathematics</h3>
+
+                <p>
+                    Explore calculations, understand mathematical methods,
+                    and follow step-by-step explanations to strengthen
+                    problem-solving skills.
+                </p>
+            </article>
+
+            <article class="card">
+                <span class="icon" aria-hidden="true">&#127891;</span>
+
+                <h3>Prepare for Examinations</h3>
+
+                <p>
+                    Review topics, generate practice questions when
+                    supported, identify knowledge gaps, and build
+                    stronger study habits.
+                </p>
+            </article>
+
+            <article class="card">
+                <span class="icon" aria-hidden="true">&#128187;</span>
+
+                <h3>Learn Digital Skills</h3>
+
+                <p>
+                    Explore programming, technology, and other useful
+                    skills with assistance suited to the task.
+                </p>
+            </article>
+
+            <article class="card">
+                <span class="icon" aria-hidden="true">&#128161;</span>
+
+                <h3>Develop Independent Thinking</h3>
+
+                <p>
+                    Use AI to explore different approaches, ask questions,
+                    examine examples, and develop your own understanding
+                    instead of simply copying answers.
+                </p>
+            </article>
+
+        </div>
+
+        <div class="notice" style="margin-top:18px;">
+            <strong>Our educational principle:</strong>
+
+            <p>
+                AI should support learning, not replace it. Students should
+                understand the work they submit, check important facts,
+                follow their school rules, and use AI responsibly.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- OUR ASSISTANTS -->
+
+    <section class="section">
+
+        <div class="section-label">
+            One Hub, Different Purposes
+        </div>
+
+        <h2>Meet Our Planned AI Assistants</h2>
+
+        <p>
+            NIMX-G AI HUB is designed to include specialized assistants.
+            Their actual capabilities will depend on the AI models,
+            integrations, and features available at the time of use.
+        </p>
+
+        <div class="cards">
+
+            <article class="card">
+                <h3>General AI</h3>
+
+                <p>
+                    Everyday questions, explanations, ideas,
+                    and general conversations.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>Study AI</h3>
+
+                <p>
+                    Learning support, educational explanations,
+                    and study assistance.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>Coding AI</h3>
+
+                <p>
+                    Programming guidance, code explanations,
+                    and debugging support.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>Writing AI</h3>
+
+                <p>
+                    Drafting, editing, organizing ideas,
+                    and improving written content.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>Research AI</h3>
+
+                <p>
+                    Exploring topics, organizing information,
+                    and assisting with research.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>Maths AI</h3>
+
+                <p>
+                    Mathematics explanations, calculations,
+                    and problem-solving support.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>Image Studio</h3>
+
+                <p>
+                    Planned image-creation and compatible
+                    image-editing capabilities.
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- ACCESSIBILITY -->
+
+    <section class="section">
+
+        <div class="section-label">
+            Designed for Accessibility
+        </div>
+
+        <h2>Technology for Different Devices</h2>
+
+        <p>
+            We aim to make NIMX-G AI HUB usable across a range of devices,
+            including Android phones and supported older browsers.
+            We recognize that not everyone has access to the latest
+            smartphone or a fast internet connection.
+        </p>
+
+        <p>
+            Our goal is to keep the interface straightforward, reduce
+            unnecessary complexity, and develop lighter experiences
+            wherever possible.
+        </p>
+
+        <p>
+            Compatibility depends on the browser, device capabilities,
+            internet connection, and the features being used.
+        </p>
+
+    </section>
+
+    <!-- RESPONSIBLE AI -->
+
+    <section class="section">
+
+        <div class="section-label">
+            Trust and Responsibility
+        </div>
+
+        <h2>AI With Purpose</h2>
+
+        <p>
+            We believe useful AI should be approached with curiosity,
+            responsibility, and good judgment.
+        </p>
+
+        <p>
+            AI-generated responses may contain errors or outdated
+            information. Users should verify important facts and should
+            not rely solely on AI for medical, legal, financial,
+            safety-critical, or other high-stakes decisions.
+        </p>
+
+        <p>
+            We also encourage users to protect their account information
+            and avoid submitting unnecessary sensitive personal details.
+        </p>
+
+        <a class="button secondary" href="privacy.html">
+            Read Our Privacy Policy
+        </a>
+
+    </section>
+
+    <!-- SUBSCRIPTIONS -->
+
+    <section class="section">
+
+        <div class="section-label">
+            Keeping Services Running
+        </div>
+
+        <h2>Supporting the Platform</h2>
+
+        <p>
+            AI services require technical resources to operate. Depending
+            on the features provided, these may include AI provider usage,
+            hosting, storage, security, maintenance, and development.
+        </p>
+
+        <p>
+            If subscription plans are offered, subscription revenue will
+            help support these operating costs and the continued
+            development of NIMX-G AI HUB.
+        </p>
+
+        <p>
+            Each plan will have its own stated features, prices, and
+            applicable usage limits. A subscription should not be assumed
+            to provide unlimited AI access.
+        </p>
+
+        <a class="button secondary" href="privacy.html">
+            Read Subscription Information
+        </a>
+
+    </section>
+
+    <!-- FINAL CALL TO ACTION -->
+
+    <section class="cta">
+
+        <div class="eyebrow">
+            Your Next Step Starts Here
+        </div>
+
+        <h2>Learn More. Create More. Accomplish More.</h2>
+
+        <p>
+            Explore NIMX-G AI HUB and discover how AI assistance can
+            support your learning, creativity, and everyday tasks.
+        </p>
+
+        <a class="button" href="dashboard.html">
+            Go to Dashboard &#8594;
+        </a>
+
+        <a class="button secondary" href="support.html">
+            Help &amp; Support
+        </a>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p class="footer-brand">NIMX-G AI HUB</p>
+
+    <p>One Platform. Multiple AIs.</p>
+
+    <p>Powered by Nimx-G.</p>
+
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Help &amp; Support</a>
+        <a href="terms.html">Terms</a>
+    </div>
+
+    <p>
+        &copy; <span id="year">2026</span> NIMX-G AI HUB.
+    </p>
+
+</footer>
+
+<script>
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+</script>
+
+</body>
+  </html>
