@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supabase Diagnostic | Nimx-G</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #edf4ef;
+    color: #173d2d;
+    padding: 15px;
+}
+
+.box {
+    max-width: 500px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h2 {
+    color: #087348;
+}
+
+#result {
+    padding: 12px;
+    background: #f0f6f1;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+button {
+    padding: 12px;
+    width: 100%;
+    background: #087348;
+    color: white;
+    border: 0;
+    border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+<div class="box">
+    <h2>Nimx-G Supabase Test</h2>
+
+    <p>This page checks the Supabase library, configuration and connection.</p>
+
+    <div id="result">Running tests...</div>
+
+    <p>
+        <button onclick="runTest()">Run Test Again</button>
+    </p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase.js"></script>
+
+<script>
+async function runTest() {
+    var result = document.getElementById("result");
+    var output = [];
+
+    try {
+        output.push(
+            "1. Supabase library: " +
+            (window.supabase ? "LOADED" : "NOT LOADED")
+        );
+
+        output.push(
+            "2. Supabase client: " +
+            (window.supabaseClient ? "INITIALIZED" : "MISSING")
+        );
+
+        if (!window.supabaseClient) {
+            output.push(
+                "3. Connection: NOT TESTED because the client is missing."
+            );
+
+            result.textContent = output.join("\n\n");
+            return;
+        }
+
+        output.push("3. Checking connection...");
+
+        result.textContent = output.join("\n\n");
+
+        var response = await Promise.race([
+            window.supabaseClient.auth.getSession(),
+            new Promise(function (_, reject) {
+                setTimeout(function () {
+                    reject(new Error("Connection test timed out."));
+                }, 12000);
+            })
+        ]);
+
+        if (response.error) {
+            output.push(
+                "4. Authentication response: " +
+                response.error.message
+            );
+        } else {
+            output.push(
+                "4. Authentication endpoint: RESPONDED"
+            );
+
+            output.push(
+                "5. Existing session: " +
+                (response.data.session ? "YES" : "NO")
+            );
+        }
+
+    } catch (error) {
+        output.push(
+            "TEST ERROR: " +
+            (error.message || "Unknown error")
+        );
+    }
+
+    result.textContent = output.join("\n\n");
+}
+
+runTest();
+</script>
+</body>
+</html>
