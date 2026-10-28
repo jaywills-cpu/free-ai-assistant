@@ -1,847 +1,685 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Create Account | NIMX-G AI HUB</title>
-
-<meta name="theme-color" content="#07110d">
-<meta name="description" content="Create your NIMX-G AI HUB account. One Platform. Multiple AIs.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#073b2a">
+<title>Register | Nimx-G AI Hub</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    body {
-        margin: 0;
-        padding: 20px 12px;
-        min-height: 100vh;
-        background: #07110d;
-        color: #f1f5f2;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 15px;
-    }
+body {
+    margin: 0;
+    padding: 12px;
+    background: #eaf2ed;
+    color: #173d2d;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: bold;
+}
 
-    .container {
-        width: 100%;
-        max-width: 430px;
-        margin: 20px auto;
-    }
+.container {
+    width: 100%;
+    max-width: 420px;
+    margin: 12px auto;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #cadbce;
+    border-radius: 8px;
+}
 
-    .brand {
-        text-align: center;
-        margin-bottom: 25px;
-    }
+.brand {
+    padding: 12px 0;
+    text-align: center;
+    border-bottom: 2px solid #d5a928;
+}
 
-    .brand-name {
-        color: #36d98b;
-        font-size: 27px;
-        font-weight: bold;
-        letter-spacing: 0.5px;
-    }
+.brand h1 {
+    margin: 0;
+    color: #075b3b;
+    font-size: 25px;
+}
 
-    .brand-name span {
-        color: #f0c75e;
-    }
+.brand p {
+    margin: 4px 0;
+    font-size: 13px;
+}
 
-    .tagline {
-        color: #a9b9af;
-        font-size: 13px;
-        margin-top: 8px;
-    }
+h2 {
+    margin-top: 18px;
+    font-size: 20px;
+}
 
-    .card {
-        background: #101d16;
-        border: 1px solid #263c2e;
-        border-radius: 15px;
-        padding: 23px 18px;
-    }
+label {
+    display: block;
+    margin-top: 13px;
+    font-weight: bold;
+}
 
-    h1 {
-        font-size: 23px;
-        margin: 0 0 8px;
-    }
+input,
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 5px;
+    font: inherit;
+}
 
-    h2 {
-        font-size: 19px;
-    }
+input {
+    border: 1px solid #9db8a5;
+    background: #ffffff;
+    color: #173d2d;
+}
 
-    .description {
-        color: #aab9af;
-        font-size: 13px;
-        line-height: 1.7;
-        margin-bottom: 23px;
-    }
+input:focus {
+    outline: 2px solid #18845b;
+    outline-offset: 1px;
+}
 
-    label {
-        display: block;
-        margin: 16px 0 7px;
-        color: #e5eee8;
-        font-size: 13px;
-        font-weight: bold;
-    }
+button {
+    border: 0;
+    background: #087348;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-    input,
-    select {
-        width: 100%;
-        min-height: 45px;
-        padding: 12px;
-        background: #08120d;
-        border: 1px solid #344b3a;
-        border-radius: 8px;
-        color: #ffffff;
-        font-size: 15px;
-        outline: none;
-    }
+button.secondary {
+    background: #e5efe8;
+    color: #075b3b;
+    border: 1px solid #b5cbb9;
+}
 
-    input:focus,
-    select:focus {
-        border-color: #36d98b;
-    }
+button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
 
-    select option {
-        background: #101d16;
-        color: #ffffff;
-    }
+.note {
+    padding: 10px;
+    margin-top: 12px;
+    background: #f0f6f1;
+    border-left: 3px solid #087348;
+    font-size: 13px;
+}
 
-    .password-note,
-    .small-note {
-        color: #9bac9f;
-        font-size: 12px;
-        line-height: 1.7;
-        margin-top: 8px;
-    }
+.message {
+    display: none;
+    padding: 10px;
+    margin: 12px 0;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+}
 
-    .button {
-        display: block;
-        width: 100%;
-        min-height: 47px;
-        padding: 14px;
-        margin-top: 20px;
-        border: none;
-        border-radius: 8px;
-        background: #36d98b;
-        color: #07110d;
-        font-size: 15px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        cursor: pointer;
-    }
+.message.error {
+    display: block;
+    background: #fff0f0;
+    color: #a00000;
+}
 
-    .button:disabled {
-        opacity: 0.6;
-        cursor: wait;
-    }
+.message.success {
+    display: block;
+    background: #e8f7ec;
+    color: #075b3b;
+}
 
-    .secondary-button {
-        background: #18291f;
-        color: #f0c75e;
-        border: 1px solid #344b3a;
-        margin-top: 10px;
-    }
+.message.info {
+    display: block;
+    background: #eef4ff;
+    color: #174a82;
+}
 
-    .message {
-        display: none;
-        padding: 12px;
-        margin: 15px 0;
-        border-radius: 8px;
-        font-size: 13px;
-        line-height: 1.7;
-        overflow-wrap: anywhere;
-    }
+.hidden {
+    display: none !important;
+}
 
-    .message.success {
-        display: block;
-        background: #102c1d;
-        color: #7df0ae;
-        border: 1px solid #286943;
-    }
+.links {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 14px;
+}
 
-    .message.error {
-        display: block;
-        background: #351719;
-        color: #ffaaaa;
-        border: 1px solid #713337;
-    }
+a {
+    color: #076b45;
+}
 
-    .message.info {
-        display: block;
-        background: #17271f;
-        color: #f0d58b;
-        border: 1px solid #4c5733;
-    }
-
-    .hidden {
-        display: none !important;
-    }
-
-    .divider {
-        height: 1px;
-        background: #2a4031;
-        margin: 23px 0;
-    }
-
-    .footer-text {
-        text-align: center;
-        color: #9bac9f;
-        font-size: 13px;
-        line-height: 1.9;
-        margin-top: 20px;
-    }
-
-    a {
-        color: #36d98b;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    .gold {
-        color: #f0c75e;
-    }
-
-    @media (max-width: 360px) {
-        body {
-            padding: 12px 8px;
-        }
-
-        .card {
-            padding: 19px 13px;
-        }
-
-        .brand-name {
-            font-size: 23px;
-        }
-
-        h1 {
-            font-size: 21px;
-        }
-    }
+footer {
+    margin-top: 18px;
+    text-align: center;
+    color: #62766a;
+    font-size: 12px;
+}
 </style>
+</head>
 
-</head><body><div class="container"><header class="brand">
-    <div class="brand-name">NIMX-G <span>AI HUB</span></div>
-    <div class="tagline">One Platform. Multiple AIs.</div>
-</header>
+<body>
 
-<main class="card">
+<div class="container">
 
-    <h1>Create your account</h1>
+    <div class="brand">
+        <h1>NIMX-G AI HUB</h1>
+        <p>One Platform. Multiple AIs.</p>
+        <p>Powered by Nimx-G</p>
+    </div>
 
-    <p class="description">
-        Join NIMX-G AI HUB and explore AI assistants for learning,
-        writing, coding, research and everyday questions.
-    </p>
+    <div id="notice" class="message" role="status" aria-live="polite"></div>
 
-    <div id="pageMessage"
-         class="message"
-         role="status"
-         aria-live="polite"></div>
+    <!-- REGISTRATION SCREEN -->
+    <section id="registrationScreen">
 
-    <!-- REGISTRATION FORM -->
+        <h2>Create Your Account</h2>
 
-    <form id="registerForm">
+        <p>Enter your details to register for Nimx-G AI Hub.</p>
 
-        <label for="username">Choose a username</label>
+        <form id="registrationForm">
 
-        <input
-            type="text"
-            id="username"
-            minlength="3"
-            maxlength="30"
-            pattern="[A-Za-z0-9_]+"
-            autocomplete="username"
-            placeholder="e.g. nimxg_user"
-            required
-        >
+            <label for="username">Username</label>
+            <input
+                id="username"
+                name="username"
+                type="text"
+                minlength="3"
+                maxlength="24"
+                autocomplete="username"
+                required
+            >
 
-        <p class="small-note">
-            Use 3–30 letters, numbers or underscores.
+            <label for="email">Email Address</label>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                maxlength="254"
+                autocomplete="email"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                id="password"
+                name="password"
+                type="password"
+                minlength="8"
+                maxlength="72"
+                autocomplete="new-password"
+                required
+            >
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                minlength="8"
+                maxlength="72"
+                autocomplete="new-password"
+                required
+            >
+
+            <button id="registerButton" type="submit">
+                Register Account
+            </button>
+
+        </form>
+
+        <div class="note">
+            You will need to verify your email address before continuing.
+        </div>
+
+        <div class="links">
+            Already registered?
+            <a href="login.html">Sign in</a>
+        </div>
+
+    </section>
+
+    <!-- EMAIL VERIFICATION SCREEN -->
+    <section id="verificationScreen" class="hidden">
+
+        <h2>Verify Your Email</h2>
+
+        <p>
+            Enter the verification code sent to the email address below.
         </p>
 
-        <label for="email">Email address</label>
+        <p><strong id="verificationEmail"></strong></p>
 
-        <input
-            type="email"
-            id="email"
-            maxlength="254"
-            autocomplete="email"
-            placeholder="you@example.com"
-            required
-        >
+        <form id="verificationForm">
 
-        <label for="password">Create password</label>
+            <label for="verificationCode">Verification Code</label>
+            <input
+                id="verificationCode"
+                name="verificationCode"
+                type="text"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                maxlength="12"
+                required
+            >
 
-        <input
-            type="password"
-            id="password"
-            minlength="8"
-            maxlength="72"
-            autocomplete="new-password"
-            placeholder="At least 8 characters"
-            required
-        >
+            <button id="verifyButton" type="submit">
+                Verify Code
+            </button>
 
-        <label for="confirmPassword">Confirm password</label>
+        </form>
 
-        <input
-            type="password"
-            id="confirmPassword"
-            minlength="8"
-            maxlength="72"
-            autocomplete="new-password"
-            placeholder="Enter your password again"
-            required
-        >
-
-        <p class="password-note">
-            Your passwords must match.
-        </p>
-
-        <label for="deviceType">Choose your device</label>
-
-        <select id="deviceType" required>
-            <option value="android">Android / Smartphone</option>
-            <option value="keypad">Keypad / Older phone</option>
-        </select>
-
-        <button type="submit" id="registerButton" class="button">
-            Create My Account
-        </button>
-
-    </form>
-
-    <!-- EMAIL VERIFICATION -->
-
-    <section id="verificationSection" class="hidden">
-
-        <div class="divider"></div>
-
-        <h2>Verify your email</h2>
-
-        <p class="description">
-            Check your inbox for the verification email.
-            You can click the verification link or enter the
-            verification code below.
-        </p>
-
-        <label for="verificationCode">Verification code</label>
-
-        <input
-            type="text"
-            id="verificationCode"
-            inputmode="numeric"
-            autocomplete="one-time-code"
-            maxlength="8"
-            placeholder="Enter your email code"
-        >
-
-        <button type="button" id="verifyButton" class="button">
-            Verify Email Code
-        </button>
-
-        <button type="button"
-                id="resendButton"
-                class="button secondary-button">
+        <button id="resendButton" class="secondary" type="button">
             Resend Verification Email
         </button>
 
-        <p class="small-note">
-            If you opened the verification link on this device,
-            this page will automatically continue when Supabase
-            confirms your email.
-        </p>
+        <button id="changeEmailButton" class="secondary" type="button">
+            Use Another Email
+        </button>
+
+        <div class="note">
+            If you leave this page to check your email, return to this same
+            page. Your pending verification will be restored automatically.
+        </div>
 
     </section>
 
-    <!-- VERIFIED STATE -->
+    <footer>
+        &copy; <span id="year"></span> Nimx-G AI Hub.
+        Powered by Nimx-G.
+    </footer>
 
-    <section id="verifiedSection" class="hidden">
+</div>
 
-        <div class="divider"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase.js"></script>
 
-        <h2 class="gold">Email verified successfully!</h2>
-
-        <p class="description">
-            Your account has been verified. Next, complete your
-            profile, choose your date of birth, and let NIMX-G AI HUB
-            calculate your age automatically.
-        </p>
-
-        <a href="profile-setup.html" class="button">
-            Continue to Profile Setup
-        </a>
-
-    </section>
-
-    <div class="divider"></div>
-
-    <div class="footer-text">
-        Already have an account?
-        <a href="login.html">Sign in</a>
-
-        <br>
-
-        <a href="index.html">Back to Home</a>
-    </div>
-
-</main>
-
-<footer class="footer-text">
-    &copy; <span id="year"></span> NIMX-G AI HUB.
-    All rights reserved.
-</footer>
-
-</div><!-- Load Supabase library first --><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><!-- Load your existing shared configuration --><script src="assets/js/supabase.js"></script><script>
+<script>
 (function () {
     "use strict";
 
-    const client = window.supabaseClient;
+    var PENDING_KEY = "nimx_keypad_pending_verification";
 
-    const pageMessage = document.getElementById("pageMessage");
-    const registerForm = document.getElementById("registerForm");
-    const registerButton = document.getElementById("registerButton");
+    var registrationScreen = document.getElementById("registrationScreen");
+    var verificationScreen = document.getElementById("verificationScreen");
+    var registrationForm = document.getElementById("registrationForm");
+    var verificationForm = document.getElementById("verificationForm");
+    var notice = document.getElementById("notice");
 
-    const verificationSection =
-        document.getElementById("verificationSection");
+    var registerButton = document.getElementById("registerButton");
+    var verifyButton = document.getElementById("verifyButton");
+    var resendButton = document.getElementById("resendButton");
 
-    const verifiedSection =
-        document.getElementById("verifiedSection");
+    var verificationEmail = document.getElementById("verificationEmail");
+    var verificationCode = document.getElementById("verificationCode");
 
-    const verifyButton = document.getElementById("verifyButton");
-    const resendButton = document.getElementById("resendButton");
-
-    const verificationCode =
-        document.getElementById("verificationCode");
-
-    let pendingEmail = "";
-    let processingVerification = false;
-    let redirectStarted = false;
+    var client = null;
+    var busy = false;
 
     document.getElementById("year").textContent =
         new Date().getFullYear();
 
     function showMessage(message, type) {
-        pageMessage.textContent = message;
-        pageMessage.className = "message " + type;
+        notice.className = "message " + (type || "info");
+        notice.textContent = message;
     }
 
     function clearMessage() {
-        pageMessage.textContent = "";
-        pageMessage.className = "message";
+        notice.className = "message";
+        notice.textContent = "";
     }
 
-    function showVerification() {
-        registerForm.classList.add("hidden");
-        verificationSection.classList.remove("hidden");
-        verifiedSection.classList.add("hidden");
-    }
-
-    function showVerified() {
-        registerForm.classList.add("hidden");
-        verificationSection.classList.add("hidden");
-        verifiedSection.classList.remove("hidden");
-    }
-
-    function friendlyError(error) {
-        const message = String(
-            error && error.message
-                ? error.message
-                : "Something went wrong."
-        );
-
-        if (/already registered|user already exists/i.test(message)) {
-            return "An account may already exist for this email. Try signing in instead.";
+    function getClient() {
+        if (window.supabaseClient) {
+            return window.supabaseClient;
         }
 
-        if (/rate limit|too many requests/i.test(message)) {
-            return "Too many attempts. Please wait before trying again.";
+        if (window.supabase && window.supabase.createClient) {
+            showMessage(
+                "Supabase has not been configured. Check assets/js/supabase.js.",
+                "error"
+            );
+            return null;
         }
-
-        if (/invalid.*token|token.*expired|otp_expired/i.test(message)) {
-            return "This verification code or link is invalid or expired. Request a new email and try again.";
-        }
-
-        if (/failed to fetch|network/i.test(message)) {
-            return "We could not reach Supabase. Check your internet connection and project URL.";
-        }
-
-        return message;
-    }
-
-    function showVerifiedState() {
-        showVerified();
 
         showMessage(
-            "Your email has been verified. Continue to profile setup.",
-            "success"
-        );
-    }
-
-    function goToProfileSetup() {
-        if (redirectStarted) {
-            return;
-        }
-
-        redirectStarted = true;
-
-        showVerifiedState();
-
-        /*
-         * Allow the success message to appear briefly before navigation.
-         */
-        setTimeout(function () {
-            window.location.replace("profile-setup.html");
-        }, 900);
-    }
-
-    if (!client) {
-        showMessage(
-            "Supabase is not configured correctly. Check assets/js/supabase.js and make sure the Supabase library loads first.",
+            "The authentication library could not load. Check your internet connection.",
             "error"
         );
 
-        registerButton.disabled = true;
-        verifyButton.disabled = true;
-        resendButton.disabled = true;
-        return;
+        return null;
     }
 
-    /*
-     * Do not save profiles here.
-     * The profile setup page is responsible for profile creation
-     * and updating the profiles table.
-     */
-
-    async function handleVerifiedUser(user) {
-        if (!user || !user.email_confirmed_at) {
-            return;
-        }
-
-        goToProfileSetup();
-    }
-
-    /*
-     * Listen for authentication events caused by email-link
-     * confirmation or OTP verification.
-     */
-    client.auth.onAuthStateChange(function (event, session) {
-        if (
-            session &&
-            session.user &&
-            session.user.email_confirmed_at &&
-            (
-                event === "SIGNED_IN" ||
-                event === "USER_UPDATED" ||
-                event === "INITIAL_SESSION"
-            )
-        ) {
-            /*
-             * Defer navigation until the auth callback finishes.
-             */
-            setTimeout(function () {
-                handleVerifiedUser(session.user);
-            }, 0);
-        }
-    });
-
-    /*
-     * Check for a confirmation session when this page loads.
-     * Supabase processes the confirmation URL using detectSessionInUrl.
-     */
-    async function checkExistingSession() {
+    function readPending() {
         try {
-            const result = await client.auth.getSession();
-
-            if (result.error) {
-                console.error("Session check failed:", result.error);
-                return;
-            }
-
-            const session = result.data.session;
-
-            if (session && session.user) {
-                if (session.user.email_confirmed_at) {
-                    goToProfileSetup();
-                }
-            }
+            var value = localStorage.getItem(PENDING_KEY);
+            return value ? JSON.parse(value) : null;
         } catch (error) {
-            console.error("Unable to check session:", error);
+            return null;
         }
     }
 
-    /*
-     * REGISTER
-     */
+    function savePending(email, username) {
+        try {
+            localStorage.setItem(PENDING_KEY, JSON.stringify({
+                email: email,
+                username: username,
+                createdAt: Date.now()
+            }));
+        } catch (error) {
+            // Verification can still continue during this visit.
+        }
+    }
 
-    registerForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
+    function clearPending() {
+        try {
+            localStorage.removeItem(PENDING_KEY);
+        } catch (error) {}
+    }
+
+    function showRegistration() {
+        registrationScreen.className = "";
+        verificationScreen.className = "hidden";
         clearMessage();
+    }
 
-        const username =
-            document.getElementById("username").value.trim();
+    function showVerification(email) {
+        registrationScreen.className = "hidden";
+        verificationScreen.className = "";
+        verificationEmail.textContent = email || "";
+        verificationCode.value = "";
+        clearMessage();
+    }
 
-        const email =
-            document.getElementById("email").value.trim().toLowerCase();
+    function lockForm(button, locked, text) {
+        button.disabled = locked;
 
-        const password =
-            document.getElementById("password").value;
+        if (locked) {
+            button.setAttribute("data-original-text", button.textContent);
+            button.textContent = text;
+        } else {
+            button.textContent =
+                button.getAttribute("data-original-text") || text;
+        }
+    }
 
-        const confirmPassword =
-            document.getElementById("confirmPassword").value;
+    function getSafeError(error) {
+        if (!error) return "Something went wrong. Please try again.";
 
-        const deviceType =
-            document.getElementById("deviceType").value;
+        var message = String(error.message || "");
 
-        if (!/^[A-Za-z0-9_]{3,30}$/.test(username)) {
+        if (/already registered|already been registered/i.test(message)) {
+            return "This email may already have an account. Try signing in, or check whether a verification email was already sent.";
+        }
+
+        if (/invalid.*token|token.*invalid|expired/i.test(message)) {
+            return "The code is incorrect or expired. Check your email or request a new code.";
+        }
+
+        if (/rate limit|too many requests/i.test(message)) {
+            return "Too many attempts. Please wait a while before trying again.";
+        }
+
+        return message || "Something went wrong. Please try again.";
+    }
+
+    async function goToProfileSetup() {
+        clearPending();
+
+        try {
+            localStorage.setItem("nimx_device_type", "keypad");
+        } catch (error) {}
+
+        window.location.href = "profile-setup.html";
+    }
+
+    async function checkExistingSession() {
+        var result = await client.auth.getSession();
+
+        if (result.error) return;
+
+        if (result.data && result.data.session) {
+            var user = result.data.session.user;
+
+            if (user && user.email_confirmed_at) {
+                await goToProfileSetup();
+            }
+        }
+    }
+
+    registrationForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        if (busy) return;
+
+        client = client || getClient();
+        if (!client) return;
+
+        var username = document.getElementById("username").value.trim();
+        var email = document.getElementById("email").value.trim().toLowerCase();
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (!/^[A-Za-z0-9_]{3,24}$/.test(username)) {
             showMessage(
-                "Username must contain 3–30 letters, numbers or underscores.",
+                "Username must contain 3–24 letters, numbers or underscores.",
                 "error"
             );
             return;
         }
 
         if (password.length < 8) {
-            showMessage(
-                "Your password must contain at least 8 characters.",
-                "error"
-            );
+            showMessage("Your password must contain at least 8 characters.", "error");
             return;
         }
 
         if (password !== confirmPassword) {
-            showMessage(
-                "Your passwords do not match.",
-                "error"
-            );
+            showMessage("The passwords do not match.", "error");
             return;
         }
 
-        if (!["android", "keypad"].includes(deviceType)) {
-            showMessage(
-                "Please select a valid device type.",
-                "error"
-            );
-            return;
-        }
-
-        registerButton.disabled = true;
-        registerButton.textContent = "Creating account...";
+        busy = true;
+        lockForm(registerButton, true, "Creating account...");
+        clearMessage();
 
         try {
-            pendingEmail = email;
-
-            /*
-             * Use the current page as the confirmation redirect.
-             * The registered user's metadata carries their username
-             * and device type to the profile setup page.
-             */
-            const redirectUrl =
-                window.location.origin + window.location.pathname;
-
-            const result = await client.auth.signUp({
+            var result = await client.auth.signUp({
                 email: email,
                 password: password,
-
                 options: {
-                    emailRedirectTo: redirectUrl,
-
+                    emailRedirectTo: window.location.origin +
+                        window.location.pathname,
                     data: {
                         username: username,
-                        device_type: deviceType
+                        device_type: "keypad"
                     }
                 }
             });
 
             if (result.error) {
+                throw result.error;
+            }
+
+            var user = result.data && result.data.user;
+            var session = result.data && result.data.session;
+
+            if (!user) {
+                throw new Error("The account could not be created. Please try again.");
+            }
+
+            if (user.email_confirmed_at) {
+                if (session) {
+                    await goToProfileSetup();
+                    return;
+                }
+
                 showMessage(
-                    friendlyError(result.error),
-                    "error"
+                    "This email is already associated with a confirmed account. Please sign in.",
+                    "info"
                 );
                 return;
             }
 
-            /*
-             * If confirmation is required, Supabase normally returns
-             * a user without a session. In that case, show the OTP
-             * instructions instead of trying to save a profile.
-             */
-            if (
-                result.data.session &&
-                result.data.user &&
-                result.data.user.email_confirmed_at
-            ) {
-                goToProfileSetup();
-                return;
-            }
-
-            showVerification();
+            savePending(email, username);
+            showVerification(email);
 
             showMessage(
-                "Your registration has been submitted. Check your inbox and Spam folder for the verification email.",
+                "Registration started. Check your email for the verification code.",
                 "success"
             );
 
+            if (session && user.email_confirmed_at) {
+                await goToProfileSetup();
+            }
+
         } catch (error) {
-            console.error("Registration error:", error);
-
-            showMessage(
-                friendlyError(error),
-                "error"
-            );
-
+            showMessage(getSafeError(error), "error");
         } finally {
-            registerButton.disabled = false;
-            registerButton.textContent = "Create My Account";
+            busy = false;
+            lockForm(registerButton, false, "Register Account");
         }
     });
 
-    /*
-     * VERIFY USING AN EMAIL CODE
-     */
+    verificationForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-    verifyButton.addEventListener("click", async function () {
+        if (busy) return;
+
+        client = client || getClient();
+        if (!client) return;
+
+        var pending = readPending();
+
+        if (!pending || !pending.email) {
+            showRegistration();
+            showMessage(
+                "No pending verification was found. Please register again or sign in.",
+                "error"
+            );
+            return;
+        }
+
+        var code = verificationCode.value.trim();
+
+        if (!code) {
+            showMessage("Enter the verification code from your email.", "error");
+            return;
+        }
+
+        busy = true;
+        lockForm(verifyButton, true, "Verifying...");
         clearMessage();
 
-        const email = pendingEmail ||
-            document.getElementById("email").value.trim().toLowerCase();
-
-        const code = verificationCode.value.trim();
-
-        if (!email) {
-            showMessage(
-                "Enter the email address used during registration.",
-                "error"
-            );
-            return;
-        }
-
-        if (!/^[0-9]{6,8}$/.test(code)) {
-            showMessage(
-                "Enter the verification code from your email.",
-                "error"
-            );
-            return;
-        }
-
-        if (processingVerification) {
-            return;
-        }
-
-        processingVerification = true;
-        verifyButton.disabled = true;
-        verifyButton.textContent = "Verifying email...";
-
         try {
-            const result = await client.auth.verifyOtp({
-                email: email,
+            var result = await client.auth.verifyOtp({
+                email: pending.email,
                 token: code,
                 type: "signup"
             });
 
             if (result.error) {
-                showMessage(
-                    friendlyError(result.error),
-                    "error"
-                );
-                return;
+                throw result.error;
             }
 
-            if (
-                result.data.user &&
-                result.data.user.email_confirmed_at
-            ) {
-                goToProfileSetup();
-                return;
+            if (!result.data || !result.data.user) {
+                throw new Error("Verification could not be completed.");
             }
+
+            clearPending();
 
             showMessage(
-                "The verification response was incomplete. Try signing in after checking your email status.",
-                "info"
+                "Email verified successfully. Opening profile setup...",
+                "success"
             );
+
+            await goToProfileSetup();
 
         } catch (error) {
-            console.error("Email verification error:", error);
-
-            showMessage(
-                friendlyError(error),
-                "error"
-            );
-
+            showMessage(getSafeError(error), "error");
         } finally {
-            processingVerification = false;
-            verifyButton.disabled = false;
-            verifyButton.textContent = "Verify Email Code";
+            busy = false;
+            lockForm(verifyButton, false, "Verify Code");
         }
     });
 
-    /*
-     * RESEND VERIFICATION EMAIL
-     */
-
     resendButton.addEventListener("click", async function () {
-        clearMessage();
+        if (busy) return;
 
-        const email = pendingEmail ||
-            document.getElementById("email").value.trim().toLowerCase();
+        client = client || getClient();
+        if (!client) return;
 
-        if (!email) {
-            showMessage(
-                "Enter your registration email address first.",
-                "error"
-            );
+        var pending = readPending();
+
+        if (!pending || !pending.email) {
+            showRegistration();
+            showMessage("Please register again to request a code.", "error");
             return;
         }
 
-        resendButton.disabled = true;
-        resendButton.textContent = "Requesting email...";
+        busy = true;
+        lockForm(resendButton, true, "Sending...");
+        clearMessage();
 
         try {
-            const redirectUrl =
-                window.location.origin + window.location.pathname;
-
-            const result = await client.auth.resend({
+            var result = await client.auth.resend({
                 type: "signup",
-                email: email,
-
+                email: pending.email,
                 options: {
-                    emailRedirectTo: redirectUrl
+                    emailRedirectTo: window.location.origin +
+                        window.location.pathname
                 }
             });
 
             if (result.error) {
-                showMessage(
-                    friendlyError(result.error),
-                    "error"
-                );
-                return;
+                throw result.error;
             }
 
-            pendingEmail = email;
-
             showMessage(
-                "A verification email has been requested. Check your inbox and Spam folder.",
+                "If a new verification message can be sent, it should arrive shortly. Check your inbox and spam folder.",
                 "success"
             );
 
         } catch (error) {
-            console.error("Resend error:", error);
-
-            showMessage(
-                friendlyError(error),
-                "error"
-            );
-
+            showMessage(getSafeError(error), "error");
         } finally {
-            resendButton.disabled = false;
-            resendButton.textContent = "Resend Verification Email";
+            busy = false;
+            lockForm(resendButton, false, "Resend Verification Email");
         }
     });
 
-    checkExistingSession();
+    document.getElementById("changeEmailButton").addEventListener("click", function () {
+        clearPending();
+        verificationForm.reset();
+        showRegistration();
+        showMessage(
+            "Enter your registration details again if you need to use another email.",
+            "info"
+        );
+    });
 
+    async function start() {
+        client = getClient();
+
+        if (!client) return;
+
+        try {
+            await checkExistingSession();
+        } catch (error) {}
+
+        var pending = readPending();
+
+        if (pending && pending.email) {
+            showVerification(pending.email);
+            showMessage(
+                "Your pending registration was restored. Enter the verification code from your email.",
+                "info"
+            );
+        } else {
+            showRegistration();
+        }
+    }
+
+    start();
 })();
-</script></body>
+</script>
+
+</body>
     </html>
