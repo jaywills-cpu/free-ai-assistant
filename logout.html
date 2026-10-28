@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#073b2a">
+<title>Logout | Nimx-G AI Hub</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 20px;
+    background: #eaf2ed;
+    color: #173d2d;
+    font-family: Arial, sans-serif;
+}
+
+.box {
+    max-width: 420px;
+    margin: 50px auto;
+    padding: 22px;
+    background: white;
+    border: 1px solid #cadbce;
+    border-radius: 10px;
+    text-align: center;
+}
+
+h1 {
+    color: #075b3b;
+}
+
+p {
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+button, a {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 12px;
+    padding: 13px;
+    border: 0;
+    border-radius: 6px;
+    background: #087348;
+    color: white;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a {
+    background: #e5efe8;
+    color: #075b3b;
+}
+
+#status {
+    padding: 12px;
+    background: #f0f6f1;
+    border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Nimx-G AI Hub</h1>
+    <h2>Session Reset</h2>
+
+    <p id="status">Checking your current session...</p>
+
+    <button id="logoutButton" type="button">Clear Session and Pending Registration</button>
+
+    <a href="register.html">Open Keypad Registration</a>
+    <a href="android-register.html">Open Android Registration</a>
+    <a href="login.html">Open Login</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase.js"></script>
+
+<script>
+(function () {
+    "use strict";
+
+    var status = document.getElementById("status");
+    var button = document.getElementById("logoutButton");
+
+    button.addEventListener("click", async function () {
+        button.disabled = true;
+        status.textContent = "Clearing the current session...";
+
+        try {
+            if (window.supabaseClient) {
+                var result = await window.supabaseClient.auth.signOut({
+                    scope: "local"
+                });
+
+                if (result.error) {
+                    throw result.error;
+                }
+            }
+
+            // Remove only Nimx-G registration-related browser data.
+            [
+                "nimx_keypad_pending_verification",
+                "nimx_android_pending_verification",
+                "nimx_device_type"
+            ].forEach(function (key) {
+                try {
+                    localStorage.removeItem(key);
+                } catch (error) {}
+            });
+
+            try {
+                [
+                    "nimx_keypad_pending_verification",
+                    "nimx_android_pending_verification",
+                    "nimx_device_type"
+                ].forEach(function (key) {
+                    sessionStorage.removeItem(key);
+                });
+            } catch (error) {}
+
+            status.textContent =
+                "Finished. The current session and pending registration data have been cleared. You can test registration again.";
+
+        } catch (error) {
+            status.textContent =
+                "Logout error: " +
+                (error.message || "Unable to clear the Supabase session.");
+
+        } finally {
+            button.disabled = false;
+        }
+    });
+})();
+</script>
+
+</body>
+  </html>
