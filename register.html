@@ -315,6 +315,34 @@ window.addEventListener("unhandledrejection", function (event) {
     }
 });
     </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    var notice = document.getElementById("notice");
+
+    if (notice) {
+        notice.className = "message info";
+        notice.textContent = "Page JavaScript is running. Testing registration...";
+    }
+
+    var form = document.getElementById("registrationForm");
+
+    if (form) {
+        form.addEventListener("submit", function () {
+            if (notice) {
+                notice.className = "message info";
+                notice.textContent = "Registration button clicked. Processing...";
+            }
+        });
+    }
+
+    if (!window.supabaseClient) {
+        if (notice) {
+            notice.className = "message error";
+            notice.textContent = "Supabase client is missing. Check assets/js/supabase.js.";
+        }
+    }
+});
+    </script>
 <script>
 (function () {
     "use strict";
