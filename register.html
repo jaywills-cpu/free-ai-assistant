@@ -291,7 +291,30 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/supabase.js"></script>
+<script>
+window.addEventListener("error", function (event) {
+    var notice = document.getElementById("notice");
 
+    if (notice) {
+        notice.className = "message error";
+        notice.textContent =
+            "Page error: " + (event.message || "A script failed to load.");
+    }
+});
+
+window.addEventListener("unhandledrejection", function (event) {
+    var notice = document.getElementById("notice");
+
+    if (notice) {
+        notice.className = "message error";
+        notice.textContent =
+            "Registration error: " +
+            (event.reason && event.reason.message
+                ? event.reason.message
+                : "Please check your Supabase configuration.");
+    }
+});
+    </script>
 <script>
 (function () {
     "use strict";
