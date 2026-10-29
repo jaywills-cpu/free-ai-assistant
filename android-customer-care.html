@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07110d">
+<title>Customer Care | NIMX-G AI HUB</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root {
+    --bg: #07110d;
+    --panel: #101d16;
+    --panel2: #17271e;
+    --green: #16c784;
+    --gold: #f6c453;
+    --text: #f1f7f3;
+    --muted: #a3b6aa;
+    --border: #263b2f;
+    --danger: #ff7777;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    background: #0b1710;
+    border-bottom: 1px solid var(--border);
+    padding: 17px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.back {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 23px;
+    padding: 5px;
+}
+
+.brand {
+    flex: 1;
+}
+
+.brand h1 {
+    font-size: 17px;
+    margin: 0 0 5px;
+}
+
+.brand p {
+    color: var(--muted);
+    font-size: 12px;
+    margin: 0;
+}
+
+.badge {
+    color: var(--green);
+    border: 1px solid #246b4c;
+    border-radius: 20px;
+    padding: 6px 9px;
+    font-size: 11px;
+}
+
+main {
+    width: 100%;
+    max-width: 760px;
+    margin: auto;
+    padding: 16px;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.care-heading {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.care-icon {
+    background: #153d2b;
+    color: var(--green);
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+}
+
+.care-heading h2 {
+    font-size: 17px;
+    margin: 0 0 6px;
+}
+
+.care-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.status {
+    margin-top: 15px;
+    padding: 11px;
+    border-radius: 9px;
+    background: var(--panel2);
+    color: var(--gold);
+    font-size: 13px;
+}
+
+.status.connected {
+    color: var(--green);
+}
+
+.status.error {
+    color: var(--danger);
+}
+
+.notice {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.chat-box {
+    height: min(54vh, 500px);
+    min-height: 280px;
+    overflow-y: auto;
+    padding: 12px;
+    background: #0b1510;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.empty {
+    color: var(--muted);
+    text-align: center;
+    padding: 35px 12px;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.message {
+    margin-bottom: 16px;
+    max-width: 88%;
+    overflow-wrap: anywhere;
+}
+
+.message.mine {
+    margin-left: auto;
+}
+
+.bubble {
+    padding: 11px 13px;
+    border-radius: 13px;
+    background: #1a2a20;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.mine .bubble {
+    background: #145b3b;
+    border-bottom-right-radius: 4px;
+}
+
+.message:not(.mine) .bubble {
+    border-bottom-left-radius: 4px;
+}
+
+.sender {
+    color: var(--gold);
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.sender.staff {
+    color: var(--green);
+}
+
+.time {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 5px;
+    text-align: right;
+}
+
+.bubble a {
+    color: #8ee8bd;
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+}
+
+.composer {
+    margin-top: 12px;
+}
+
+textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 80px;
+    max-height: 180px;
+    padding: 13px;
+    border-radius: 11px;
+    border: 1px solid var(--border);
+    background: #0b1510;
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: var(--green);
+}
+
+.actions {
+    display: flex;
+    gap: 9px;
+    margin-top: 10px;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 9px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.send {
+    background: var(--green);
+    color: #04140b;
+    flex: 1;
+}
+
+.secondary {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.footer {
+    text-align: center;
+    padding: 22px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.footer strong {
+    color: var(--gold);
+}
+
+#loginMessage {
+    font-size: 13px;
+    color: var(--danger);
+    line-height: 1.6;
+}
+
+@media (max-width: 420px) {
+    header {
+        padding: 13px 10px;
+    }
+
+    main {
+        padding: 11px;
+    }
+
+    .badge {
+        font-size: 10px;
+    }
+
+    .message {
+        max-width: 94%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a class="back" href="android.html" aria-label="Back">&#8592;</a>
+
+    <div class="brand">
+        <h1>NIMX-G AI HUB</h1>
+        <p>Customer Care Centre</p>
+    </div>
+
+    <span class="badge">ANDROID</span>
+</header>
+
+<main>
+
+    <section class="card">
+        <div class="care-heading">
+            <div class="care-icon">&#9993;</div>
+            <div>
+                <h2>Talk to Customer Care</h2>
+                <p>Your personal, permanent conversation</p>
+            </div>
+        </div>
+
+        <div id="connectionStatus" class="status">
+            Connecting to Customer Care...
+        </div>
+
+        <p class="notice">
+            Send your message even when an agent is unavailable.
+            Your conversation is designed to remain available when you
+            return. Never send your password or private security codes.
+        </p>
+
+        <div id="loginMessage"></div>
+    </section>
+
+    <section class="card">
+        <div id="messages" class="chat-box" aria-live="polite">
+            <div class="empty">Loading your conversation...</div>
+        </div>
+
+        <form id="messageForm" class="composer">
+            <textarea
+                id="messageInput"
+                maxlength="4000"
+                placeholder="Write your message here..."
+                aria-label="Your message"
+                required
+            ></textarea>
+
+            <div class="actions">
+                <button class="secondary" type="button" id="refreshButton">
+                    Refresh
+                </button>
+
+                <button class="send" id="sendButton" type="submit">
+                    Send Message
+                </button>
+            </div>
+        </form>
+    </section>
+
+</main>
+
+<div class="footer">
+    <strong>Powered by Nimx-G</strong><br><br>
+    One Platform. Multiple AIs.
+</div>
+
+<script type="module">
+/*
+ * This page expects assets/js/supabase.js to export:
+ *
+ * export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+ *
+ * If your existing file exports a different variable name, adjust
+ * the import below to match it.
+ */
+import { supabase } from "./assets/js/supabase.js";
+
+const statusBox = document.getElementById("connectionStatus");
+const messagesBox = document.getElementById("messages");
+const messageInput = document.getElementById("messageInput");
+const messageForm = document.getElementById("messageForm");
+const sendButton = document.getElementById("sendButton");
+const refreshButton = document.getElementById("refreshButton");
+const loginMessage = document.getElementById("loginMessage");
+
+let currentUser = null;
+let conversationId = null;
+let messageChannel = null;
+let lastMessageId = 0;
+let loading = false;
+let sending = false;
+
+function setStatus(message, type = "") {
+    statusBox.textContent = message;
+    statusBox.className = "status " + type;
+}
+
+function escapeText(value) {
+    return String(value ?? "");
+}
+
+function safeLinkify(container, text) {
+    /*
+     * Message content is inserted as text, never as raw HTML.
+     * Only HTTP and HTTPS links are clickable.
+     */
+    const pattern = /https?:\/\/[^\s<>"']+/gi;
+    let lastIndex = 0;
+    let match;
+
+    while ((match = pattern.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+            container.appendChild(
+                document.createTextNode(text.slice(lastIndex, match.index))
+            );
+        }
+
+        let url = match[0];
+        let trailing = "";
+
+        while (/[),.!?;:]$/.test(url)) {
+            trailing = url.slice(-1) + trailing;
+            url = url.slice(0, -1);
+        }
+
+        try {
+            const parsed = new URL(url);
+
+            if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+                const link = document.createElement("a");
+                link.href = parsed.href;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                link.textContent = url;
+                container.appendChild(link);
+            } else {
+                container.appendChild(document.createTextNode(url));
+            }
+        } catch {
+            container.appendChild(document.createTextNode(url));
+        }
+
+        if (trailing) {
+            container.appendChild(document.createTextNode(trailing));
+        }
+
+        lastIndex = pattern.lastIndex;
+    }
+
+    if (lastIndex < text.length) {
+        container.appendChild(
+            document.createTextNode(text.slice(lastIndex))
+        );
+    }
+}
+
+function formatTime(value) {
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return "";
+    }
+
+    return date.toLocaleString([], {
+        dateStyle: "short",
+        timeStyle: "short"
+    });
+}
+
+function renderMessage(row) {
+    const mine = row.sender_id === currentUser.id;
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "message" + (mine ? " mine" : "");
+
+    const sender = document.createElement("div");
+    sender.className = "sender";
+
+    if (!mine) {
+        sender.classList.add("staff");
+    }
+
+    sender.textContent = mine
+        ? "You"
+        : (row.sender_username || "Customer Care");
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+
+    safeLinkify(bubble, escapeText(row.message));
+
+    const time = document.createElement("div");
+    time.className = "time";
+    time.textContent = formatTime(row.created_at);
+
+    wrapper.appendChild(sender);
+    wrapper.appendChild(bubble);
+    wrapper.appendChild(time);
+
+    messagesBox.appendChild(wrapper);
+}
+
+function showEmptyMessage(text) {
+    messagesBox.replaceChildren();
+
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = text;
+
+    messagesBox.appendChild(empty);
+}
+
+async function getOrCreateConversation() {
+    let result = await supabase
+        .from("customer_care_conversations")
+        .select("id,last_message_at")
+        .eq("user_id", currentUser.id)
+        .maybeSingle();
+
+    if (result.error) {
+        throw result.error;
+    }
+
+    if (result.data) {
+        return result.data;
+    }
+
+    result = await supabase
+        .from("customer_care_conversations")
+        .insert({ user_id: currentUser.id })
+        .select("id,last_message_at")
+        .single();
+
+    /*
+     * Another open tab might have created the permanent conversation
+     * at the same time. If so, retrieve the existing conversation.
+     */
+    if (result.error) {
+        const retry = await supabase
+            .from("customer_care_conversations")
+            .select("id,last_message_at")
+            .eq("user_id", currentUser.id)
+            .maybeSingle();
+
+        if (retry.error || !retry.data) {
+            throw result.error;
+        }
+
+        return retry.data;
+    }
+
+    return result.data;
+}
+
+async function loadMessages() {
+    if (loading || !conversationId) return;
+
+    loading = true;
+    refreshButton.disabled = true;
+
+    try {
+        const { data, error } = await supabase
+            .from("customer_care_messages")
+            .select("id,conversation_id,sender_id,sender_username,message,created_at")
+            .eq("conversation_id", conversationId)
+            .order("id", { ascending: false })
+            .limit(50);
+
+        if (error) throw error;
+
+        messagesBox.replaceChildren();
+
+        const rows = (data || []).reverse();
+
+        if (!rows.length) {
+            showEmptyMessage(
+                "Welcome to Customer Care.\n\nWrite your first message below. Our team can reply when available."
+            );
+            lastMessageId = 0;
+        } else {
+            for (const row of rows) {
+                renderMessage(row);
+            }
+
+            lastMessageId = Math.max(...rows.map(row => Number(row.id) || 0));
+            messagesBox.scrollTop = messagesBox.scrollHeight;
+        }
+    } finally {
+        loading = false;
+        refreshButton.disabled = false;
+    }
+}
+
+async function updateConnectionStatus() {
+    /*
+     * A Realtime subscription being active does not guarantee that
+     * a human agent is online. This page reports transport status only.
+     */
+    setStatus(
+        "Conversation available. Waiting for Customer Care.",
+        ""
+    );
+}
+
+function subscribeToMessages() {
+    if (messageChannel || !conversationId) return;
+
+    messageChannel = supabase
+        .channel("care-messages-" + conversationId)
+        .on(
+            "postgres_changes",
+            {
+                event: "INSERT",
+                schema: "public",
+                table: "customer_care_messages",
+                filter: "conversation_id=eq." + conversationId
+            },
+            payload => {
+                const row = payload.new;
+
+                if (Number(row.id) <= lastMessageId) return;
+
+                /*
+                 * Avoid inserting a message twice if it arrived via
+                 * Realtime while a manual refresh was running.
+                 */
+                lastMessageId = Number(row.id);
+
+                const placeholder = messagesBox.querySelector(".empty");
+                if (placeholder) messagesBox.replaceChildren();
+
+                renderMessage(row);
+                messagesBox.scrollTop = messagesBox.scrollHeight;
+            }
+        )
+        .subscribe(state => {
+            if (state === "SUBSCRIBED") {
+                setStatus("Connected to Customer Care chat.", "connected");
+            } else if (state === "CHANNEL_ERROR" ||
+                       state === "TIMED_OUT" ||
+                       state === "CLOSED") {
+                setStatus(
+                    "Customer Care temporarily disconnected. Your messages remain saved.",
+                    "error"
+                );
+            } else {
+                setStatus("Connecting to Customer Care...");
+            }
+        });
+}
+
+async function initialise() {
+    try {
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error || !data.user) {
+            setStatus("Please sign in to continue.", "error");
+            loginMessage.textContent =
+                "You need to sign in before opening Customer Care.";
+
+            messageForm.hidden = true;
+            return;
+        }
+
+        currentUser = data.user;
+
+        const conversation = await getOrCreateConversation();
+        conversationId = conversation.id;
+
+        await loadMessages();
+        subscribeToMessages();
+        await updateConnectionStatus();
+
+    } catch (error) {
+        console.error("Customer Care initialisation failed:", error);
+
+        setStatus("Unable to load Customer Care.", "error");
+
+        loginMessage.textContent =
+            "Please check your sign-in, Supabase configuration, database tables and access policies, then refresh this page.";
+    }
+}
+
+messageForm.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    if (!currentUser || !conversationId || sending) return;
+
+    const message = messageInput.value.trim();
+
+    if (!message) return;
+
+    sending = true;
+    sendButton.disabled = true;
+
+    try {
+        const { error } = await supabase
+            .from("customer_care_messages")
+            .insert({
+                conversation_id: conversationId,
+                sender_id: currentUser.id,
+                message: message
+            });
+
+        if (error) throw error;
+
+        messageInput.value = "";
+
+        /*
+         * Realtime usually displays the message. Reload as a fallback
+         * in case the subscription has disconnected.
+         */
+        if (!messageChannel) {
+            await loadMessages();
+        }
+
+    } catch (error) {
+        console.error("Message send failed:", error);
+
+        setStatus(
+            "Message not sent. Check your connection and try again.",
+            "error"
+        );
+    } finally {
+        sending = false;
+        sendButton.disabled = false;
+        messageInput.focus();
+    }
+});
+
+refreshButton.addEventListener("click", async () => {
+    try {
+        await loadMessages();
+        setStatus("Conversation refreshed.", "connected");
+    } catch (error) {
+        console.error(error);
+        setStatus("Could not refresh messages.", "error");
+    }
+});
+
+window.addEventListener("pagehide", () => {
+    if (messageChannel) {
+        supabase.removeChannel(messageChannel);
+        messageChannel = null;
+    }
+});
+
+initialise();
+</script>
+
+</body>
+</html>
