@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NIMX-G - Keypad Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 12px;
+            background: #f3f7f2;
+            color: #183d2a;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+          font-weigt: bold;
+        }
+
+        .box {
+            max-width: 360px;
+            margin: 25px auto;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid #d8e5d8;
+        }
+
+        h1 {
+            margin: 0;
+            color: #176b3a;
+            font-size: 25px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666666;
+            font-size: 13px;
+            margin: 8px 0 22px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            margin-top: 6px;
+            padding: 11px 8px;
+            border: 1px solid #aabbaa;
+            background: #ffffff;
+            color: #222222;
+            font-size: 16px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: #176b3a;
+            color: #ffffff;
+            border: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:disabled {
+            background: #718777;
+        }
+
+        #message {
+            margin-top: 15px;
+            padding: 9px;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .links {
+            margin-top: 20px;
+            text-align: center;
+            line-height: 2;
+            font-size: 14px;
+        }
+
+        a {
+            color: #176b3a;
+        }
+
+        .brand {
+            margin-top: 22px;
+            text-align: center;
+            color: #98731b;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>NIMX-G AI HUB</h1>
+
+        <div class="subtitle">
+            One Platform. Multiple AIs.<br>
+            Keypad Phone Login
+        </div>
+
+        <form id="loginForm">
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit" id="loginButton">
+                Sign In
+            </button>
+
+            <div id="message" role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="links">
+            <a href="register.html">Create an account</a><br>
+            <a href="index.html">Back to Home</a>
+        </div>
+
+        <div class="brand">Powered by Nimx-G</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase.js"></script>
+
+    <script>
+    (function () {
+        "use strict";
+
+        var form = document.getElementById("loginForm");
+        var button = document.getElementById("loginButton");
+        var message = document.getElementById("message");
+
+        function showMessage(text) {
+            message.textContent = text;
+        }
+
+        function getClient() {
+            if (!window.supabaseClient) {
+                showMessage(
+                    "Login service is not ready. Please refresh and try again."
+                );
+                return null;
+            }
+
+            return window.supabaseClient;
+        }
+
+        // Existing authenticated users go directly to the keypad dashboard.
+        async function checkExistingSession() {
+            var client = getClient();
+
+            if (!client) {
+                return;
+            }
+
+            try {
+                var result = await client.auth.getSession();
+
+                if (result.error) {
+                    console.error(result.error.message);
+                    showMessage("Unable to check your session. Please try again.");
+                    return;
+                }
+
+                if (result.data.session) {
+                    window.location.replace("keypad-dash.html");
+                }
+            } catch (error) {
+                console.error(error);
+                showMessage("Connection problem. Please refresh the page.");
+            }
+        }
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            var client = getClient();
+
+            if (!client) {
+                return;
+            }
+
+            var email = document.getElementById("email").value.trim();
+            var password = document.getElementById("password").value;
+
+            if (!email || !password) {
+                showMessage("Enter your email and password.");
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Signing in...";
+            showMessage("Please wait while we sign you in.");
+
+            try {
+                var result = await client.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (result.error) {
+                    showMessage(
+                        "Sign-in failed. Check your email and password, " +
+                        "and make sure your email is verified."
+                    );
+
+                    console.error("Login error:", result.error.message);
+                    return;
+                }
+
+                if (result.data && result.data.session) {
+                    window.location.replace("keypad-dash.html");
+                    return;
+                }
+
+                showMessage("No active session was created. Please try again.");
+
+            } catch (error) {
+                console.error("Login error:", error);
+                showMessage("A connection error occurred. Please try again.");
+
+            } finally {
+                button.disabled = false;
+                button.textContent = "Sign In";
+            }
+        });
+
+        checkExistingSession();
+    })();
+    </script>
+</body>
+  </html>
