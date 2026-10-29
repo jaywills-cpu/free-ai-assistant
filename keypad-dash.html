@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NIMX-G AI HUB - Keypad Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 10px;
+            background: #f1f6f0;
+            color: #203b2a;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: #155d35;
+            color: white;
+            padding: 16px 12px;
+            border-bottom: 4px solid #d8b34b;
+        }
+
+        .brand {
+            margin: 0;
+            font-size: 23px;
+        }
+
+        .tagline {
+            margin-top: 6px;
+            font-size: 12px;
+            color: #f1e3a6;
+        }
+
+        .welcome {
+            margin-top: 12px;
+            padding: 14px 12px;
+            background: white;
+            border: 1px solid #d7e2d6;
+        }
+
+        .welcome h2 {
+            margin: 0 0 8px;
+            font-size: 19px;
+        }
+
+        .welcome p {
+            margin: 5px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .status {
+            color: #18713c;
+            font-size: 13px;
+        }
+
+        .section-title {
+            margin: 20px 0 10px;
+            padding-bottom: 7px;
+            border-bottom: 2px solid #d8b34b;
+            font-size: 19px;
+        }
+
+        .ai-card {
+            display: block;
+            margin: 9px 0;
+            padding: 13px 11px;
+            background: white;
+            border: 1px solid #d5e1d4;
+            border-left: 4px solid #25804a;
+            color: #203b2a;
+            text-decoration: none;
+        }
+
+        .ai-card:focus,
+        .ai-card:hover {
+            background: #e6f2e5;
+        }
+
+        .ai-name {
+            display: block;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .ai-description {
+            display: block;
+            margin-top: 5px;
+            color: #5a675d;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .menu {
+            margin-top: 22px;
+            padding: 12px;
+            background: white;
+            border: 1px solid #d5e1d4;
+        }
+
+        .menu a {
+            display: block;
+            padding: 11px 5px;
+            border-bottom: 1px solid #e5ebe4;
+            color: #176b3a;
+            text-decoration: none;
+        }
+
+        .menu a:last-child {
+            border-bottom: none;
+        }
+
+        .logout {
+            display: block;
+            width: 100%;
+            margin-top: 16px;
+            padding: 12px;
+            border: none;
+            background: #9d2929;
+            color: white;
+            font-size: 15px;
+        }
+
+        .logout:disabled {
+            opacity: 0.65;
+        }
+
+        #pageMessage {
+            padding: 10px;
+            background: white;
+            border: 1px solid #d7e2d6;
+            overflow-wrap: anywhere;
+        }
+
+        .footer {
+            margin: 22px 0 10px;
+            text-align: center;
+            color: #98731b;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <header class="header">
+        <h1 class="brand">NIMX-G AI HUB</h1>
+        <div class="tagline">One Platform. Multiple AIs.</div>
+    </header>
+
+    <div id="pageMessage" role="status" aria-live="polite">
+        Checking your account...
+    </div>
+
+    <main id="dashboardContent" hidden>
+
+        <section class="welcome">
+            <h2 id="welcomeTitle">Welcome!</h2>
+            <p id="usernameLine">Username: Loading...</p>
+            <p class="status">Account status: Signed in</p>
+        </section>
+
+        <h2 class="section-title">Choose Your AI</h2>
+
+        <a class="ai-card" href="keypad-chat.html?ai=general">
+            <span class="ai-name">1. General AI</span>
+            <span class="ai-description">
+                Ask questions and get help with everyday tasks.
+            </span>
+        </a>
+
+        <a class="ai-card" href="keypad-chat.html?ai=study">
+            <span class="ai-name">2. Study AI</span>
+            <span class="ai-description">
+                Learn subjects and understand schoolwork.
+            </span>
+        </a>
+
+        <a class="ai-card" href="keypad-chat.html?ai=coding">
+            <span class="ai-name">3. Coding AI</span>
+            <span class="ai-description">
+                Get help understanding and writing code.
+            </span>
+        </a>
+
+        <a class="ai-card" href="keypad-chat.html?ai=writing">
+            <span class="ai-name">4. Writing AI</span>
+            <span class="ai-description">
+                Help with letters, stories and other writing.
+            </span>
+        </a>
+
+        <a class="ai-card" href="keypad-chat.html?ai=research">
+            <span class="ai-name">5. Research AI</span>
+            <span class="ai-description">
+                Explore topics and understand information.
+            </span>
+        </a>
+
+        <a class="ai-card" href="keypad-chat.html?ai=maths">
+            <span class="ai-name">6. Maths AI</span>
+            <span class="ai-description">
+                Work through calculations and maths problems.
+            </span>
+        </a>
+
+        <section class="menu">
+            <h2 style="margin-top:0;font-size:18px;">My Account</h2>
+
+            <a href="keypad-conversations.html">My Conversations</a>
+            <a href="keypad-profile.html">My Profile</a>
+            <a href="keypad-support.html">Help &amp; Support</a>
+            <a href="keypad-settings.html">Settings</a>
+        </section>
+
+        <button type="button" class="logout" id="logoutButton">
+            Sign Out
+        </button>
+
+    </main>
+
+    <footer class="footer">
+        Powered by Nimx-G
+    </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase.js"></script>
+
+<script>
+(function () {
+    "use strict";
+
+    var message = document.getElementById("pageMessage");
+    var content = document.getElementById("dashboardContent");
+    var logoutButton = document.getElementById("logoutButton");
+
+    function showMessage(text) {
+        message.textContent = text;
+        message.hidden = false;
+    }
+
+    async function startDashboard() {
+        var client = window.supabaseClient;
+
+        if (!client) {
+            showMessage(
+                "The account service is unavailable. Check your connection and reload."
+            );
+            return;
+        }
+
+        try {
+            var sessionResult = await client.auth.getSession();
+
+            if (sessionResult.error) {
+                console.error(sessionResult.error);
+                showMessage("Unable to check your session. Please reload.");
+                return;
+            }
+
+            var session = sessionResult.data.session;
+
+            if (!session) {
+                window.location.replace("keypad-login.html");
+                return;
+            }
+
+            var user = session.user;
+            var username = user.user_metadata &&
+                           user.user_metadata.username
+                           ? user.user_metadata.username
+                           : "";
+
+            // Try to obtain the saved username and account details.
+            var profileResult = await client
+                .from("profiles")
+                .select("username, account_type, profile_completed")
+                .eq("id", user.id)
+                .maybeSingle();
+
+            if (profileResult.error) {
+                console.error(
+                    "Could not load profile:",
+                    profileResult.error.message
+                );
+            }
+
+            var profile = profileResult.data;
+
+            if (profile && profile.username) {
+                username = profile.username;
+            }
+
+            document.getElementById("welcomeTitle").textContent =
+                username ? "Welcome, " + username + "!" : "Welcome!";
+
+            document.getElementById("usernameLine").textContent =
+                username ? "Username: " + username : "Username not set";
+
+            content.hidden = false;
+            message.hidden = true;
+
+        } catch (error) {
+            console.error("Dashboard error:", error);
+            showMessage("Connection problem. Please reload the dashboard.");
+        }
+    }
+
+    logoutButton.addEventListener("click", async function () {
+        var client = window.supabaseClient;
+
+        if (!client) {
+            showMessage("Account service unavailable. Please try again.");
+            return;
+        }
+
+        logoutButton.disabled = true;
+        logoutButton.textContent = "Signing out...";
+
+        try {
+            var result = await client.auth.signOut();
+
+            if (result.error) {
+                console.error(result.error);
+                showMessage("Sign out failed. Please try again.");
+                logoutButton.disabled = false;
+                logoutButton.textContent = "Sign Out";
+                return;
+            }
+
+            window.location.replace("keypad-login.html");
+
+        } catch (error) {
+            console.error(error);
+            showMessage("Connection problem. Please try signing out again.");
+            logoutButton.disabled = false;
+            logoutButton.textContent = "Sign Out";
+        }
+    });
+
+    startDashboard();
+})();
+</script>
+
+</body>
+</html>
