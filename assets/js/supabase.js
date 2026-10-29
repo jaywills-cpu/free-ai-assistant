@@ -1,31 +1,36 @@
 (function () {
     "use strict";
 
-    // Replace these with your REAL Supabase project details.
     var SUPABASE_URL = "https://cbkspksnwehxcqadmsfr.supabase.co";
     var SUPABASE_PUBLISHABLE_KEY = "sb_publishable_FA2GoL7yOw-FkFdCvea8fw_Bq2QgQNa";
 
-    if (!window.supabase || !window.supabase.createClient) {
-        console.error("Supabase JavaScript library did not load.");
-        return;
+    function initializeSupabase() {
+        if (!window.supabase || typeof window.supabase.createClient !== "function") {
+            console.error("NIMX-G: Supabase library is unavailable.");
+            return;
+        }
+
+        if (
+            !SUPABASE_URL.startsWith("https://") ||
+            SUPABASE_URL.indexOf("supabase.co") === -1 ||
+            SUPABASE_PUBLISHABLE_KEY.indexOf("PASTE_") !== -1
+        ) {
+            console.error("NIMX-G: Check your Supabase URL and publishable key.");
+            return;
+        }
+
+        try {
+            window.supabaseClient = window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            );
+
+            console.log("NIMX-G: Supabase client initialized.");
+            window.dispatchEvent(new Event("nimx-supabase-ready"));
+        } catch (error) {
+            console.error("NIMX-G: Initialization failed:", error);
+        }
     }
 
-    if (
-        SUPABASE_URL === "https://cbkspksnwehxcqadmsfr.supabase.co" ||
-        SUPABASE_PUBLISHABLE_KEY === "sb_publishable_FA2GoL7yOw-FkFdCvea8fw_Bq2QgQNa"
-    ) {
-        console.error("Supabase URL and publishable key have not been configured.");
-        return;
-    }
-
-    try {
-        window.supabaseClient = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_PUBLISHABLE_KEY
-        );
-
-        console.log("Supabase client initialized successfully.");
-    } catch (error) {
-        console.error("Supabase initialization failed:", error);
-    }
+    initializeSupabase();
 })();
