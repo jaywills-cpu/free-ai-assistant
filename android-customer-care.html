@@ -3,429 +3,792 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07110d">
+<meta name="theme-color" content="#075e46">
 <title>Customer Care | NIMX-G AI HUB</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root {
-    --bg: #07110d;
-    --panel: #101d16;
-    --panel2: #17271e;
-    --green: #16c784;
-    --gold: #f6c453;
-    --text: #f1f7f3;
-    --muted: #a3b6aa;
-    --border: #263b2f;
-    --danger: #ff7777;
+    --green: #087653;
+    --green-dark: #064b39;
+    --green-light: #e5f7ee;
+    --gold: #e9c66b;
+    --background: #f3f7f5;
+    --text: #172923;
+    --muted: #788780;
+    --white: #ffffff;
+    --border: #e7eeea;
 }
 
 * {
     box-sizing: border-box;
 }
 
-body {
+html, body {
     margin: 0;
-    background: var(--bg);
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
     color: var(--text);
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
+    background: var(--background);
 }
 
-header {
-    background: #0b1710;
-    border-bottom: 1px solid var(--border);
-    padding: 17px;
+body {
+    overflow-x: hidden;
+}
+
+button, textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.app {
+    width: 100%;
+    max-width: 760px;
+    min-height: 100vh;
+    margin: auto;
+    background: var(--background);
+    position: relative;
+    overflow: hidden;
+}
+
+/* HEADER */
+
+.header {
+    min-height: 100px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    color: white;
+    padding: 18px 17px 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before,
+.header::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.12);
+    pointer-events: none;
+}
+
+.header::before {
+    width: 180px;
+    height: 180px;
+    right: -50px;
+    top: -100px;
+}
+
+.header::after {
+    width: 110px;
+    height: 110px;
+    right: 45px;
+    top: -60px;
+}
+
+.topline {
     display: flex;
     align-items: center;
     gap: 12px;
+    position: relative;
+    z-index: 1;
 }
 
-.back {
-    color: var(--gold);
-    text-decoration: none;
-    font-size: 23px;
-    padding: 5px;
+.back-button {
+    width: 37px;
+    height: 37px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 12px;
+    color: white;
+    background: rgba(255,255,255,.1);
+    font-size: 22px;
 }
 
-.brand {
+.brand-icon {
+    width: 45px;
+    height: 45px;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    color: var(--green-dark);
+    background: linear-gradient(145deg, #fff1bb, var(--gold));
+    font-size: 22px;
+    font-weight: 900;
+    box-shadow: 0 5px 18px rgba(0,0,0,.12);
+}
+
+.brand-text {
     flex: 1;
 }
 
-.brand h1 {
-    font-size: 17px;
-    margin: 0 0 5px;
-}
-
-.brand p {
-    color: var(--muted);
-    font-size: 12px;
+.brand-text h1 {
     margin: 0;
+    font-size: 17px;
+    letter-spacing: .4px;
 }
 
-.badge {
+.brand-text p {
+    margin: 5px 0 0;
+    font-size: 11px;
+    color: rgba(255,255,255,.77);
+}
+
+.header-tag {
+    position: relative;
+    z-index: 1;
+    margin: 17px 0 0 49px;
+    font-size: 12px;
+    color: #e7fff3;
+}
+
+/* WELCOME CARD */
+
+.welcome-wrap {
+    padding: 0 15px;
+    margin-top: -12px;
+    position: relative;
+    z-index: 2;
+}
+
+.welcome-card {
+    background: white;
+    border-radius: 19px;
+    padding: 17px;
+    box-shadow: 0 8px 28px rgba(15, 63, 44, .08);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    animation: welcomeIn .65s ease both;
+}
+
+.welcome-avatar {
+    width: 43px;
+    height: 43px;
+    min-width: 43px;
+    border-radius: 15px;
+    background: var(--green-light);
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    animation: avatarFloat 3s ease-in-out infinite;
+}
+
+.welcome-card h2 {
+    margin: 1px 0 7px;
+    font-size: 15px;
+}
+
+.welcome-card p {
+    margin: 0;
+    font-size: 12px;
+    color: #66776f;
+    line-height: 1.65;
+}
+
+.welcome-card strong {
     color: var(--green);
-    border: 1px solid #246b4c;
-    border-radius: 20px;
-    padding: 6px 9px;
+}
+
+@keyframes welcomeIn {
+    from { opacity: 0; transform: translateY(18px) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes avatarFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* CONNECTION STATUS */
+
+.status-row {
+    margin: 15px 17px 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #eaf5ef;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 11px;
+    color: #506b5d;
+}
+
+.status-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e4a62b;
+    box-shadow: 0 0 0 4px rgba(228,166,43,.12);
+}
+
+.status-dot.connected {
+    background: #17a568;
+    box-shadow: 0 0 0 4px rgba(23,165,104,.12);
+}
+
+.status-dot.offline {
+    background: #d94b4b;
+    box-shadow: 0 0 0 4px rgba(217,75,75,.12);
+}
+
+/* CHAT AREA */
+
+.chat-panel {
+    margin: 0 12px;
+    background: white;
+    border-radius: 19px;
+    overflow: hidden;
+    box-shadow: 0 5px 24px rgba(15, 63, 44, .045);
+}
+
+.chat-heading {
+    padding: 14px 14px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.agent-avatar {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, #e4f7ec, #c7edda);
+    font-size: 21px;
+}
+
+.agent-avatar::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: #20b477;
+}
+
+.agent-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.agent-info h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.agent-info p {
+    margin: 5px 0 0;
+    color: var(--muted);
     font-size: 11px;
 }
 
-main {
-    width: 100%;
-    max-width: 760px;
-    margin: auto;
-    padding: 16px;
-}
-
-.card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 16px;
-    margin-bottom: 14px;
-}
-
-.care-heading {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.care-icon {
-    background: #153d2b;
+.secure-badge {
+    font-size: 10px;
     color: var(--green);
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    display: grid;
-    place-items: center;
-    font-size: 25px;
+    background: var(--green-light);
+    border-radius: 20px;
+    padding: 7px 9px;
+    white-space: nowrap;
 }
 
-.care-heading h2 {
-    font-size: 17px;
-    margin: 0 0 6px;
-}
-
-.care-heading p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.status {
-    margin-top: 15px;
-    padding: 11px;
-    border-radius: 9px;
-    background: var(--panel2);
-    color: var(--gold);
-    font-size: 13px;
-}
-
-.status.connected {
-    color: var(--green);
-}
-
-.status.error {
-    color: var(--danger);
-}
-
-.notice {
-    font-size: 12px;
-    line-height: 1.6;
-    color: var(--muted);
-}
-
-.chat-box {
-    height: min(54vh, 500px);
-    min-height: 280px;
+.messages {
+    min-height: 260px;
+    max-height: 48vh;
     overflow-y: auto;
-    padding: 12px;
-    background: #0b1510;
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    padding: 17px 12px;
+    background:
+        radial-gradient(circle at 10% 15%, rgba(8,118,83,.035) 0 3px, transparent 4px),
+        radial-gradient(circle at 85% 65%, rgba(8,118,83,.035) 0 3px, transparent 4px),
+        #fbfdfc;
+    background-size: 42px 42px, 58px 58px, auto;
+    scroll-behavior: smooth;
 }
 
-.empty {
-    color: var(--muted);
-    text-align: center;
-    padding: 35px 12px;
-    font-size: 13px;
-    line-height: 1.7;
+.day-label {
+    width: fit-content;
+    margin: 0 auto 18px;
+    padding: 6px 11px;
+    border-radius: 20px;
+    background: #edf3ef;
+    color: #7a8a82;
+    font-size: 10px;
 }
 
-.message {
-    margin-bottom: 16px;
-    max-width: 88%;
-    overflow-wrap: anywhere;
+.message-row {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 15px;
+    animation: messageIn .25s ease both;
 }
 
-.message.mine {
-    margin-left: auto;
+.message-row.mine {
+    align-items: flex-end;
+}
+
+.message-row.theirs {
+    align-items: flex-start;
+}
+
+@keyframes messageIn {
+    from { opacity: 0; transform: translateY(9px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .bubble {
+    max-width: 84%;
     padding: 11px 13px;
-    border-radius: 13px;
-    background: #1a2a20;
-    font-size: 14px;
+    border-radius: 16px;
+    font-size: 13px;
     line-height: 1.6;
-    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    box-shadow: 0 2px 5px rgba(0,0,0,.025);
 }
 
 .mine .bubble {
-    background: #145b3b;
-    border-bottom-right-radius: 4px;
+    background: linear-gradient(135deg, #087653, #099365);
+    color: white;
+    border-bottom-right-radius: 5px;
 }
 
-.message:not(.mine) .bubble {
-    border-bottom-left-radius: 4px;
-}
-
-.sender {
-    color: var(--gold);
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-
-.sender.staff {
-    color: var(--green);
-}
-
-.time {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 5px;
-    text-align: right;
+.theirs .bubble {
+    background: white;
+    color: #263b31;
+    border: 1px solid #e8efea;
+    border-bottom-left-radius: 5px;
 }
 
 .bubble a {
-    color: #8ee8bd;
+    color: inherit;
     text-decoration: underline;
     overflow-wrap: anywhere;
 }
 
-.composer {
-    margin-top: 12px;
-}
-
-textarea {
-    width: 100%;
-    resize: vertical;
-    min-height: 80px;
-    max-height: 180px;
-    padding: 13px;
-    border-radius: 11px;
-    border: 1px solid var(--border);
-    background: #0b1510;
-    color: var(--text);
-    font: inherit;
-    font-size: 14px;
-    outline: none;
-}
-
-textarea:focus {
-    border-color: var(--green);
-}
-
-.actions {
+.message-meta {
     display: flex;
-    gap: 9px;
-    margin-top: 10px;
+    gap: 6px;
+    align-items: center;
+    margin: 5px 4px 0;
+    font-size: 10px;
+    color: #8a9991;
 }
 
-button {
-    border: 0;
-    cursor: pointer;
-    padding: 12px 16px;
-    border-radius: 9px;
-    font-weight: bold;
-    font-size: 13px;
+.sender-name {
+    font-weight: 700;
+    color: var(--green);
 }
 
-.send {
-    background: var(--green);
-    color: #04140b;
-    flex: 1;
+.empty-state {
+    text-align: center;
+    padding: 25px 12px;
+    color: #829188;
+    font-size: 12px;
+    line-height: 1.7;
 }
 
-.secondary {
-    background: var(--panel2);
+.empty-icon {
+    font-size: 30px;
+    margin-bottom: 9px;
+}
+
+/* TYPING INDICATOR */
+
+.typing-row {
+    display: none;
+    padding: 0 12px 12px;
+    background: #fbfdfc;
+}
+
+.typing-row.show {
+    display: block;
+}
+
+.typing-bubble {
+    width: fit-content;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 15px;
+    background: white;
     border: 1px solid var(--border);
+}
+
+.typing-bubble span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #6f9883;
+    animation: typing 1s infinite ease-in-out;
+}
+
+.typing-bubble span:nth-child(2) { animation-delay: .15s; }
+.typing-bubble span:nth-child(3) { animation-delay: .3s; }
+
+@keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: .5; }
+    30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* COMPOSER */
+
+.composer {
+    padding: 12px;
+    background: white;
+    border-top: 1px solid var(--border);
+}
+
+.composer-note {
+    margin: 0 0 10px 3px;
+    color: #839189;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.composer-box {
+    display: flex;
+    align-items: flex-end;
+    gap: 9px;
+    padding: 8px;
+    border: 1px solid #e0eae4;
+    background: #f8fbf9;
+    border-radius: 17px;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.composer-box:focus-within {
+    border-color: #80c7a7;
+    box-shadow: 0 0 0 3px rgba(8,118,83,.07);
+}
+
+#messageInput {
+    flex: 1;
+    min-width: 0;
+    max-height: 115px;
+    min-height: 40px;
+    resize: none;
+    border: 0;
+    outline: none;
+    background: transparent;
+    padding: 10px 5px;
+    font-size: 13px;
     color: var(--text);
 }
 
-button:disabled {
-    opacity: .5;
+#messageInput::placeholder {
+    color: #9aa8a0;
+}
+
+.send-button {
+    width: 43px;
+    height: 43px;
+    min-width: 43px;
+    border: 0;
+    border-radius: 13px;
+    color: white;
+    background: var(--green);
+    font-size: 20px;
+    transition: transform .15s, background .15s;
+}
+
+.send-button:active {
+    transform: scale(.92);
+}
+
+.send-button:disabled {
+    opacity: .45;
     cursor: not-allowed;
 }
 
-.footer {
-    text-align: center;
-    padding: 22px;
-    color: var(--muted);
+.error-message {
+    display: none;
+    margin: 9px 3px 0;
+    color: #bd3e3e;
     font-size: 11px;
+    line-height: 1.5;
+}
+
+.error-message.show {
+    display: block;
+}
+
+.footer {
+    padding: 18px 10px 24px;
+    text-align: center;
+    font-size: 10px;
+    color: #8c9b93;
 }
 
 .footer strong {
-    color: var(--gold);
+    color: var(--green);
+    letter-spacing: .4px;
 }
 
-#loginMessage {
-    font-size: 13px;
-    color: var(--danger);
-    line-height: 1.6;
+@media (min-width: 600px) {
+    .messages {
+        max-height: 52vh;
+        min-height: 350px;
+    }
 }
 
-@media (max-width: 420px) {
-    header {
-        padding: 13px 10px;
-    }
-
-    main {
-        padding: 11px;
-    }
-
-    .badge {
-        font-size: 10px;
-    }
-
-    .message {
-        max-width: 94%;
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
     }
 }
 </style>
 </head>
 
 <body>
+<div class="app">
 
-<header>
-    <a class="back" href="android.html" aria-label="Back">&#8592;</a>
+    <header class="header">
+        <div class="topline">
+            <button class="back-button" id="backButton" aria-label="Go back">‹</button>
 
-    <div class="brand">
-        <h1>NIMX-G AI HUB</h1>
-        <p>Customer Care Centre</p>
+            <div class="brand-icon">N</div>
+
+            <div class="brand-text">
+                <h1>NIMX-G AI HUB</h1>
+                <p>Customer Care Centre</p>
+            </div>
+        </div>
+
+        <div class="header-tag">We're here to help you. 💚</div>
+    </header>
+
+    <section class="welcome-wrap">
+        <div class="welcome-card">
+            <div class="welcome-avatar">👋</div>
+            <div>
+                <h2>Welcome to NIMX-G Support!</h2>
+                <p>
+                    Hello! Need assistance? Send us a message and our
+                    support team will help you as soon as possible.
+                    <strong>Your conversation stays saved.</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="status-row">
+        <div class="status-left">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="connectionStatus" role="status">Connecting to customer care…</span>
+        </div>
+        <span id="connectionDetail">Please wait</span>
     </div>
 
-    <span class="badge">ANDROID</span>
-</header>
+    <main class="chat-panel">
+        <div class="chat-heading">
+            <div class="agent-avatar">🎧</div>
+            <div class="agent-info">
+                <h3>Customer Care Team</h3>
+                <p id="agentSubtitle">Here to assist you</p>
+            </div>
+            <div class="secure-badge">🔒 Private chat</div>
+        </div>
 
-<main>
+        <div class="messages" id="messages" aria-live="polite">
+            <div class="day-label">YOUR SUPPORT CONVERSATION</div>
 
-    <section class="card">
-        <div class="care-heading">
-            <div class="care-icon">&#9993;</div>
-            <div>
-                <h2>Talk to Customer Care</h2>
-                <p>Your personal, permanent conversation</p>
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">💬</div>
+                <strong>Your conversation starts here</strong><br>
+                Send us a message whenever you need help.
             </div>
         </div>
 
-        <div id="connectionStatus" class="status">
-            Connecting to Customer Care...
-        </div>
-
-        <p class="notice">
-            Send your message even when an agent is unavailable.
-            Your conversation is designed to remain available when you
-            return. Never send your password or private security codes.
-        </p>
-
-        <div id="loginMessage"></div>
-    </section>
-
-    <section class="card">
-        <div id="messages" class="chat-box" aria-live="polite">
-            <div class="empty">Loading your conversation...</div>
-        </div>
-
-        <form id="messageForm" class="composer">
-            <textarea
-                id="messageInput"
-                maxlength="4000"
-                placeholder="Write your message here..."
-                aria-label="Your message"
-                required
-            ></textarea>
-
-            <div class="actions">
-                <button class="secondary" type="button" id="refreshButton">
-                    Refresh
-                </button>
-
-                <button class="send" id="sendButton" type="submit">
-                    Send Message
-                </button>
+        <div class="typing-row" id="typingRow" aria-hidden="true">
+            <div class="typing-bubble">
+                <span></span><span></span><span></span>
             </div>
-        </form>
-    </section>
+        </div>
 
-</main>
+        <div class="composer">
+            <p class="composer-note">
+                Messages are saved to your support conversation.
+            </p>
 
-<div class="footer">
-    <strong>Powered by Nimx-G</strong><br><br>
-    One Platform. Multiple AIs.
+            <form id="messageForm">
+                <div class="composer-box">
+                    <textarea
+                        id="messageInput"
+                        rows="1"
+                        maxlength="4000"
+                        placeholder="Type your message…"
+                        aria-label="Your message"
+                        required
+                    ></textarea>
+
+                    <button class="send-button" id="sendButton"
+                            type="submit" aria-label="Send message">➤</button>
+                </div>
+
+                <div class="error-message" id="errorMessage" role="alert"></div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <strong>POWERED BY NIMX-G</strong><br>
+        Your experience matters to us.
+    </footer>
 </div>
+
+<!-- Supabase JS library. This does not make a database request by itself. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script type="module">
 /*
+ * IMPORTANT:
  * This page expects assets/js/supabase.js to export:
+ *     export const supabase = ...
  *
- * export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
- *
- * If your existing file exports a different variable name, adjust
- * the import below to match it.
+ * Keep your existing Supabase URL and publishable key in that file.
+ * Do not put a service-role key in browser code.
  */
 import { supabase } from "./assets/js/supabase.js";
 
-const statusBox = document.getElementById("connectionStatus");
 const messagesBox = document.getElementById("messages");
-const messageInput = document.getElementById("messageInput");
-const messageForm = document.getElementById("messageForm");
+const emptyState = document.getElementById("emptyState");
+const input = document.getElementById("messageInput");
+const form = document.getElementById("messageForm");
 const sendButton = document.getElementById("sendButton");
-const refreshButton = document.getElementById("refreshButton");
-const loginMessage = document.getElementById("loginMessage");
+const errorBox = document.getElementById("errorMessage");
+const statusText = document.getElementById("connectionStatus");
+const statusDetail = document.getElementById("connectionDetail");
+const statusDot = document.getElementById("statusDot");
+const agentSubtitle = document.getElementById("agentSubtitle");
 
 let currentUser = null;
 let conversationId = null;
-let messageChannel = null;
-let lastMessageId = 0;
+let realtimeChannel = null;
 let loading = false;
 let sending = false;
+let pageActive = true;
 
-function setStatus(message, type = "") {
-    statusBox.textContent = message;
-    statusBox.className = "status " + type;
+/*
+ * Avoid duplicate messages when Realtime reports a message that was
+ * already loaded in the initial history.
+ */
+const renderedIds = new Set();
+const MAX_INITIAL_MESSAGES = 30;
+
+function setStatus(state, detail = "") {
+    statusText.textContent = state;
+    statusDetail.textContent = detail;
+
+    statusDot.classList.remove("connected", "offline");
+
+    if (state === "Connected") {
+        statusDot.classList.add("connected");
+        agentSubtitle.textContent = "Live support connection";
+    } else if (
+        state === "Temporarily disconnected" ||
+        state === "Unable to connect"
+    ) {
+        statusDot.classList.add("offline");
+        agentSubtitle.textContent = "Connection needs attention";
+    } else {
+        agentSubtitle.textContent = "Here to assist you";
+    }
 }
 
-function escapeText(value) {
-    return String(value ?? "");
+function showError(message) {
+    errorBox.textContent = message;
+    errorBox.classList.add("show");
 }
 
-function safeLinkify(container, text) {
-    /*
-     * Message content is inserted as text, never as raw HTML.
-     * Only HTTP and HTTPS links are clickable.
-     */
-    const pattern = /https?:\/\/[^\s<>"']+/gi;
+function clearError() {
+    errorBox.textContent = "";
+    errorBox.classList.remove("show");
+}
+
+function scrollToBottom() {
+    messagesBox.scrollTop = messagesBox.scrollHeight;
+}
+
+/*
+ * Safely render plain text and clickable HTTP/HTTPS links.
+ * Message text is never inserted using innerHTML.
+ */
+function appendMessage(row) {
+    if (!row || row.id == null) return;
+    if (renderedIds.has(String(row.id))) return;
+
+    renderedIds.add(String(row.id));
+
+    if (emptyState) emptyState.style.display = "none";
+
+    const mine = row.sender_id === currentUser.id;
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "message-row " + (mine ? "mine" : "theirs");
+    wrapper.dataset.messageId = String(row.id);
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+
+    addSafeLinkedText(bubble, String(row.message || ""));
+
+    const meta = document.createElement("div");
+    meta.className = "message-meta";
+
+    const time = document.createElement("span");
+    time.textContent = formatTime(row.created_at);
+
+    if (!mine) {
+        const sender = document.createElement("span");
+        sender.className = "sender-name";
+        sender.textContent = row.sender_username || "Customer Care";
+        meta.appendChild(sender);
+    }
+
+    meta.appendChild(time);
+    wrapper.appendChild(bubble);
+    wrapper.appendChild(meta);
+    messagesBox.appendChild(wrapper);
+
+    scrollToBottom();
+}
+
+function addSafeLinkedText(container, text) {
+    const urlPattern = /https?:\/\/[^\s<>"']+/gi;
     let lastIndex = 0;
     let match;
 
-    while ((match = pattern.exec(text)) !== null) {
-        if (match.index > lastIndex) {
-            container.appendChild(
-                document.createTextNode(text.slice(lastIndex, match.index))
-            );
-        }
-
+    while ((match = urlPattern.exec(text)) !== null) {
+        const start = match.index;
         let url = match[0];
         let trailing = "";
 
         while (/[),.!?;:]$/.test(url)) {
             trailing = url.slice(-1) + trailing;
             url = url.slice(0, -1);
+        }
+
+        if (start > lastIndex) {
+            container.appendChild(
+                document.createTextNode(text.slice(lastIndex, start))
+            );
         }
 
         try {
@@ -449,7 +812,7 @@ function safeLinkify(container, text) {
             container.appendChild(document.createTextNode(trailing));
         }
 
-        lastIndex = pattern.lastIndex;
+        lastIndex = match.index + match[0].length;
     }
 
     if (lastIndex < text.length) {
@@ -460,158 +823,106 @@ function safeLinkify(container, text) {
 }
 
 function formatTime(value) {
+    if (!value) return "";
+
     const date = new Date(value);
 
-    if (Number.isNaN(date.getTime())) {
-        return "";
-    }
+    if (Number.isNaN(date.getTime())) return "";
 
-    return date.toLocaleString([], {
-        dateStyle: "short",
-        timeStyle: "short"
+    return date.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
     });
 }
 
-function renderMessage(row) {
-    const mine = row.sender_id === currentUser.id;
+async function getCurrentUser() {
+    const { data, error } = await supabase.auth.getUser();
 
-    const wrapper = document.createElement("div");
-    wrapper.className = "message" + (mine ? " mine" : "");
+    if (error) throw error;
 
-    const sender = document.createElement("div");
-    sender.className = "sender";
-
-    if (!mine) {
-        sender.classList.add("staff");
+    if (!data.user) {
+        throw new Error("Please sign in to use customer care.");
     }
 
-    sender.textContent = mine
-        ? "You"
-        : (row.sender_username || "Customer Care");
-
-    const bubble = document.createElement("div");
-    bubble.className = "bubble";
-
-    safeLinkify(bubble, escapeText(row.message));
-
-    const time = document.createElement("div");
-    time.className = "time";
-    time.textContent = formatTime(row.created_at);
-
-    wrapper.appendChild(sender);
-    wrapper.appendChild(bubble);
-    wrapper.appendChild(time);
-
-    messagesBox.appendChild(wrapper);
+    return data.user;
 }
 
-function showEmptyMessage(text) {
-    messagesBox.replaceChildren();
-
-    const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.textContent = text;
-
-    messagesBox.appendChild(empty);
-}
-
+/*
+ * Get or create the user's single permanent support conversation.
+ * The user_id column must have a UNIQUE constraint.
+ */
 async function getOrCreateConversation() {
-    let result = await supabase
+    const { data: existing, error: findError } = await supabase
         .from("customer_care_conversations")
-        .select("id,last_message_at")
+        .select("id")
         .eq("user_id", currentUser.id)
         .maybeSingle();
 
-    if (result.error) {
-        throw result.error;
-    }
+    if (findError) throw findError;
 
-    if (result.data) {
-        return result.data;
-    }
+    if (existing) return existing.id;
 
-    result = await supabase
+    const { data: created, error: createError } = await supabase
         .from("customer_care_conversations")
         .insert({ user_id: currentUser.id })
-        .select("id,last_message_at")
+        .select("id")
         .single();
 
-    /*
-     * Another open tab might have created the permanent conversation
-     * at the same time. If so, retrieve the existing conversation.
-     */
-    if (result.error) {
-        const retry = await supabase
+    if (createError) {
+        /*
+         * A second open tab may have created the conversation at the
+         * same time. Try fetching it once instead of repeatedly retrying.
+         */
+        const { data: retry, error: retryError } = await supabase
             .from("customer_care_conversations")
-            .select("id,last_message_at")
+            .select("id")
             .eq("user_id", currentUser.id)
             .maybeSingle();
 
-        if (retry.error || !retry.data) {
-            throw result.error;
-        }
-
-        return retry.data;
+        if (retryError || !retry) throw createError;
+        return retry.id;
     }
 
-    return result.data;
+    return created.id;
 }
 
-async function loadMessages() {
-    if (loading || !conversationId) return;
-
-    loading = true;
-    refreshButton.disabled = true;
-
-    try {
-        const { data, error } = await supabase
-            .from("customer_care_messages")
-            .select("id,conversation_id,sender_id,sender_username,message,created_at")
-            .eq("conversation_id", conversationId)
-            .order("id", { ascending: false })
-            .limit(50);
-
-        if (error) throw error;
-
-        messagesBox.replaceChildren();
-
-        const rows = (data || []).reverse();
-
-        if (!rows.length) {
-            showEmptyMessage(
-                "Welcome to Customer Care.\n\nWrite your first message below. Our team can reply when available."
-            );
-            lastMessageId = 0;
-        } else {
-            for (const row of rows) {
-                renderMessage(row);
-            }
-
-            lastMessageId = Math.max(...rows.map(row => Number(row.id) || 0));
-            messagesBox.scrollTop = messagesBox.scrollHeight;
-        }
-    } finally {
-        loading = false;
-        refreshButton.disabled = false;
-    }
-}
-
-async function updateConnectionStatus() {
+async function loadRecentMessages() {
     /*
-     * A Realtime subscription being active does not guarantee that
-     * a human agent is online. This page reports transport status only.
+     * One initial read: only the latest 30 messages.
+     * Reversing the rows displays them oldest-to-newest.
      */
-    setStatus(
-        "Conversation available. Waiting for Customer Care.",
-        ""
-    );
+    const { data, error } = await supabase
+        .from("customer_care_messages")
+        .select("id, conversation_id, sender_id, sender_username, message, created_at")
+        .eq("conversation_id", conversationId)
+        .order("created_at", { ascending: false })
+        .limit(MAX_INITIAL_MESSAGES);
+
+    if (error) throw error;
+
+    const rows = (data || []).reverse();
+
+    rows.forEach(appendMessage);
+
+    if (rows.length === 0 && emptyState) {
+        emptyState.style.display = "block";
+    }
+
+    scrollToBottom();
 }
 
-function subscribeToMessages() {
-    if (messageChannel || !conversationId) return;
+function subscribeToLiveMessages() {
+    if (!pageActive || !conversationId) return;
 
-    messageChannel = supabase
-        .channel("care-messages-" + conversationId)
+    if (realtimeChannel) {
+        supabase.removeChannel(realtimeChannel);
+        realtimeChannel = null;
+    }
+
+    setStatus("Connecting", "Starting live chat");
+
+    realtimeChannel = supabase
+        .channel("care-" + String(conversationId))
         .on(
             "postgres_changes",
             {
@@ -620,138 +931,191 @@ function subscribeToMessages() {
                 table: "customer_care_messages",
                 filter: "conversation_id=eq." + conversationId
             },
-            payload => {
-                const row = payload.new;
-
-                if (Number(row.id) <= lastMessageId) return;
-
-                /*
-                 * Avoid inserting a message twice if it arrived via
-                 * Realtime while a manual refresh was running.
-                 */
-                lastMessageId = Number(row.id);
-
-                const placeholder = messagesBox.querySelector(".empty");
-                if (placeholder) messagesBox.replaceChildren();
-
-                renderMessage(row);
-                messagesBox.scrollTop = messagesBox.scrollHeight;
+            (payload) => {
+                appendMessage(payload.new);
             }
         )
-        .subscribe(state => {
+        .subscribe((state) => {
             if (state === "SUBSCRIBED") {
-                setStatus("Connected to Customer Care chat.", "connected");
-            } else if (state === "CHANNEL_ERROR" ||
-                       state === "TIMED_OUT" ||
-                       state === "CLOSED") {
+                setStatus("Connected", "Live chat is ready");
+            } else if (
+                state === "CHANNEL_ERROR" ||
+                state === "TIMED_OUT" ||
+                state === "CLOSED"
+            ) {
                 setStatus(
-                    "Customer Care temporarily disconnected. Your messages remain saved.",
-                    "error"
+                    "Temporarily disconnected",
+                    "Check your internet connection"
                 );
-            } else {
-                setStatus("Connecting to Customer Care...");
             }
         });
 }
 
-async function initialise() {
+async function initializeChat() {
+    if (loading) return;
+    loading = true;
+    sendButton.disabled = true;
+    setStatus("Connecting", "Checking your account");
+
     try {
-        const { data, error } = await supabase.auth.getUser();
+        currentUser = await getCurrentUser();
+        conversationId = await getOrCreateConversation();
 
-        if (error || !data.user) {
-            setStatus("Please sign in to continue.", "error");
-            loginMessage.textContent =
-                "You need to sign in before opening Customer Care.";
+        await loadRecentMessages();
 
-            messageForm.hidden = true;
-            return;
+        if (pageActive) {
+            subscribeToLiveMessages();
         }
-
-        currentUser = data.user;
-
-        const conversation = await getOrCreateConversation();
-        conversationId = conversation.id;
-
-        await loadMessages();
-        subscribeToMessages();
-        await updateConnectionStatus();
-
     } catch (error) {
-        console.error("Customer Care initialisation failed:", error);
+        console.error("Customer care initialization failed:", error);
 
-        setStatus("Unable to load Customer Care.", "error");
+        setStatus("Unable to connect", "Please try again");
 
-        loginMessage.textContent =
-            "Please check your sign-in, Supabase configuration, database tables and access policies, then refresh this page.";
+        showError(
+            error.message ||
+            "We couldn't load customer care. Check your sign-in and try again."
+        );
+    } finally {
+        loading = false;
+        sendButton.disabled = false;
     }
 }
 
-messageForm.addEventListener("submit", async event => {
+/* Local-only typing animation; it makes no database request. */
+function showLocalSendingAnimation() {
+    const row = document.getElementById("typingRow");
+    row.classList.add("show");
+    row.setAttribute("aria-hidden", "false");
+
+    window.setTimeout(() => {
+        row.classList.remove("show");
+        row.setAttribute("aria-hidden", "true");
+    }, 350);
+}
+
+form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    if (!currentUser || !conversationId || sending) return;
+    if (sending) return;
 
-    const message = messageInput.value.trim();
+    clearError();
+
+    const message = input.value.trim();
 
     if (!message) return;
 
+    if (!currentUser || !conversationId) {
+        showError("Customer care is not connected yet. Please wait a moment.");
+        return;
+    }
+
+    if (message.length > 4000) {
+        showError("Your message is too long. Please shorten it.");
+        return;
+    }
+
     sending = true;
     sendButton.disabled = true;
+    input.disabled = true;
+
+    const originalMessage = message;
 
     try {
-        const { error } = await supabase
+        showLocalSendingAnimation();
+
+        /*
+         * One database INSERT per message.
+         * The database should validate sender_id against auth.uid().
+         * The database should also generate sender_username securely.
+         */
+        const { data, error } = await supabase
             .from("customer_care_messages")
             .insert({
                 conversation_id: conversationId,
                 sender_id: currentUser.id,
-                message: message
-            });
+                message: originalMessage
+            })
+            .select("id, conversation_id, sender_id, sender_username, message, created_at")
+            .single();
 
         if (error) throw error;
 
-        messageInput.value = "";
-
         /*
-         * Realtime usually displays the message. Reload as a fallback
-         * in case the subscription has disconnected.
+         * Render immediately. Realtime may also deliver this row,
+         * but appendMessage prevents displaying it twice.
          */
-        if (!messageChannel) {
-            await loadMessages();
-        }
+        appendMessage(data);
 
+        input.value = "";
+        input.style.height = "auto";
     } catch (error) {
-        console.error("Message send failed:", error);
+        console.error("Sending customer-care message failed:", error);
 
-        setStatus(
-            "Message not sent. Check your connection and try again.",
-            "error"
+        showError(
+            error.message ||
+            "Your message couldn't be sent. Please try again."
         );
     } finally {
         sending = false;
         sendButton.disabled = false;
-        messageInput.focus();
+        input.disabled = false;
+        input.focus();
     }
 });
 
-refreshButton.addEventListener("click", async () => {
-    try {
-        await loadMessages();
-        setStatus("Conversation refreshed.", "connected");
-    } catch (error) {
-        console.error(error);
-        setStatus("Could not refresh messages.", "error");
+/* Expand the text box locally as the user types. */
+input.addEventListener("input", () => {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 115) + "px";
+});
+
+/* Enter sends; Shift+Enter creates a new line. */
+input.addEventListener("keydown", (event) => {
+    if (
+        event.key === "Enter" &&
+        !event.shiftKey &&
+        !event.isComposing
+    ) {
+        event.preventDefault();
+        form.requestSubmit();
     }
 });
 
-window.addEventListener("pagehide", () => {
-    if (messageChannel) {
-        supabase.removeChannel(messageChannel);
-        messageChannel = null;
+document.getElementById("backButton").addEventListener("click", () => {
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        window.location.href = "index.html";
     }
 });
 
-initialise();
+/*
+ * Remove the Realtime subscription when leaving the page.
+ * This prevents the page from intentionally keeping its channel open.
+ */
+function disconnectLiveChat() {
+    pageActive = false;
+
+    if (realtimeChannel) {
+        supabase.removeChannel(realtimeChannel);
+        realtimeChannel = null;
+    }
+}
+
+window.addEventListener("pagehide", disconnectLiveChat);
+
+/*
+ * Returning to a page restored from the browser back-forward cache:
+ * reconnect once, without polling.
+ */
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted && conversationId) {
+        pageActive = true;
+        subscribeToLiveMessages();
+    }
+});
+
+initializeChat();
 </script>
-
 </body>
 </html>
